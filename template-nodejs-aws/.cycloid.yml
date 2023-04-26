@@ -1,0 +1,38 @@
+version: "2"
+name: NodeJS WebApp on AWS
+canonical: template-nodejs-aws
+template: true
+status: private
+author: '{{stack_author}}'
+description: |
+  Build and deploy a Node.js web application on an AWS EC2 instance.
+image: |
+  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/node.svg
+keywords:
+  - cloud-init
+  - user data
+  - webapp
+  - nodejs
+  - nginx
+  - provider:aws
+technologies:
+  - technology: nodejs
+  - technology: nginx
+
+config:
+  default:
+    name: 'Default'
+    description: 'Build and deploy a Node.js web application'
+    cloud_provider: aws
+    # Pipeline and variable configuration for the default CD pipeline use case
+    pipeline:
+      pipeline:
+        path: pipeline/pipeline.yaml
+      variables:
+        path: pipeline/variables.sample.yaml
+        destination: ($ project $)/pipeline/($ environment $)/variables.yaml
+    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+    terraform:
+      main:
+        path: 'terraform/main.tf'
+        destination: '($ project $)/terraform/($ environment $)/main.tf'
