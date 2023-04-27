@@ -26,18 +26,18 @@ stack_git_repository: ($ scs_url $)
 stack_git_branch: ($ scs_branch $)
 
 {% if scs_cred_type == "http" %}
-#. stack_git_username (required): (({{scs_cred_path}}.username))
+#. stack_git_username (required): ((($ scs_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
-stack_git_username: (({{scs_cred_path}}.username))
+stack_git_username: ((($ scs_cred_path $).username))
 
-#. stack_git_token (required): (({{scs_cred_path}}.password))
+#. stack_git_token (required): ((($ scs_cred_path $).password))
 #+ Password for HTTP(S) auth when pulling/pushing.
-stack_git_token: (({{scs_cred_path}}.password))
+stack_git_token: ((($ scs_cred_path $).password))
 
 {% else %}
-#. stack_git_private_key (required): (({{scs_cred_path}}.ssh_key))
+#. stack_git_private_key (required): ((($ scs_cred_path $).ssh_key))
 #+ SSH key pair to fetch the stack Git repository.
-stack_git_private_key: (({{scs_cred_path}}.ssh_key))
+stack_git_private_key: ((($ scs_cred_path $).ssh_key))
 
 {% endif %}
 #. stack_terraform_path (required): {{stack_path}}/terraform
@@ -57,19 +57,19 @@ config_git_repository: ($ cr_url $)
 #+ Branch to use on the config Git repository.
 config_git_branch: ($ cr_branch $)
 
-{% if cr_cred_type == "http" %}
-#. config_git_username (required): (({{cr_cred_path}}.username))
+{% if scs_cred_type == "http" %}
+#. config_git_username (required): ((($ cr_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
-config_git_username: (({{cr_cred_path}}.username))
+config_git_username: ((($ cr_cred_path $).username))
 
-#. config_git_token (required): (({{cr_cred_path}}.password))
+#. config_git_token (required): ((($ cr_cred_path $).password))
 #+ Password for HTTP(S) auth when pulling/pushing.
-config_git_token: (({{cr_cred_path}}.password))
+config_git_token: ((($ cr_cred_path $).password))
 
 {% else %}
-#. config_git_private_key (required): (({{cr_cred_path}}.ssh_key))
+#. config_git_private_key (required): ((($ cr_cred_path $).ssh_key))
 #+ SSH key pair to fetch the config Git repository.
-config_git_private_key: (({{cr_cred_path}}.ssh_key))
+config_git_private_key: ((($ cr_cred_path $).ssh_key))
 
 {% endif %}
 #. config_terraform_path (required): ($ project $)/terraform/($ environment $)
