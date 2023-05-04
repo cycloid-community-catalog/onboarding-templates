@@ -19,12 +19,6 @@ resource_types:
     repository: cycloid/terraform-resource
     tag: ((terraform_version))
 
-- name: cycloid-events
-  type: registry-image
-  source:
-    repository: cycloid/cycloid-events-resource
-    tag: latest
-
 
 resources:
 - name: tfstate
@@ -41,23 +35,6 @@ resources:
       env: ((env))
       project: ((project))
       customer: ((customer))
-
-# The Cycloid event resource to log events
-- name: cycloid-event
-  type: cycloid-events
-  source:
-    api_key: ((cycloid_api_key))
-    api_url: ((cycloid_api_url))
-    icon: fa-code-branch
-    organization: ((customer))
-    severity: info
-    type: Custom
-    tags:
-      - key: project
-        value: ((project))
-      - key: env
-        value: ((env))
-  icon: calendar
 
 # The Terraform stack (will be merged with the config)
 - name: git_stack-terraform
@@ -178,14 +155,6 @@ jobs:
         params:
           plan_run: true
           terraform_source: merged-stack/
-
-        on_success:
-          do:
-            - put: cycloid-event
-              params:
-                severity: info
-                title: NodeJS application deployment successful
-                message: The project ((project)) on ((env)) environment deployed successfully
 
 
   # Destroy the infrastructure

@@ -40,9 +40,9 @@ stack_git_token: ((($ scs_cred_path $).password))
 stack_git_private_key: ((($ scs_cred_path $).ssh_key))
 
 {% endif %}
-#. stack_terraform_path (required): {{stack_path}}/terraform
+#. stack_terraform_path (required): ($ stack_path $)/terraform
 #+ Path of Terraform files in the stack git repository
-stack_terraform_path: {{stack_path}}/terraform
+stack_terraform_path: ($ stack_path $)/terraform
 
 
 #
@@ -57,7 +57,7 @@ config_git_repository: ($ cr_url $)
 #+ Branch to use on the config Git repository.
 config_git_branch: ($ cr_branch $)
 
-{% if scs_cred_type == "http" %}
+{% if cr_cred_type == "http" %}
 #. config_git_username (required): ((($ cr_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
 config_git_username: ((($ cr_cred_path $).username))
@@ -93,13 +93,9 @@ project: ($ project $)
 #+ Name of the Cycloid Organization, used as customer variable name.
 customer: ($ organization_canonical $)
 
-#. cycloid_api_url (required): {{api_url}}
+#. cycloid_api_url (required): ($ api_url $)
 #+ Cycloid API URL.
-cycloid_api_url: {{api_url}}
-
-#. cycloid_api_key (required): ((api-key-admin.key))
-#+ API key to grant admin acess to Cycloid API.
-cycloid_api_key: ((api-key-admin.key))
+cycloid_api_url: ($ api_url $)
 
 #. terraform_version (required): '1.1.9'
 #+ terraform version used to execute your code. Please select a Terraform version matching a container image tag here: https://hub.docker.com/r/cycloid/terraform-resource/tags

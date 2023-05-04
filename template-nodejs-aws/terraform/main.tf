@@ -1,7 +1,7 @@
 module "webapp" {
   #####################################
   # Do not modify the following lines #
-  source   = "./module-webapp"
+  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/vpc-ec2-nodejs"
   project  = var.project
   env      = var.env
   customer = var.customer
