@@ -1,0 +1,97 @@
+---
+version: "2"
+use_cases:
+- name: default
+  sections:
+  - name: NodeJS Server
+    groups:
+    - name: Virtual machine specifications
+      technologies: [terraform]
+      vars:
+      - name: "Machine type"
+        description: "Machine type for the VM."
+        key: vm_machine_type
+        widget: slider_list
+        type: string
+        default: "n2-standard-2"
+        values:
+            - e2-medium
+            - n2-standard-2
+            - n2d-standard-2
+        required: true
+      - name: "Disk size"
+        unit: Go
+        description: "Disk size for the VM."
+        key: vm_disk_size
+        widget: slider_range
+        type: integer
+        default: 20
+        values:
+            - 10
+            - 250
+        required: true
+        
+    - name: NodeJS Application
+      technologies: [terraform]
+      vars:
+      - name: "Webapp Public Git URL"
+        description: "Public git URL of the web application to build and deploy."
+        key: git_app_url
+        widget: auto_complete
+        type: string
+        values: ["https://github.com/Rahul-Pandey7/react-image-compressor.git","https://github.com/arnab-datta/counter-app.git","https://github.com/Yog9/SnapShot.git","https://github.com/ahfarmer/calculator.git","https://github.com/ahfarmer/emoji-search.git"]
+        default: "https://github.com/Yog9/SnapShot.git"
+        required: true
+
+  - name: GCP Cloud Provider
+    groups:
+    - name: Access Configuration
+      technologies: [pipeline]
+      vars:
+      - name: "GCP credentials"
+        description: "Google Cloud Platform JSON credentials to use for Terraform."
+        key: gcp_credentials_json
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - gcp
+        type: string
+        default: "((gcp.json_key))"
+        required: true
+      - name: "GCP project"
+        description: "Google Cloud Platform project ID for Terraform."
+        key: gcp_project
+        widget: simple_text
+        type: string
+        default: ""
+        required: true
+      - name: "GCP region"
+        description: "Google Cloud Platform region to use for Terraform."
+        key: gcp_region
+        widget: auto_complete
+        type: string
+        default: "europe-west1"
+        values:
+            - europe-west1
+            - europe-west2
+            - europe-west3
+            - europe-north1
+            - europe-north2
+            - northamerica-northeast1
+            - northamerica-northeast2
+        required: true
+      - name: "GCP zone"
+        description: "Google Cloud Platform zone to use for Terraform. Make sure the zone extension exists for the selected region."
+        key: gcp_zone
+        widget: dropdown
+        type: string
+        default: "b"
+        values:
+            - a
+            - b
+            - c
+            - d
+            - e
+            - f
+        required: true
