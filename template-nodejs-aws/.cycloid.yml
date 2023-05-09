@@ -1,13 +1,13 @@
 version: "2"
-name: NodeJS WebApp on AWS
+name: Terraform template on AWS
 canonical: template-nodejs-aws
 template: true
 status: private
 author: '{{stack_author}}'
 description: |
-  Build and deploy a Node.js web application on an AWS EC2 instance.
+  Build and deploy a Node.js web application on an AWS EC2 instance using Terraform and Cloud-Init.
 image: |
-  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/node.svg
+  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png
 keywords:
   - cloud-init
   - user data

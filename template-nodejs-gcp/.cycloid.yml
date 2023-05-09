@@ -1,13 +1,13 @@
 version: "2"
-name: NodeJS WebApp on GCP
+name: Terraform template on GCP
 canonical: template-nodejs-gcp
 template: true
 status: private
 author: '{{stack_author}}'
 description: |
-  Build and deploy a Node.js web application on an GCP Virtual Machine.
+  Build and deploy a Node.js web application on an GCP Virtual Machine using Terraform and Cloud-Init.
 image: |
-  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/node.svg
+  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png
 keywords:
   - cloud-init
   - user data
