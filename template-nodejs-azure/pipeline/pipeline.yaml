@@ -58,7 +58,7 @@ resources:
   source:
     uri: ((config_git_repository))
     branch: ((config_git_branch))
-{% if scs_cred_type == "http" %}
+{% if cr_default_cred_type == "http" %}
     username: ((stack_git_username))
     password: ((stack_git_token))
 {% else %}

@@ -65,7 +65,7 @@ config_git_repository: ($ cr_url $)
 #+ Branch to use on the config Git repository.
 config_git_branch: ($ cr_branch $)
 
-{% if cr_cred_type == "http" %}
+{% if cr_default_cred_type == "http" %}
 #. config_git_username (required): ((($ cr_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
 config_git_username: ((($ cr_cred_path $).username))

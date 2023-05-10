@@ -1,5 +1,5 @@
 version: "2"
-name: Terraform template on GCP
+name: Terraform template for GCP
 canonical: template-nodejs-gcp
 template: true
 status: private

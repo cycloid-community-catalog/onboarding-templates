@@ -1,5 +1,5 @@
 version: "2"
-name: Terraform template on Azure
+name: Terraform template for Azure
 canonical: template-nodejs-azure
 template: true
 status: private

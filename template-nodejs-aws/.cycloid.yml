@@ -1,5 +1,5 @@
 version: "2"
-name: Terraform template on AWS
+name: Terraform template for AWS
 canonical: template-nodejs-aws
 template: true
 status: private
