@@ -2,7 +2,7 @@ version: "2"
 name: Terraform template for GCP
 canonical: template-nodejs-gcp
 template: true
-status: private
+status: public
 author: '{{stack_author}}'
 description: |
   Build and deploy a Node.js web application on an GCP Virtual Machine using Terraform and Cloud-Init.

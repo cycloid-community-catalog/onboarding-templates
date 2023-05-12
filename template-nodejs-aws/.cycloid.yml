@@ -2,7 +2,7 @@ version: "2"
 name: Terraform template for AWS
 canonical: template-nodejs-aws
 template: true
-status: private
+status: public
 author: '{{stack_author}}'
 description: |
   Build and deploy a Node.js web application on an AWS EC2 instance using Terraform and Cloud-Init.
