@@ -131,9 +131,9 @@ config_git_token: ((($ cr_cred_path $).password))
 #+ SSH key pair to fetch the config Git repository.
 config_git_private_key: ((($ cr_cred_path $).ssh_key))
 {% endif %}
-#. config_terraform_path (required): ($ project $)/terraform/($ environment $)
+#. config_terraform_path (required): ($ project $)/terraform/{{ stack_usecase }}/($ environment $)
 #+ Path of Terraform files in the config git repository
-config_terraform_path: ($ project $)/terraform/($ environment $)
+config_terraform_path: ($ project $)/terraform/{{ stack_usecase }}/($ environment $)
 
 #. config_ansible_path (required): ($ project $)/ansible/environments
 #+ Path of Ansible files in the config git repository
