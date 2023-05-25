@@ -1,0 +1,13 @@
+---
+- name: Calling Groovy script {{ script_name }}
+  uri:
+    url: "http://{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}:{{ nexus_port }}/service/rest/v1/security/users/admin/{{ script_name }}"
+    user: 'admin'
+    password: "{{ current_nexus_admin_password }}"
+    headers:
+      Content-Type: "text/plain"
+    method: PUT
+    status_code: 200,204
+    force_basic_auth: yes
+    # body: "{{ args | to_json }}"
+    body: "{{ args.new_password }}"

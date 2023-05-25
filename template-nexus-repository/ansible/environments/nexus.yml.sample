@@ -1,0 +1,6 @@
+---
+# customize variables present in default_nexus.yaml file
+nexus_version: '3.41.0-01'
+nexus_os_group: 'nexus'
+vm_os_user: 'nexus'
+nexus_timezone: 'Europe/Paris' # java timezone

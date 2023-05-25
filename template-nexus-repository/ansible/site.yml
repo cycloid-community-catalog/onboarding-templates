@@ -1,0 +1,183 @@
+---
+- name: install Nexus Repository
+  hosts: tag_role_nexus:&tag_project_{{ project }}:&tag_cycloid_true:&tag_env_{{ env }}
+  become: yes
+
+  vars_files:
+  - "environments/default_nexus.yml"
+  - ["environments/{{ env }}-nexus.yml", "environments/empty.yml"]
+
+
+  tasks:
+  # Creating nexus user and group
+  - name: Add group "nexus"
+    group:
+      name: "{{ nexus_os_group }}"
+      state: present
+
+  - name: Add user "nexus"  
+    user:
+      name: "{{ vm_os_user }}"
+      groups: "{{ nexus_os_group }}"
+      shell: "/bin/bash"
+      state: present
+
+  # Increasing max number of open files on the system for the user nexus
+  - name: Set file descriptor limit to 65536  
+    sysctl:
+      name: fs.file-max
+      value: 65536
+      sysctl_file: /etc/sysctl.conf
+      reload: yes
+
+  - name: Add nofile soft limit for the user nexus  
+    pam_limits:
+      domain: nexus
+      limit_type: soft
+      limit_item: nofile
+      value: 65536
+
+  - name: Add nofile hard limit for the user nexus  
+    pam_limits:
+      domain: nexus
+      limit_type: hard
+      limit_item: nofile
+      value: 65536
+
+  # Installing JAVA
+  - name: Update repositories cache 
+    apt:
+      update_cache: yes
+
+  - name: Install Java JRE 8 headless
+    apt:
+      deb: https://cycloid-demo-archives.s3.eu-west-1.amazonaws.com/{{ java_deb_headless }}
+
+  - name: Install Java JRE 8
+    apt:
+      deb: https://cycloid-demo-archives.s3.eu-west-1.amazonaws.com/{{ java_deb }}
+
+  - name: make sure /etc/profile.d exists
+    file: 
+      path: /etc/profile.d
+      state: directory
+
+  - name: export JAVA_HOME and add its bin dir in the PATH
+    template:
+      src:  java_home.sh.j2
+      dest: /etc/profile.d/java_home.sh
+      mode: "a+x"
+
+  # Stop nexus service if already installed
+  - name: Check if nexus service is installed
+    stat:
+      path: /etc/systemd/system/nexus.service
+    register: nexus_service_file
+
+  - name: Stop nexus service
+    shell: 'systemctl stop nexus.service'
+    when: nexus_service_file.stat.exists
+
+  # Installing Nexus Repository
+  - name: Ensure Nexus installation directory exists
+    file:
+      path: "{{ nexus_installation_dir }}"
+      state: "directory"
+
+  - name: Download and unarchive Nexus Repository installer
+    unarchive:
+      src: "https://cycloid-demo-archives.s3.eu-west-1.amazonaws.com/{{ nexus_package }}"
+      dest: "{{ nexus_installation_dir }}"
+      remote_src: yes
+      owner: nexus
+      group: nexus
+      creates: "{{ nexus_installation_dir }}/nexus-{{ nexus_version }}"
+
+  - name: create or update symlink nexus-latest
+    file:
+      path: "{{ nexus_installation_dir }}/nexus-latest"
+      src: "{{ nexus_installation_dir }}/nexus-{{ nexus_version }}"
+      owner: "{{ vm_os_user }}"
+      group: "{{ nexus_os_group }}"
+      state: link
+
+  - name: copy nexus.rc
+    template:
+      src: nexus.rc.j2
+      dest: "{{ nexus_installation_dir }}/nexus-latest/bin/nexus.rc"
+      owner: nexus
+      group: nexus
+
+  - name: Setup default timezone
+    lineinfile:
+      dest: "{{ nexus_installation_dir }}/nexus-latest/bin/nexus.vmoptions"
+      regexp: "^-Duser.timezone=.*"
+      line: "-Duser.timezone={{ nexus_timezone }}"
+
+  - name: Set NEXUS_HOME for the service user
+    lineinfile:
+      dest: "/home/{{ vm_os_user }}/.bashrc"
+      regexp: "^export NEXUS_HOME=.*"
+      line: "export NEXUS_HOME={{ nexus_installation_dir }}/nexus-latest"
+
+  - name: Set nexus port
+    lineinfile:
+      dest: "{{ nexus_installation_dir }}/nexus-latest/etc/nexus-default.properties"
+      regexp: "^application-port=.*"
+      line: "application-port={{ nexus_port }}"
+
+  - name: ensure all subdirectories in /opt are owned by nexus user
+    file:
+      dest: /opt
+      owner: nexus
+      group: nexus
+      recurse: yes
+
+  # Installing nexus as a service and enable it
+  - name: copy systemd service configuration
+    template:
+      src: "nexus.service.j2"
+      dest: "/etc/systemd/system/nexus.service"
+
+  - name: Reload nexus service configuration
+    shell: 'systemctl daemon-reload'
+
+  - name: Enable nexus service
+    shell: 'systemctl enable nexus.service'
+
+  - name: Restart nexus service
+    shell: 'systemctl restart nexus.service'
+
+  - name: Waiting for nexus to be ready...
+    wait_for:
+      host: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"
+      port: "{{ nexus_port }}"
+      delay: 5
+
+  # Changing admin password for first-time install
+  - name: Check if first-time install admin password is present
+    stat:
+      path: "{{ nexus_data_dir }}/nexus3/admin.password"
+    register: admin_password_file
+
+  - name: fetch first-time install admin password
+    slurp:
+      src: "{{ nexus_data_dir }}/nexus3/admin.password"
+    register: admin_password_slurp
+    when: admin_password_file.stat.exists
+
+  - name: Decode first-time install admin password and store it
+    set_fact:
+      current_nexus_admin_password: "{{ admin_password_slurp.content | b64decode }}"
+    when: admin_password_file.stat.exists
+
+  - include: call_script.yml
+    vars:
+      script_name: change-password
+      args:
+        new_password: "{{ nexus_admin_password }}"
+    when: admin_password_file.stat.exists
+
+  - name: Admin password changed and Subsequent re-provision admin password
+    set_fact:
+      current_nexus_admin_password: "{{ nexus_admin_password }}"
