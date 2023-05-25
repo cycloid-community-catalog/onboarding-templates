@@ -1,8 +1,8 @@
 version: "2"
 name: Terraform template for Azure
 canonical: template-nodejs-azure
+status: 'private'
 template: true
-status: public
 author: '{{stack_author}}'
 description: |
   Build and deploy a Node.js web application on an Azure VM using Terraform and Cloud-Init.
