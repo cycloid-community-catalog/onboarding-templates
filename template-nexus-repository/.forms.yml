@@ -175,11 +175,11 @@ use_cases:
         key: gcp_credentials_json
         widget: cy_cred
         widget_config:
-          display_keys: false
+          display_keys: true
           cred_types:
             - gcp
         type: string
-        default: "((gcp))"
+        default: "((gcp.json_key))"
         required: true
       - name: "GCP project"
         description: "Google Cloud Platform project ID for Terraform."
