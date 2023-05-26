@@ -36,6 +36,7 @@ resources:
       azure_location: ((azure_location))
 {%- elif stack_usecase == "gcp" %}
       gcp_project: ((gcp_project))
+      gcp_region: ((gcp_region))
       gcp_zone: ((gcp_zone))
 {%- endif %}
       keypair_public: ((keypair_public))

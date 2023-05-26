@@ -40,9 +40,9 @@ use_cases:
         type: string
         default: "n2-standard-2"
         values:
-            - e2-medium
             - n2-standard-2
             - n2d-standard-2
+            - n2d-standard-4
         required: true
 {%- endif %}
       - name: "Disk size"
@@ -188,94 +188,129 @@ use_cases:
         type: string
         default: ""
         required: true
+      - name: "GCP region"
+        description: "Google Cloud Platform region to use for Terraform."
+        key: gcp_region
+        widget: auto_complete
+        type: string
+        default: "europe-west1"
+        values:
+          - asia-east1
+          - asia-east2
+          - asia-northeast1
+          - asia-northeast2
+          - asia-northeast3
+          - asia-south1
+          - asia-south2
+          - asia-southeast1
+          - asia-southeast2
+          - australia-southeast1
+          - australia-southeast2
+          - europe-central2
+          - europe-north1
+          - europe-west1
+          - europe-west2
+          - europe-west3
+          - europe-west4
+          - europe-west6
+          - northamerica-northeast1
+          - southamerica-east1
+          - us-central1
+          - us-east1
+          - us-east4
+          - us-west1
+          - us-west2
+          - us-west3
+          - us-west4
+        required: true
       - name: "GCP zone"
         description: "Google Cloud Platform zone to use for Terraform."
         key: gcp_zone
-        widget: dropdown
-        type: map
+        widget: auto_complete
+        type: string
         default: "europe-west1-b"
         values:
-          - { "value": "asia-east1-a", "label": "asia-east1-a: Changhua County, Taiwan, APAC" }
-          - { "value": "asia-east1-b", "label": "asia-east1-b: Changhua County, Taiwan, APAC" }
-          - { "value": "asia-east1-c", "label": "Changhua County, Taiwan, APAC" }
-          - { "value": "asia-east2-a", "label": "Hong Kong, APAC" }
-          - { "value": "asia-east2-b", "label": "Hong Kong, APAC" }
-          - { "value": "asia-east2-c", "label": "Hong Kong, APAC" }
-          - { "value": "asia-northeast1-a", "label": "Tokyo, Japan, APAC" }
-          - { "value": "asia-northeast1-b", "label": "Tokyo, Japan, APAC" }
-          - { "value": "asia-northeast1-c", "label": "Tokyo, Japan, APAC" }
-          - { "value": "asia-northeast2-a", "label": "Osaka, Japan, APAC" }
-          - { "value": "asia-northeast2-b", "label": "Osaka, Japan, APAC" }
-          - { "value": "asia-northeast2-c", "label": "Osaka, Japan, APAC" }
-          - { "value": "asia-northeast3-a", "label": "Seoul, South Korea, APAC" }
-          - { "value": "asia-northeast3-b", "label": "Seoul, South Korea, APAC" }
-          - { "value": "asia-northeast3-c", "label": "Seoul, South Korea, APAC" }
-          - { "value": "asia-south1-a", "label": "Mumbai, India APAC" }
-          - { "value": "asia-south1-b", "label": "Mumbai, India APAC" }
-          - { "value": "asia-south1-c", "label": "Mumbai, India APAC" }
-          - { "value": "asia-south2-a", "label": "Delhi, India APAC" }
-          - { "value": "asia-south2-b", "label": "Delhi, India APAC" }
-          - { "value": "asia-south2-c", "label": "Delhi, India APAC" }
-          - { "value": "asia-southeast1-a", "label": "Jurong West, Singapore, APAC" }
-          - { "value": "asia-southeast1-b", "label": "Jurong West, Singapore, APAC" }
-          - { "value": "asia-southeast1-c", "label": "Jurong West, Singapore, APAC" }
-          - { "value": "asia-southeast2-a", "label": "Jakarta, Indonesia, APAC" }
-          - { "value": "asia-southeast2-b", "label": "Jakarta, Indonesia, APAC" }
-          - { "value": "asia-southeast2-c", "label": "Jakarta, Indonesia, APAC" }
-          - { "value": "australia-southeast1-a", "label": "Sydney, Australia, APAC" }
-          - { "value": "australia-southeast1-b", "label": "Sydney, Australia, APAC" }
-          - { "value": "australia-southeast1-c", "label": "Sydney, Australia, APAC" }
-          - { "value": "australia-southeast2-a", "label": "Melbourne, Australia, APAC" }
-          - { "value": "australia-southeast2-b", "label": "Melbourne, Australia, APAC" }
-          - { "value": "australia-southeast2-c", "label": "Melbourne, Australia, APAC" }
-          - { "value": "europe-central2-a", "label": "Warsaw, Poland, Europe" }
-          - { "value": "europe-central2-b", "label": "Warsaw, Poland, Europe" }
-          - { "value": "europe-central2-c", "label": "Warsaw, Poland, Europe" }
-          - { "value": "europe-north1-a", "label": "Hamina, Finland, Europe" }
-          - { "value": "europe-north1-b", "label": "Hamina, Finland, Europe" }
-          - { "value": "europe-north1-c", "label": "Hamina, Finland, Europe" }
-          - { "value": "europe-west1-b", "label": "St. Ghislain, Belgium, Europe" }
-          - { "value": "europe-west1-c", "label": "St. Ghislain, Belgium, Europe" }
-          - { "value": "europe-west1-d", "label": "St. Ghislain, Belgium, Europe" }
-          - { "value": "europe-west2-a", "label": "London, England, Europe" }
-          - { "value": "europe-west2-b", "label": "London, England, Europe" }
-          - { "value": "europe-west2-c", "label": "London, England, Europe" }
-          - { "value": "europe-west3-a", "label": "Frankfurt, Germany Europe" }
-          - { "value": "europe-west3-b", "label": "Frankfurt, Germany Europe" }
-          - { "value": "europe-west3-c", "label": "Frankfurt, Germany Europe" }
-          - { "value": "europe-west4-a", "label": "Eemshaven, Netherlands, Europe" }
-          - { "value": "europe-west4-b", "label": "Eemshaven, Netherlands, Europe" }
-          - { "value": "europe-west4-c", "label": "Eemshaven, Netherlands, Europe" }
-          - { "value": "europe-west6-a", "label": "Zurich, Switzerland, Europe" }
-          - { "value": "europe-west6-b", "label": "Zurich, Switzerland, Europe" }
-          - { "value": "europe-west6-c", "label": "Zurich, Switzerland, Europe" }
-          - { "value": "northamerica-northeast1-a", "label": "Montréal, Québec, North America" }
-          - { "value": "northamerica-northeast1-b", "label": "Montréal, Québec, North America" }
-          - { "value": "northamerica-northeast1-c", "label": "Montréal, Québec, North America" }
-          - { "value": "southamerica-east1-a", "label": "Osasco, São Paulo, Brazil, South America" }
-          - { "value": "southamerica-east1-b", "label": "Osasco, São Paulo, Brazil, South America" }
-          - { "value": "southamerica-east1-c", "label": "Osasco, São Paulo, Brazil, South America" }
-          - { "value": "us-central1-a", "label": "Council Bluffs, Iowa, North America" }
-          - { "value": "us-central1-b", "label": "Council Bluffs, Iowa, North America" }
-          - { "value": "us-central1-c", "label": "Council Bluffs, Iowa, North America" }
-          - { "value": "us-central1-f", "label": "Council Bluffs, Iowa, North America" }
-          - { "value": "us-east1-b", "label": "Moncks Corner, South Carolina, North America" }
-          - { "value": "us-east1-c", "label": "Moncks Corner, South Carolina, North America" }
-          - { "value": "us-east1-d", "label": "Moncks Corner, South Carolina, North America" }
-          - { "value": "us-east4-a", "label": "Ashburn, Virginia, North America" }
-          - { "value": "us-east4-b", "label": "Ashburn, Virginia, North America" }
-          - { "value": "us-east4-c", "label": "Ashburn, Virginia, North America" }
-          - { "value": "us-west1-a", "label": "The Dalles, Oregon, North America" }
-          - { "value": "us-west1-b", "label": "The Dalles, Oregon, North America" }
-          - { "value": "us-west1-c", "label": "The Dalles, Oregon, North America" }
-          - { "value": "us-west2-a", "label": "Los Angeles, California, North America" }
-          - { "value": "us-west2-b", "label": "Los Angeles, California, North America" }
-          - { "value": "us-west2-c", "label": "Los Angeles, California, North America" }
-          - { "value": "us-west3-a", "label": "Salt Lake City, Utah, North America" }
-          - { "value": "us-west3-b", "label": "Salt Lake City, Utah, North America" }
-          - { "value": "us-west3-c", "label": "Salt Lake City, Utah, North America" }
-          - { "value": "us-west4-a", "label": "Las Vegas, Nevada, North America" }
-          - { "value": "us-west4-b", "label": "Las Vegas, Nevada, North America" }
-          - { "value": "us-west4-c", "label": "Las Vegas, Nevada, North America" }
+          - asia-east1-a
+          - asia-east1-b
+          - asia-east1-c
+          - asia-east2-a
+          - asia-east2-b
+          - asia-east2-c
+          - asia-northeast1-a
+          - asia-northeast1-b
+          - asia-northeast1-c
+          - asia-northeast2-a
+          - asia-northeast2-b
+          - asia-northeast2-c
+          - asia-northeast3-a
+          - asia-northeast3-b
+          - asia-northeast3-c
+          - asia-south1-a
+          - asia-south1-b
+          - asia-south1-c
+          - asia-south2-a
+          - asia-south2-b
+          - asia-south2-c
+          - asia-southeast1-a
+          - asia-southeast1-b
+          - asia-southeast1-c
+          - asia-southeast2-a
+          - asia-southeast2-b
+          - asia-southeast2-c
+          - australia-southeast1-a
+          - australia-southeast1-b
+          - australia-southeast1-c
+          - australia-southeast2-a
+          - australia-southeast2-b
+          - australia-southeast2-c
+          - europe-central2-a
+          - europe-central2-b
+          - europe-central2-c
+          - europe-north1-a
+          - europe-north1-b
+          - europe-north1-c
+          - europe-west1-b
+          - europe-west1-c
+          - europe-west1-d
+          - europe-west2-a
+          - europe-west2-b
+          - europe-west2-c
+          - europe-west3-a
+          - europe-west3-b
+          - europe-west3-c
+          - europe-west4-a
+          - europe-west4-b
+          - europe-west4-c
+          - europe-west6-a
+          - europe-west6-b
+          - europe-west6-c
+          - northamerica-northeast1-a
+          - northamerica-northeast1-b
+          - northamerica-northeast1-c
+          - southamerica-east1-a
+          - southamerica-east1-b
+          - southamerica-east1-c
+          - us-central1-a
+          - us-central1-b
+          - us-central1-c
+          - us-central1-f
+          - us-east1-b
+          - us-east1-c
+          - us-east1-d
+          - us-east4-a
+          - us-east4-b
+          - us-east4-c
+          - us-west1-a
+          - us-west1-b
+          - us-west1-c
+          - us-west2-a
+          - us-west2-b
+          - us-west2-c
+          - us-west3-a
+          - us-west3-b
+          - us-west3-c
+          - us-west4-a
+          - us-west4-b
+          - us-west4-c
         required: true
 {%- endif %}

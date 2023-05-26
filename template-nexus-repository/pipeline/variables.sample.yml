@@ -55,6 +55,10 @@ gcp_credentials_json: ((gcp.json_key))
 #+ Google Cloud Platform project ID for Terraform.
 gcp_project: ""
 
+#. gcp_region (required): "europe-west1"
+#+ Google Cloud Platform region to use for Terraform.
+gcp_region: "europe-west1"
+
 #. gcp_zone (required): "europe-west1-b"
 #+ Google Cloud Platform zone to use for Terraform.
 gcp_zone: "europe-west1-b"

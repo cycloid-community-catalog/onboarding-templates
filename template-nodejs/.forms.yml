@@ -40,9 +40,9 @@ use_cases:
         type: string
         default: "n2-standard-2"
         values:
-            - n1-standard-2
             - n2-standard-2
             - n2d-standard-2
+            - n2d-standard-4
         required: true
 {%- endif %}
       - name: "Disk size"
@@ -165,6 +165,41 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
+        required: true
+      - name: "GCP region"
+        description: "Google Cloud Platform region to use for Terraform."
+        key: gcp_region
+        widget: auto_complete
+        type: string
+        default: "europe-west1"
+        values:
+          - asia-east1
+          - asia-east2
+          - asia-northeast1
+          - asia-northeast2
+          - asia-northeast3
+          - asia-south1
+          - asia-south2
+          - asia-southeast1
+          - asia-southeast2
+          - australia-southeast1
+          - australia-southeast2
+          - europe-central2
+          - europe-north1
+          - europe-west1
+          - europe-west2
+          - europe-west3
+          - europe-west4
+          - europe-west6
+          - northamerica-northeast1
+          - southamerica-east1
+          - us-central1
+          - us-east1
+          - us-east4
+          - us-west1
+          - us-west2
+          - us-west3
+          - us-west4
         required: true
       - name: "GCP zone"
         description: "Google Cloud Platform zone to use for Terraform."
