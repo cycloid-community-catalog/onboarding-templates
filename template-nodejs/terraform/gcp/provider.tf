@@ -1,5 +1,5 @@
 provider "google" {
   project = var.gcp_project
-  region  = var.gcp_region
-  zone  = "${var.gcp_region}-${var.gcp_zone}"
+  region  = substr(var.gcp_zone, 0, -3)
+  zone  = var.gcp_zone
 }

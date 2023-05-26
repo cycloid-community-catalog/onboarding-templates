@@ -158,7 +158,7 @@ customer: ($ organization_canonical $)
 
 #. cycloid_api_url (required): https://http-api.cycloid.io
 #+ Cycloid API URL.
-cycloid_api_url: 'https://http-api.cycloid.io'
+cycloid_api_url: ($ api_url $)
 
 #. terraform_version (required): '1.1.9'
 #+ terraform version used to execute your code.
