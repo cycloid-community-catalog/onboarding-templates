@@ -1,7 +1,7 @@
 ---
 # Configuration of the Cycloid stack
 version: '2'
-name: 'Terraform + Ansible template'
+name: 'Terraform and Ansible template'
 canonical: 'template-nexus-repository'
 description: Deploys a Nexus Repository on an AWS, Azure or GCP instance using Terraform and Ansible.
 author: '{{ stack_author }}'
