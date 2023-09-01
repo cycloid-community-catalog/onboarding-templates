@@ -1,3 +1,4 @@
+{% verbatim %}
 ---
 - name: Calling Groovy script {{ script_name }}
   uri:
@@ -11,3 +12,4 @@
     force_basic_auth: yes
     # body: "{{ args | to_json }}"
     body: "{{ args.new_password }}"
+{% endverbatim %}

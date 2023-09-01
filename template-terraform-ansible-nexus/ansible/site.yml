@@ -1,3 +1,4 @@
+{% verbatim %}
 ---
 - name: install Nexus Repository
   hosts: tag_role_nexus:&tag_project_{{ project }}:&tag_cycloid_true:&tag_env_{{ env }}
@@ -181,3 +182,4 @@
   - name: Admin password changed and Subsequent re-provision admin password
     set_fact:
       current_nexus_admin_password: "{{ nexus_admin_password }}"
+{% endverbatim %}
