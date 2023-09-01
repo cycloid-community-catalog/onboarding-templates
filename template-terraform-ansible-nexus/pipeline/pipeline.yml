@@ -264,6 +264,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ((aws_access_key))
           AWS_SECRET_ACCESS_KEY: ((aws_secret_key))
           AWS_DEFAULT_REGION: ((aws_region))
+          AWS_INVENTORY: true # Useful if you want to use an IAM role on your EC2 worker instances and comment out access and secret keys
 {%- elif stack_usecase == "azure" %}
           ANSIBLE_REMOTE_USER: nexus
           AZURE_USE_PRIVATE_IP: False # Force to connect to public IP because we don't use a bastion in this stack
