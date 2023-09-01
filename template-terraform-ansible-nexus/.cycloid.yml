@@ -1,28 +1,28 @@
-version: "2"
-name: Terraform template
-canonical: template-nodejs
-description: Deploys a Node.js web application on an AWS, Azure or GCP instance using Terraform and Cloud-Init.
-author: '{{stack_author}}'
-image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
+---
+# Configuration of the Cycloid stack
+version: '2'
+name: 'Terraform and Ansible template'
+canonical: 'template-terraform-ansible-nexus'
+description: Deploys a Nexus Repository on an instance using Terraform and Ansible.
+author: '{{ stack_author }}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
 status: 'private'
 template: true
 keywords:
 - terraform
-- cloud-init
-- user data
-- webapp
-- nodejs
-- nginx
+- ansible
+- nexus
+- '{{ stack_usecase }}'
 technologies:
 - technology: terraform
   version: 1.3.9
-- technology: nodejs
-- technology: nginx
+- technology: ansible
+  version: 2.9
 
 config:
   aws:
     name: 'AWS'
-    description: 'Deploys a Node.js web application in a single AWS instance'
+    description: 'Deploys a Nexus Repository in a single AWS instance'
     cloud_provider: aws
     # Pipeline and variable configuration for the AWS CD pipeline use case
     pipeline:
@@ -31,6 +31,11 @@ config:
       variables:
         path: 'pipeline/variables.sample.yml'
         destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      nexus:
+        path: 'ansible/environments/nexus.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-nexus.yml'
     # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
     terraform:
       main:
@@ -39,7 +44,7 @@ config:
 
   azure:
     name: 'Azure'
-    description: 'Deploys a Node.js web application in a single Azure instance'
+    description: 'Deploys a Nexus Repository in a single Azure instance'
     cloud_provider: azurerm
     # Pipeline and variable configuration for the Azure CD pipeline use case
     pipeline:
@@ -48,6 +53,11 @@ config:
       variables:
         path: 'pipeline/variables.sample.yml'
         destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      nexus:
+        path: 'ansible/environments/nexus.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-nexus.yml'
     # Configuration of terraform
     terraform:
       main:
@@ -56,7 +66,7 @@ config:
 
   gcp:
     name: 'GCP'
-    description: 'Deploys a Node.js web application in a single GCP instance'
+    description: 'Deploys a Nexus Repository in a single GCP instance'
     cloud_provider: google
     # Pipeline and variable configuration for the GCP CD pipeline use case
     pipeline:
@@ -65,6 +75,11 @@ config:
       variables:
         path: 'pipeline/variables.sample.yml'
         destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      nexus:
+        path: 'ansible/environments/nexus.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-nexus.yml'
     # Configuration of terraform
     terraform:
       main:
