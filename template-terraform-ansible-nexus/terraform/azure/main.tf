@@ -20,7 +20,7 @@ module "nexus" {
 
   #. azure_location: "West Europe"
   #+ Azure location
-  azure_location = var.azure_location
+  azure_location = "Value injected by StackForms"
 
   #
   # Nexus Repository

@@ -33,7 +33,6 @@ resources:
       aws_region: ((aws_region))
 {%- elif stack_usecase == "azure" %}
       azure_cred: ((azure_cred))
-      azure_location: ((azure_location))
 {%- elif stack_usecase == "gcp" %}
       gcp_project: ((gcp_project))
       gcp_region: ((gcp_region))

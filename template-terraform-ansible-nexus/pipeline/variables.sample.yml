@@ -42,10 +42,6 @@ azure_client_id: ((((azure_cred)).client_id))
 #. azure_client_secret (required): ((azure.client_secret))
 #+ Azure client secret to use for Terraform.
 azure_client_secret: ((((azure_cred)).client_secret))
-
-#. azure_location (required): West Europe
-#+ Azure location to use for terraform. 
-azure_location: "West Europe"
 {%- elif stack_usecase == "gcp" %}
 #. gcp_credentials_json (required): ((gcp.json_key))
 #+ Google Cloud Platform JSON credentials to use for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
