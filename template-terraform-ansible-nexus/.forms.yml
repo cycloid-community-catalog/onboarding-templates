@@ -97,16 +97,27 @@ use_cases:
     - name: Access Configuration
       technologies: [pipeline]
       vars:
-      - name: "AWS account"
-        description: "The AWS account where to deploy the infrastructure. It contains access key and secret key."
-        key: aws_cred
+      - name: "AWS access key"
+        description: "Amazon AWS access key for Terraform."
+        key: aws_access_key
         widget: cy_cred
         widget_config:
-          display_keys: false
+          display_keys: true
           cred_types:
             - aws
         type: string
-        default: "((aws))"
+        default: "((aws_cycloid-demo.access_key))"
+        required: true
+      - name: "AWS secret key"
+        description: "Amazon AWS secret key for Terraform."
+        key: aws_secret_key
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - aws
+        type: string
+        default: "((aws_cycloid-demo.secret_key))"
         required: true
       - name: "Amazon AWS region"
         description: "Amazon AWS region to use for Terraform."
