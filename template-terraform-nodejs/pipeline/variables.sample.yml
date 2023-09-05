@@ -48,7 +48,7 @@ stack_git_repository: ($ scs_url $)
 #. stack_git_branch (required): ($ scs_branch $)
 #+ Branch to use on the stack Git repository.
 stack_git_branch: ($ scs_branch $)
-{% if scs_cred_type == "http" %}
+{% if scs_cred_type == "basic_auth" %}
 #. stack_git_username (required): ((($ scs_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
 stack_git_username: ((($ scs_cred_path $).username))
@@ -77,7 +77,7 @@ config_git_repository: ($ cr_url $)
 #. config_git_branch (required): ($ cr_branch $)
 #+ Branch to use on the config Git repository.
 config_git_branch: ($ cr_branch $)
-{% if cr_default_cred_type == "http" %}
+{% if cr_default_cred_type == "basic_auth" %}
 #. config_git_username (required): ((($ cr_cred_path $).username))
 #+ Username for HTTP(S) auth when pulling/pushing.
 config_git_username: ((($ cr_cred_path $).username))

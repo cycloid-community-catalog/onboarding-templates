@@ -56,7 +56,7 @@ resources:
   source:
     uri: ((stack_git_repository))
     branch: ((stack_git_branch))
-{% if scs_cred_type == "http" %}
+{% if scs_cred_type == "basic_auth" %}
     username: ((stack_git_username))
     password: ((stack_git_token))
 {% else %}
@@ -72,7 +72,7 @@ resources:
   source:
     uri: ((config_git_repository))
     branch: ((config_git_branch))
-{% if cr_default_cred_type == "http" %}
+{% if cr_default_cred_type == "basic_auth" %}
     username: ((stack_git_username))
     password: ((stack_git_token))
 {% else %}
@@ -88,7 +88,7 @@ resources:
   source:
     uri: ((stack_git_repository))
     branch: ((stack_git_branch))
-{% if scs_cred_type == "http" %}
+{% if scs_cred_type == "basic_auth" %}
     username: ((stack_git_username))
     password: ((stack_git_token))
 {% else %}
@@ -104,7 +104,7 @@ resources:
   source:
     uri: ((config_git_repository))
     branch: ((config_git_branch))
-{% if cr_default_cred_type == "http" %}
+{% if cr_default_cred_type == "basic_auth" %}
     username: ((stack_git_username))
     password: ((stack_git_token))
 {% else %}
