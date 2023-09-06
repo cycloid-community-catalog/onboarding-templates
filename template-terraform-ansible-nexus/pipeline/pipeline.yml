@@ -111,10 +111,10 @@ resources:
     uri: ((config_git_repository))
     branch: ((config_git_branch))
 {% if cr_default_cred_type == "ssh" %}
-    private_key: ((stack_git_private_key))
+    private_key: ((config_git_private_key))
 {% else %}
-    username: ((stack_git_username))
-    password: ((stack_git_token))
+    username: ((config_git_username))
+    password: ((config_git_token))
 {% endif %}
     paths:
       - ((config_ansible_path))/*
