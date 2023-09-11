@@ -162,6 +162,17 @@ use_cases:
         type: boolean
         default: false
 {%- if stack_usecase == "aws" %}
+    - name: SSH Public Key Configuration
+      technologies: [pipeline]
+      condition: '$create_instance == true'
+      vars:
+      - name: "SSH Public key"
+        description: "The public SSH key to connect via SSH"
+        key: keypair_public
+        widget: cy_cred
+        type: string
+        default: ((keypair.ssh_pub))
+        required: true
     - name: EC2 Configuration
       technologies: [terraform]
       condition: '$create_instance == true'
@@ -172,13 +183,6 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
-        required: true
-      - name: "SSH Public key"
-        description: "The public SSH key to connect via SSH"
-        key: keypair_public
-        widget: cy_cred
-        type: string
-        default: ((keypair.ssh_pub))
         required: true
       - name: "Instance type"
         description: "Instance type for the VM."
