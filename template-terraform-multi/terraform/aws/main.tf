@@ -112,4 +112,7 @@ module "ec2" {
   #+ Disk size for the VM (Go)
   vm_disk_size = "Value injected by StackForms"
 
+  #. keypair_public: ""
+  #+ The public SSH key, for SSH access to newly-created instances
+  keypair_public = "Value injected by StackForms"
 }

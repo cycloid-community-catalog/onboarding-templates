@@ -173,6 +173,13 @@ use_cases:
         type: string
         default: ""
         required: true
+      - name: "SSH Public key"
+        description: "The public SSH key to connect via SSH"
+        key: keypair_public
+        widget: cy_cred
+        type: string
+        default: ((keypair.ssh_pub))
+        required: true
       - name: "Instance type"
         description: "Instance type for the VM."
         key: vm_instance_type
