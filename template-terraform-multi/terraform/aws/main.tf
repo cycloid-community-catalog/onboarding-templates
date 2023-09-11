@@ -20,17 +20,9 @@ module "s3" {
   
   count = var.create_storage ? 1 : 0
 
-  #. subnet_id: ''
-  #+ Subnet ID where to deploy the EC2 instance
-  subnet_id = "Value injected by StackForms"
-
-  #. vm_instance_type: 't3.micro'
-  #+ Instance type for the VM
-  vm_instance_type = "Value injected by StackForms"
-
-  #. vm_disk_size: 20
-  #+ Disk size for the VM (Go)
-  vm_disk_size = "Value injected by StackForms"
+  #. s3_bucket_name: ''
+  #+ Name of the S3 bucket
+  s3_bucket_name = "Value injected by StackForms"
 
 }
 
