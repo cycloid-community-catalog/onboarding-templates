@@ -1,6 +1,6 @@
 version: "2"
 name: Terraform template deploying multiple resources
-canonical: template-terraform-nodejs
+canonical: template-terraform-multi
 description: Deploy storage, database and compute resources using Terraform remote modules.
 author: '{{stack_author}}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
