@@ -1,5 +1,5 @@
 version: "2"
-name: Terraform template
+name: Terraform template deploying NodeJS on one instance
 canonical: template-terraform-nodejs
 description: Deploys a Node.js web application on an AWS, Azure or GCP instance using Terraform and Cloud-Init.
 author: '{{stack_author}}'
