@@ -114,5 +114,5 @@ module "ec2" {
 
   #. keypair_public: ""
   #+ The public SSH key, for SSH access to newly-created instances
-  keypair_public = "Value injected by StackForms"
+  keypair_public = var.keypair_public
 }

@@ -41,6 +41,7 @@ resources:
       create_storage: ((create_storage))
       create_database: ((create_database))
       create_instance: ((create_instance))
+      keypair_public: ((keypair_public))
       customer: ((customer))
       project: ((project))
       env: ((env))

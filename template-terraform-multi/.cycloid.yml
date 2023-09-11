@@ -10,7 +10,6 @@ keywords:
 - terraform
 - cloud-init
 - user data
-- webapp
 - nodejs
 - nginx
 technologies:

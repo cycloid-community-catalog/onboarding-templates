@@ -55,6 +55,15 @@ create_instance: false
 
 
 #
+# SSH Keypair to use for newly created instances
+#
+
+#. keypair_public (required): ((keypair.ssh_pub))
+#+ The public SSH key to connect via SSH to execute the Ansible playbook.
+keypair_public: ((keypair.ssh_pub))
+
+
+#
 # Stack Git repository
 #
 
