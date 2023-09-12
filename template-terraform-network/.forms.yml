@@ -61,7 +61,7 @@ use_cases:
         key: keypair_public
         widget: cy_cred
         widget_config:
-          display_keys: false
+          display_keys: true
           cred_types:
             - custom
         type: string

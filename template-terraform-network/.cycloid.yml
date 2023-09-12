@@ -1,9 +1,9 @@
 version: "2"
-name: Terraform template deploying network resources
+name: Networking Resources
 canonical: template-terraform-network
-description: Deploys network resources and optionally a bastion using Terraform. The created network will be used to deploy services such as compute and databases.
+description: Deploys networking resources and optionally a bastion using Terraform. The created network will be used to deploy services such as compute and databases.
 author: '{{stack_author}}'
-image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/network.png'
 status: 'private'
 template: true
 keywords:
@@ -15,13 +15,11 @@ keywords:
 technologies:
 - technology: terraform
   version: 1.3.9
-- technology: nodejs
-- technology: nginx
 
 config:
   aws:
     name: 'AWS'
-    description: 'Deploys a Node.js web application in a single AWS instance'
+    description: 'Deploys a VPC, public and private subnets and optionally a bastion'
     cloud_provider: aws
     # Pipeline and variable configuration for the AWS CD pipeline use case
     pipeline:
@@ -36,36 +34,36 @@ config:
         path: 'terraform/aws/main.tf'
         destination: '($ project $)/terraform/aws/($ environment $)/main.tf'
 
-  azure:
-    name: 'Azure'
-    description: 'Deploys a Node.js web application in a single Azure instance'
-    cloud_provider: azurerm
-    # Pipeline and variable configuration for the Azure CD pipeline use case
-    pipeline:
-      pipeline:
-        path: 'pipeline/pipeline.yml'
-      variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
-    # Configuration of terraform
-    terraform:
-      main:
-        path: 'terraform/azure/main.tf'
-        destination: '($ project $)/terraform/azure/($ environment $)/main.tf'
+  # azure:
+  #   name: 'Azure'
+  #   description: 'Deploys a Virtual Network, public and private subnets and optionally a bastion'
+  #   cloud_provider: azurerm
+  #   # Pipeline and variable configuration for the Azure CD pipeline use case
+  #   pipeline:
+  #     pipeline:
+  #       path: 'pipeline/pipeline.yml'
+  #     variables:
+  #       path: 'pipeline/variables.sample.yml'
+  #       destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+  #   # Configuration of terraform
+  #   terraform:
+  #     main:
+  #       path: 'terraform/azure/main.tf'
+  #       destination: '($ project $)/terraform/azure/($ environment $)/main.tf'
 
-  gcp:
-    name: 'GCP'
-    description: 'Deploys a Node.js web application in a single GCP instance'
-    cloud_provider: google
-    # Pipeline and variable configuration for the GCP CD pipeline use case
-    pipeline:
-      pipeline:
-        path: 'pipeline/pipeline.yml'
-      variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
-    # Configuration of terraform
-    terraform:
-      main:
-        path: 'terraform/gcp/main.tf'
-        destination: '($ project $)/terraform/gcp/($ environment $)/main.tf'
+  # gcp:
+  #   name: 'GCP'
+  #   description: 'Deploys a Virtual Network, public and private subnets and optionally a bastion'
+  #   cloud_provider: google
+  #   # Pipeline and variable configuration for the GCP CD pipeline use case
+  #   pipeline:
+  #     pipeline:
+  #       path: 'pipeline/pipeline.yml'
+  #     variables:
+  #       path: 'pipeline/variables.sample.yml'
+  #       destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+  #   # Configuration of terraform
+  #   terraform:
+  #     main:
+  #       path: 'terraform/gcp/main.tf'
+  #       destination: '($ project $)/terraform/gcp/($ environment $)/main.tf'
