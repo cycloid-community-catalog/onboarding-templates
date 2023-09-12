@@ -43,31 +43,6 @@ use_cases:
 {%- elif stack_usecase == "gcp" %}
 {%- endif %}
 
-    - name: Bastion
-      technologies: [pipeline]
-      vars:
-      - name: "Deploy a Bastion"
-        description: "Deploy a Bastion or not."
-        key: create_bastion
-        widget: switch
-        type: boolean
-        default: false
-    - name: Bastion Configuration
-      technologies: [pipeline]
-      condition: '$create_bastion == true'
-      vars:
-      - name: "SSH Public key"
-        description: "The public SSH key to connect via SSH"
-        key: keypair_public
-        widget: cy_cred
-        widget_config:
-          display_keys: true
-          cred_types:
-            - custom
-        type: string
-        default: ((keypair.ssh_pub))
-        required: true
-
 {%- if stack_usecase == "aws" %}
   - name: AWS Cloud Provider
     groups:

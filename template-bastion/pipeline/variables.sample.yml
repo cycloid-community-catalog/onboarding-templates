@@ -41,9 +41,9 @@ gcp_zone: "europe-west1-b"
 # Bastion
 #
 
-#. create_bastion (required): false
-#+ Deploy a bastion or not.
-create_bastion: false
+#. subnet_id (required): ""
+#+ Subnet ID where to deploy the bastion. Must belong to the region stated in this form.
+subnet_id: ""
 
 #. keypair_public (required): ((keypair.ssh_pub))
 #+ The public SSH key to connect via SSH.

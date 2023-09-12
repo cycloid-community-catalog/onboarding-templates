@@ -1,7 +1,7 @@
 version: "2"
 name: Networking Resources
-canonical: template-terraform-network
-description: Deploys networking resources and optionally a bastion using Terraform. The created network will be used to deploy services such as compute and databases.
+canonical: template-network
+description: Deploys a virtual network and subnets using Terraform. They will be used to deploy services such as compute and databases.
 author: '{{stack_author}}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/network.png'
 status: 'private'

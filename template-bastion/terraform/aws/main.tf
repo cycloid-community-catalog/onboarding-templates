@@ -18,13 +18,13 @@ module "vpc" {
   # Bastion
   #
 
-  #. create_bastion: false
-  #+ Deploy a bastion or not
-  create_bastion = var.create_bastion
-
   #. keypair_public: ""
   #+ The public SSH key, for SSH access to newly-created instances
   keypair_public = var.keypair_public
+
+  #. subnet_id: ''
+  #+ Subnet ID where to deploy the EC2 instance
+  subnet_id = var.subnet_id
 
   #
   # Network

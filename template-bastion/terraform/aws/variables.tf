@@ -13,5 +13,5 @@ variable "aws_region" {
 }
 
 # Bastion
-variable "create_bastion" {}
 variable "keypair_public" {}
+variable "subnet_id" {}

@@ -31,8 +31,6 @@ resources:
 {%- if stack_usecase == "aws" %}
       aws_cred: ((aws_cred))
       aws_region: ((aws_region))
-      create_bastion: ((create_bastion))
-      keypair_public: ((keypair_public))
 {%- elif stack_usecase == "azure" %}
       azure_cred: ((azure_cred))
 {%- elif stack_usecase == "gcp" %}
