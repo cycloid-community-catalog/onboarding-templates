@@ -3,7 +3,7 @@ name: Bastion
 canonical: template-bastion
 description: Deploys a bastion using Terraform. For example, it would allow to deploy applications using Ansible in a private subnet.
 author: '{{stack_author}}'
-image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/network.png'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/shield.png'
 status: 'private'
 template: true
 keywords:
