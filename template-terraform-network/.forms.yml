@@ -15,9 +15,9 @@ use_cases:
         widget: simple_text
         type: string
         default: "10.0.0.0/16"
-        validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
-          error_message: "Please enter a valid CIDR"
+        # validations: 
+        # - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        #   error_message: "Please enter a valid CIDR"
         required: true
       - name: "Public Subnet CIDR"
         description: "The public subnet for the VPC."
@@ -25,9 +25,9 @@ use_cases:
         widget: simple_text
         type: string
         default: "10.0.0.0/24"
-        validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
-          error_message: "Please enter a valid CIDR"
+        # validations: 
+        # - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        #   error_message: "Please enter a valid CIDR"
         required: true
       - name: "Private Subnet CIDR"
         description: "The private subnet for the VPC."
@@ -35,9 +35,9 @@ use_cases:
         widget: simple_text
         type: string
         default: "10.0.1.0/24"
-        validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
-          error_message: "Please enter a valid CIDR"
+        # validations: 
+        # - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        #   error_message: "Please enter a valid CIDR"
         required: true
 {%- elif stack_usecase == "azure" %}
 {%- elif stack_usecase == "gcp" %}
