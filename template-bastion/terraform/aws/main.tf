@@ -1,7 +1,7 @@
 module "vpc" {
   #####################################
   # Do not modify the following lines #
-  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/vpc"
+  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/bastion"
   project  = var.project
   env      = var.env
   customer = var.customer
