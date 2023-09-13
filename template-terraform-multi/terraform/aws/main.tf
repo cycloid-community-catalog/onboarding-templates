@@ -1,7 +1,8 @@
 module "s3" {
   #####################################
   # Do not modify the following lines #
-  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/s3"
+  # source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/s3"
+  source   = "./module-s3"
   project  = var.project
   env      = var.env
   customer = var.customer
@@ -29,7 +30,8 @@ module "s3" {
 module "rds" {
   #####################################
   # Do not modify the following lines #
-  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/rds"
+  # source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/rds"
+  source   = "./module-rds"
   project  = var.project
   env      = var.env
   customer = var.customer
@@ -81,7 +83,8 @@ module "rds" {
 module "ec2" {
   #####################################
   # Do not modify the following lines #
-  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/ec2"
+  # source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/ec2"
+  source   = "./module-ec2"
   project  = var.project
   env      = var.env
   customer = var.customer
