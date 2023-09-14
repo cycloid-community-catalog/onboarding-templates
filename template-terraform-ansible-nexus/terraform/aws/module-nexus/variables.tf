@@ -31,6 +31,19 @@ variable "nexus_admin_password" {
   default = "changeme"
 }
 
+#
+# Networking
+#
+variable "create_network" {
+  description = "Whether to create a VPC and subnets"
+  default     = true
+}
+
+variable "subnet_id" {
+  description = "Public subnet ID where to deploy the EC2 instance"
+  default     = ""
+}
+
 # Tags
 variable "extra_tags" {
   default = {}

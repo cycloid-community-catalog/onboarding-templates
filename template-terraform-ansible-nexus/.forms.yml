@@ -73,6 +73,28 @@ use_cases:
         type: string
         default: ((keypair.ssh_prv))
         required: true
+{%- if stack_usecase == "aws" %}
+    - name: Networking
+      technologies: [terraform]
+      vars:
+      - name: "Create VPC"
+        description: "Whether to create a VPC and subnets or not."
+        key: create_network
+        widget: switch
+        type: boolean
+        default: true
+    - name: Networking Configuration
+      technologies: [terraform]
+      vars:
+      condition: '$create_instance == true'
+      - name: "Public Subnet ID"
+        description: "Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form."
+        key: subnet_id
+        widget: simple_text
+        type: string
+        default: ""
+        required: true
+{%- endif %}
     - name: Application Configuration
       technologies: [terraform]
       vars:
