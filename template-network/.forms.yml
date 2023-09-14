@@ -44,9 +44,7 @@ use_cases:
 {%- endif %}
 
 {%- if stack_usecase == "aws" %}
-  - name: AWS Cloud Provider
-    groups:
-    - name: Access Configuration
+    - name: AWS Access Configuration
       technologies: [pipeline]
       vars:
       - name: "AWS account"
@@ -69,9 +67,7 @@ use_cases:
         default: eu-west-1
         required: true
 {%- elif stack_usecase == "azure" %}
-  - name: Azure Cloud Provider
-    groups:
-    - name: Access Configuration
+    - name: Azure Access Configuration
       technologies: [pipeline]
       vars:
       - name: "Azure credentials"
@@ -117,9 +113,7 @@ use_cases:
         default: ""
         required: true
 {%- elif stack_usecase == "gcp" %}
-  - name: GCP Cloud Provider
-    groups:
-    - name: Access Configuration
+    - name: GCP Access Configuration
       technologies: [pipeline]
       vars:
       - name: "GCP credentials"
