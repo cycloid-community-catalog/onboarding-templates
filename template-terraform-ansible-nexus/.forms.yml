@@ -86,7 +86,7 @@ use_cases:
     - name: Networking Configuration
       technologies: [terraform]
       vars:
-      condition: '$create_instance == true'
+      condition: '$create_network == true'
       - name: "Public Subnet ID"
         description: "Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form."
         key: subnet_id
