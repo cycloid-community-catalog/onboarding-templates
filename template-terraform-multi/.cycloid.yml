@@ -1,40 +1,40 @@
-# version: "2"
-# name: Multiple Resources
-# canonical: template-terraform-multi
-# description: Deploy storage, database and compute resources using Terraform.
-# author: '{{stack_author}}'
-# image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
-# status: 'private'
-# template: true
-# keywords:
-# - terraform
-# - cloud-init
-# - user data
-# - nodejs
-# - nginx
-# technologies:
-# - technology: terraform
-#   version: 1.3.9
-# - technology: nodejs
-# - technology: nginx
+version: "2"
+name: Multiple Resources
+canonical: template-terraform-multi
+description: Deploy storage, database and compute resources using Terraform.
+author: '{{stack_author}}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
+status: 'private'
+template: true
+keywords:
+- terraform
+- cloud-init
+- user data
+- nodejs
+- nginx
+technologies:
+- technology: terraform
+  version: 1.3.9
+- technology: nodejs
+- technology: nginx
 
-# config:
-#   aws:
-#     name: 'AWS'
-#     description: 'Deploys S3, RDS and EC2 resources'
-#     cloud_provider: aws
-#     # Pipeline and variable configuration for the AWS CD pipeline use case
-#     pipeline:
-#       pipeline:
-#         path: 'pipeline/pipeline.yml'
-#       variables:
-#         path: 'pipeline/variables.sample.yml'
-#         destination: '($ project $)/pipeline/($ environment $)/variables.yml'
-#     # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
-#     terraform:
-#       main:
-#         path: 'terraform/aws/main.tf'
-#         destination: '($ project $)/terraform/aws/($ environment $)/main.tf'
+config:
+  aws:
+    name: 'AWS'
+    description: 'Deploys S3, RDS and EC2 resources'
+    cloud_provider: aws
+    # Pipeline and variable configuration for the AWS CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+    terraform:
+      main:
+        path: 'terraform/aws/main.tf'
+        destination: '($ project $)/terraform/aws/($ environment $)/main.tf'
 
   # azure:
   #   name: 'Azure'
