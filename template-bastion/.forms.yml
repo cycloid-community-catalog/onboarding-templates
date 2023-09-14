@@ -30,8 +30,6 @@ use_cases:
         default: ""
         required: true
 
-  - name: Cloud Provider
-    groups:
 {%- if stack_usecase == "aws" %}
     - name: AWS Access Configuration
       technologies: [pipeline]
