@@ -45,7 +45,7 @@ resource "aws_instance" "nexus" {
 
   subnet_id               = module.vpc.public_subnets[0]
   disable_api_termination = false
-  associate_public_ip_address = true
+  # associate_public_ip_address = true
 
   root_block_device {
     volume_size           = var.vm_disk_size
@@ -56,6 +56,10 @@ resource "aws_instance" "nexus" {
     Name       = "${var.customer}-${var.project}-${var.env}-nexus"
     role       = "nexus"
   })
+
+  depends_on = [
+    aws_eip.nexus
+  ]
 
   lifecycle {
     ignore_changes = [ami]
