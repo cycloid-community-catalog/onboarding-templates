@@ -3,7 +3,7 @@ version: "2"
 use_cases:
 - name: {{ stack_usecase }}
   sections:
-  - name: Bastion
+  - name: Environment Configuration
     groups:
     - name: Bastion Configuration
       technologies: [pipeline]
@@ -30,10 +30,10 @@ use_cases:
         default: ""
         required: true
 
-{%- if stack_usecase == "aws" %}
-  - name: AWS Cloud Provider
+  - name: Cloud Provider
     groups:
-    - name: Access Configuration
+{%- if stack_usecase == "aws" %}
+    - name: AWS Access Configuration
       technologies: [pipeline]
       vars:
       - name: "AWS account"
@@ -56,9 +56,7 @@ use_cases:
         default: eu-west-1
         required: true
 {%- elif stack_usecase == "azure" %}
-  - name: Azure Cloud Provider
-    groups:
-    - name: Access Configuration
+    - name: Azure Access Configuration
       technologies: [pipeline]
       vars:
       - name: "Azure credentials"
@@ -104,9 +102,7 @@ use_cases:
         default: ""
         required: true
 {%- elif stack_usecase == "gcp" %}
-  - name: GCP Cloud Provider
-    groups:
-    - name: Access Configuration
+    - name: GCP Access Configuration
       technologies: [pipeline]
       vars:
       - name: "GCP credentials"
