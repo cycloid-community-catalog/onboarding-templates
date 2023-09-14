@@ -11,7 +11,7 @@ output "vpc_id" {
 #
 output "vm_ip" {
   description = "The IP address the Nexus Repository EC2 server"
-  value       = aws_instance.nexus.public_ip
+  value       = aws_eip.nexus.public_ip
 }
 
 output "vm_os_user" {
