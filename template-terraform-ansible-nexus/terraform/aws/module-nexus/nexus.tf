@@ -57,10 +57,6 @@ resource "aws_instance" "nexus" {
     role       = "nexus"
   })
 
-  depends_on = [
-    aws_eip.nexus
-  ]
-
   lifecycle {
     ignore_changes = [ami]
   }
