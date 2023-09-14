@@ -1,7 +1,7 @@
 resource "aws_security_group" "nexus" {
   name        = "${var.customer}-${var.project}-${var.env}-nexus"
   description = "Allow accessing the Nexus Repository service from the internet."
-  vpc_id      =   var.create_network ? module.vpc[0].vpc_id : data.aws_subnet.selected[0].vpc_id
+  vpc_id      = var.create_network ? module.vpc[*].vpc_id[0] : data.aws_subnet.selected[*].vpc_id[0]
 
   tags = merge(local.merged_tags, {
     Name       = "${var.customer}-${var.project}-${var.env}-nexus"

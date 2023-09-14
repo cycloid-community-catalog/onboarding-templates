@@ -3,7 +3,12 @@
 #
 output "vpc_id" {
   description = "The VPC ID for the VPC"
-  value       = module.vpc.vpc_id
+  value       = var.create_network ? try(module.vpc[0].vpc_id, null) : try(data.aws_subnet.selected[0].vpc_id, null)
+}
+
+output "subnet_id" {
+  description = "The VPC ID for the VPC"
+  value       = var.create_network ? try(module.vpc[0].public_subnets[0], null) : var.subnet_id
 }
 
 #
