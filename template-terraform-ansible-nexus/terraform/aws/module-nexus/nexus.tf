@@ -1,7 +1,7 @@
 resource "aws_security_group" "nexus" {
   name        = "${var.customer}-${var.project}-${var.env}-nexus"
   description = "Allow accessing the Nexus Repository service from the internet."
-  vpc_id      =   create_network ? module.vpc[0].vpc_id : data.aws_subnet.selected[0].vpc_id
+  vpc_id      =   var.create_network ? module.vpc[0].vpc_id : data.aws_subnet.selected[0].vpc_id
 
   tags = merge(local.merged_tags, {
     Name       = "${var.customer}-${var.project}-${var.env}-nexus"
@@ -43,7 +43,7 @@ resource "aws_instance" "nexus" {
 
   vpc_security_group_ids = [aws_security_group.nexus.id]
 
-  subnet_id               = create_network ? module.vpc[0].public_subnets[0] : var.subnet_id
+  subnet_id               = var.create_network ? module.vpc[0].public_subnets[0] : var.subnet_id
   disable_api_termination = false
   # associate_public_ip_address = true
 

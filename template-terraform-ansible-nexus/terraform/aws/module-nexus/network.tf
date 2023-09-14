@@ -1,17 +1,17 @@
 data "aws_availability_zones" "available" {
-  count = create_network ? 1 : 0
-  
+  count = var.create_network ? 1 : 0
+
   state = "available"
 }
 
 data "aws_subnet" "selected" {
-  count = create_network ? 0 : 1
+  count = var.create_network ? 0 : 1
 
   id = var.subnet_id
 }
 
 module "vpc" {
-  count = create_network ? 1 : 0
+  count = var.create_network ? 1 : 0
 
   source = "terraform-aws-modules/vpc/aws"
 

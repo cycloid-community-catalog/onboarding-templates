@@ -83,7 +83,7 @@ use_cases:
         widget: switch
         type: boolean
         default: true
-    - name: Networking Configuration
+    - name: Network Configuration
       technologies: [terraform]
       condition: '$create_network == false'
       vars:
