@@ -48,5 +48,5 @@ module "nexus" {
 
   #. subnet_id: ""
   #+ Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form
-  subnet_id = "Value injected by StackForms"
+  subnet_id = ""
 }
