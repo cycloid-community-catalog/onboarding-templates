@@ -1,0 +1,32 @@
+{% verbatim %}
+---
+- name: Operations
+  hosts: {{ hosts_inventory }}
+  become: yes
+
+  vars_files:
+  - "environments/default_operations.yml"
+  - ["environments/{{ env }}-operations.yml", "environments/empty.yml"]
+
+  tasks:
+  - name: Reboot All
+    reboot:
+      reboot_timeout: 300
+
+  - name: Service to Restart
+    service:
+      name: {{ hosts_service }}
+      state: restarted
+
+  - name: Package to Install
+    apt:
+      name: {{ hosts_package }}
+      state: present
+
+  - name: User to Create
+    user:
+      name: "{{ hosts_user }}"
+      groups: "{{ hosts_user }}"
+      shell: "/bin/bash"
+      state: present
+{% endverbatim %}

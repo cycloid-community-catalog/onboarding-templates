@@ -1,0 +1,131 @@
+---
+version: "2"
+use_cases:
+- name: '{{ stack_usecase }}'
+  sections:
+  - name: Hosts
+    groups:
+    - name: Host Targeting Mode
+      technologies: [pipeline]
+      vars:
+      - name: "Host Targeting Mode"
+        description: "Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)."
+        key: host_targeting_mode
+        widget: dropdown
+        values:
+        - 'AWS Dynamic Inventory'
+        - 'Azure Dynamic Inventory'
+        - 'GCP Dynamic Inventory'
+        - 'Cycloid Asset Inventory'
+        default: 'Cycloid Dynamic Inventory'
+    - name: AWS Dynamic Inventory Configuration
+      technologies: [pipeline]
+      condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
+      vars:
+      - name: "AWS account"
+        description: "The AWS account used to get EC2 tags information. It contains access key and secret key."
+        key: aws_cred
+        widget: cy_cred
+        widget_config:
+          display_keys: false
+          cred_types:
+            - aws
+        type: string
+        default: ""
+        required: true
+      - name: "Amazon AWS region"
+        description: "Amazon AWS region where targeted EC2 are deployed."
+        key: aws_region
+        widget: auto_complete
+        type: string
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
+        default: eu-west-1
+        required: true
+    - name: Azure Dynamic Inventory Configuration
+      technologies: [pipeline]
+      condition: "$host_targeting_mode == 'Azure Dynamic Inventory'"
+      vars:
+      - name: "Azure credentials"
+        description: "The azure credential used to deploy the infrastructure. It contains subscription_id, tenant_id, client_id, and client_secret."
+        key: azure_cred
+        widget: cy_cred
+        widget_config:
+          display_keys: false
+          cred_types:
+            - azure
+        type: string
+        default: ""
+        required: true
+    - name: GCP Dynamic Inventory Configuration
+      technologies: [pipeline]
+      condition: "$host_targeting_mode == 'GCP Dynamic Inventory'"
+      vars:
+      - name: "GCP credentials"
+        description: "Google Cloud Platform JSON credentials to use for Terraform."
+        key: gcp_credentials_json
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - gcp
+        type: string
+        default: "((gcp.json_key))"
+        required: true
+    - name: Cycloid Asset Inventory Configuration
+      technologies: [pipeline]
+      condition: "$host_targeting_mode == 'Cycloid Asset Inventory'"
+      vars:
+      - name: "Virtual Machine"
+        description: "Select the Virtual Machine to target"
+        key: cai_host
+        widget: text_area
+        type: string
+        widget: cy_inventory_resource
+        # widget_config:
+        #   - resource: aws_instance
+    - name: Inventory Targeting
+      technologies: [pipeline]
+      vars:
+      - name: "Hosts Inventory"
+        description: "An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
+        key: hosts_inventory
+        widget: simple_text
+        type: string
+        default: "tag_project_{{ project }}:&tag_cycloid_true:&tag_env_{{ env }}"
+    - name: Hosts Connectivity
+      technologies: [pipeline]
+      vars:
+      - name: "Hosts Username"
+        description: "The username to connect to via SSH to execute the Ansible playbook"
+        key: hosts_username
+        widget: simple_text
+        type: string
+        default: "admin"
+        required: true
+      - name: "SSH Private key"
+        description: "The private SSH key to connect via SSH to execute the Ansible playbook. The Cycloid workers shall be able to connect to targeted hosts via a public IP address."
+        key: hosts_private_key
+        widget: cy_cred
+        type: string
+        default: ((keypair.ssh_prv))
+        required: true
+    - name: Operations
+      technologies: [ansible]
+      vars:
+      - name: "Reboot All"
+        description: "Reboot all the targeted hosts."
+        key: hosts_reboot
+        widget: switch
+        default: false
+      - name: "Service to Restart"
+        description: "A single service to restart on a Linux machine. Supported init systems include BSD init, OpenRC, SysV, Solaris SMF, systemd, upstart."
+        key: hosts_service
+        widget: simple_text
+      - name: "Package to Install"
+        description: "A single package to install or upgrade on a Debian or Ubuntu OS."
+        key: hosts_package
+        widget: simple_text
+      - name: "User to Create"
+        description: "A single user to create."
+        key: hosts_user
+        widget: simple_text

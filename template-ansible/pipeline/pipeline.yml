@@ -1,0 +1,122 @@
+resources:
+# The Ansible stack
+- name: git_stack-ansible
+  type: git
+  icon: git
+  source:
+    uri: ((stack_git_repository))
+    branch: ((stack_git_branch))
+{% if scs_cred_type == "ssh" %}
+    private_key: ((stack_git_private_key))
+{% else %}
+    username: ((stack_git_username))
+    password: ((stack_git_token))
+{% endif %}
+    paths:
+      - ((stack_ansible_path))/*
+
+# The Ansible config
+- name: git_config-ansible
+  type: git
+  icon: git
+  source:
+    uri: ((config_git_repository))
+    branch: ((config_git_branch))
+{% if cr_default_cred_type == "ssh" %}
+    private_key: ((config_git_private_key))
+{% else %}
+    username: ((config_git_username))
+    password: ((config_git_token))
+{% endif %}
+    paths:
+      - ((config_ansible_path))/*
+
+
+groups:
+- name: overview
+  jobs:
+    - ansible-playbook
+
+
+jobs:
+  - name: ansible-playbook
+    serial: true
+    build_logs_to_retain: 10
+    plan:
+      - in_parallel:
+        - get: git_stack-ansible
+          trigger: true
+
+        - get: git_config-ansible
+          trigger: true
+
+      - task: merge-stack-and-config
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: cycloid/cycloid-toolkit
+              tag: latest
+          run:
+            path: /usr/bin/merge-stack-and-config
+          inputs:
+          - name: git_config-ansible
+            path: "config"
+          - name: git_stack-ansible
+            path: "stack"
+          outputs:
+          - name: merged-stack
+            path: "merged-stack"
+        params:
+          CONFIG_PATH: ((config_ansible_path))
+          STACK_PATH: ((stack_ansible_path))
+
+      - task: run-ansible
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: cycloid/cycloid-toolkit
+              tag: ((ansible_version))
+          run:
+            path: sh
+            args:
+              - '-exc'
+              - |
+                /usr/bin/ansible-runner
+                source ansible-playbook/env
+                echo "You can now connect to http://${vm_ip}:${nexus_port}"
+          caches:
+            - path: ansible-playbook/roles
+          inputs:
+          - name: merged-stack
+            path: ansible-playbook
+        params:
+          #+ Parameters of ansible-runner script. Can be found here: https://github.com/cycloidio/docker-cycloid-toolkit#ansible-runner
+          SSH_PRIVATE_KEY: ((hosts_private_key))
+          ANSIBLE_REMOTE_USER: ((hosts_username))
+          #+ AWS Dynamic Inventory
+          EC2_VPC_DESTINATION_VARIABLE: ip_address # Force to connect to public IP because we don't use a bastion in this stack
+          AWS_ACCESS_KEY_ID: ((aws_access_key))
+          AWS_SECRET_ACCESS_KEY: ((aws_secret_key))
+          AWS_DEFAULT_REGION: ((aws_region))
+          #+ Azure Dynamic Inventory
+          AZURE_USE_PRIVATE_IP: False # Force to connect to public IP because we don't use a bastion in this stack
+          AZURE_SUBSCRIPTION_ID: ((azure_subscription_id))
+          AZURE_TENANT_ID: ((azure_tenant_id))
+          AZURE_TENANT: ((azure_tenant_id))
+          AZURE_CLIENT_ID: ((azure_client_id))
+          AZURE_SECRET: ((azure_client_secret))
+          #+ GCP Dynamic Inventory
+          GCP_USE_PRIVATE_IP: False # Force to connect to public IP because we don't use a bastion in this stack
+          GCP_SERVICE_ACCOUNT_CONTENTS: ((gcp_credentials_json))
+          ANSIBLE_PLAYBOOK_PATH: ansible-playbook
+          ANSIBLE_PLAYBOOK_NAME: site.yml
+          ANSIBLE_EXTRA_VARS:
+            env: ((env))
+            project: ((project))
+            customer: ((customer))
+            cai_host: ((cai_host))
+            hosts_inventory: ((hosts_inventory))

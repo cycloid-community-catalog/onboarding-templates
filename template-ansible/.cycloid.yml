@@ -1,0 +1,32 @@
+---
+# Configuration of the Cycloid stack
+version: '2'
+name: 'Ansible only template'
+canonical: 'template-ansible'
+description: Supports bulk operations such as rebooting VMs, restarting services, installing packages or creating users on a set of targeted virtual machines using Ansible.
+author: '{{ stack_author }}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
+status: 'private'
+template: true
+keywords:
+- ansible
+- '{{ stack_usecase }}'
+technologies:
+- technology: ansible
+  version: 2.9
+
+config:
+  default:
+    name: default
+    # Pipeline and variable configuration
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      nexus:
+        path: 'ansible/environments/support.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-support.yml'
