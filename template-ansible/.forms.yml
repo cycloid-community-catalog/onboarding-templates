@@ -18,7 +18,6 @@ use_cases:
         - 'Azure Dynamic Inventory'
         - 'GCP Dynamic Inventory'
         - 'Cycloid Asset Inventory'
-        default: 'Cycloid Dynamic Inventory'
     - name: AWS Dynamic Inventory Configuration
       technologies: [pipeline]
       condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
