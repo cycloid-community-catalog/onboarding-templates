@@ -27,6 +27,6 @@ config:
         destination: '($ project $)/pipeline/($ environment $)/variables.yml'
     # Configuration of ansible for provisionning
     ansible:
-      nexus:
-        path: 'ansible/environments/support.yml.sample'
-        destination: '($ project $)/ansible/environments/($ environment $)-support.yml'
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-operations.yml'
