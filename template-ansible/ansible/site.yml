@@ -12,6 +12,7 @@
   - name: Reboot All
     reboot:
       reboot_timeout: 300
+    when: {{ hosts_reboot }} | bool
 
   - name: Service to Restart
     service:
