@@ -31,7 +31,7 @@ use_cases:
           cred_types:
             - aws
         type: string
-        default: "((aws.access_key))"
+        default: ""
         required: true
       - name: "AWS secret key"
         description: "Amazon AWS secret key for Terraform."
@@ -42,7 +42,7 @@ use_cases:
           cred_types:
             - aws
         type: string
-        default: "((aws.secret_key))"
+        default: ""
         required: true
       - name: "Amazon AWS region"
         description: "Amazon AWS region where targeted EC2 are deployed."
@@ -61,28 +61,28 @@ use_cases:
         key: azure_subscription_id
         widget: cy_cred
         type: string
-        default: "((azure_terraform.subscription_id))"
+        default: ""
         required: true
       - name: "Azure tenant ID"
         description: "Azure tenant ID for Terraform."
         key: azure_tenant_id
         widget: cy_cred
         type: string
-        default: "((azure_terraform.tenant_id))"
+        default: ""
         required: true
       - name: "Azure client ID"
         description: "Azure client ID for Terraform."
         key: azure_client_id
         widget: cy_cred
         type: string
-        default: "((azure_terraform.client_id))"
+        default: ""
         required: true
       - name: "Azure client secret"
         description: "Azure client secret for Terraform."
         key: azure_client_secret
         widget: cy_cred
         type: string
-        default: "((azure_terraform.client_secret))"
+        default: ""
         required: true
     - name: GCP Dynamic Inventory Configuration
       technologies: [pipeline]
@@ -97,7 +97,7 @@ use_cases:
           display_keys: true
           cred_types:
             - gcp
-        default: "((gcp.json_key))"
+        default: ""
         required: true
     - name: Cycloid Asset Inventory Configuration
       technologies: [pipeline]
@@ -110,6 +110,8 @@ use_cases:
         widget: cy_inventory_resource
         # widget_config:
         #   - resource: aws_instance
+        default: ""
+        required: true
     - name: Inventory Targeting
       technologies: [pipeline]
       vars:
