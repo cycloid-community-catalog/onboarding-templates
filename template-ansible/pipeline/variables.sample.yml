@@ -38,6 +38,23 @@ gcp_credentials_json: ((gcp.json_key))
 
 
 #
+# Inventory Targeting
+#
+
+#. host_targeting_mode (required): ""
+#+ Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)
+host_targeting_mode: ""
+
+#. cai_host (required): ''
+#+ The targeted host IP addres or FQDN from the Cycloid Asset Inventory (cai).
+cai_host: ""
+
+#. hosts_inventory (required): "{'project':'($ project $)','env':'($ environment $)'}"
+#+ An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod
+hosts_inventory: ""
+
+
+#
 # Hosts Connectivity
 #
 
@@ -48,6 +65,27 @@ hosts_username: admin
 #. hosts_private_key (required): ((keypair.ssh_prv))
 #+ The private SSH key to connect via SSH to execute the Ansible playbook. The Cycloid workers shall be able to connect to targeted hosts via a public IP address.
 hosts_private_key: ((keypair.ssh_prv))
+
+
+#
+# Operations
+#
+
+#. hosts_reboot (required): false
+#+ Reboot all the targeted hosts.
+hosts_reboot: false
+
+#. hosts_service (required): ""
+#+ A single service to restart on a Linux machine. Supported init systems include BSD init, OpenRC, SysV, Solaris SMF, systemd, upstart.
+hosts_service: ""
+
+#. hosts_package (required): ""
+#+ A single package to install or upgrade on a Debian or Ubuntu OS.
+hosts_package: ""
+
+#. hosts_user (required): ""
+#+ A single user to create.
+hosts_user: ""
 
 
 #

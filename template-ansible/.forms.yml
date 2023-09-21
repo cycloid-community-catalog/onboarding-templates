@@ -6,7 +6,7 @@ use_cases:
   - name: Hosts
     groups:
     - name: Host Targeting Mode
-      technologies: [ansible]
+      technologies: [pipeline]
       vars:
       - name: "Host Targeting Mode"
         description: "Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)."
@@ -100,26 +100,25 @@ use_cases:
         default: "((gcp.json_key))"
         required: true
     - name: Cycloid Asset Inventory Configuration
-      technologies: [ansible]
+      technologies: [pipeline]
       condition: "$host_targeting_mode == 'Cycloid Asset Inventory'"
       vars:
       - name: "Virtual Machine"
         description: "Select the Virtual Machine to target"
         key: cai_host
         type: string
-        widget: text_area
         widget: cy_inventory_resource
         # widget_config:
         #   - resource: aws_instance
     - name: Inventory Targeting
-      technologies: [ansible]
+      technologies: [pipeline]
       vars:
       - name: "Hosts Inventory"
         description: "An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
         key: hosts_inventory
         type: string
         widget: simple_text
-        default: "tag_project_{{ project }}:&tag_cycloid_true:&tag_env_{{ env }}"
+        default: "tag_project_($ project $):&tag_env_($ env $)"
     - name: Hosts Connectivity
       technologies: [pipeline]
       vars:
@@ -138,7 +137,7 @@ use_cases:
         default: ((keypair.ssh_prv))
         required: true
     - name: Operations
-      technologies: [ansible]
+      technologies: [pipeline]
       vars:
       - name: "Reboot All"
         description: "Reboot all the targeted hosts."
