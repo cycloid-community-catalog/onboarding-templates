@@ -81,13 +81,7 @@ jobs:
               repository: cycloid/cycloid-toolkit
               tag: ((ansible_version))
           run:
-            path: sh
-            args:
-              - '-exc'
-              - |
-                /usr/bin/ansible-runner
-                source ansible-playbook/env
-                echo "You can now connect to http://${vm_ip}:${nexus_port}"
+            path: /usr/bin/ansible-runner
           caches:
             - path: ansible-playbook/roles
           inputs:
@@ -118,5 +112,3 @@ jobs:
             env: ((env))
             project: ((project))
             customer: ((customer))
-            cai_host: ((cai_host))
-            hosts_inventory: ((hosts_inventory))

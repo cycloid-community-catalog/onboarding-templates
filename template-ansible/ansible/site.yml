@@ -1,7 +1,7 @@
 {% verbatim %}
 ---
 - name: Operations
-  hosts: {{ hosts_inventory }}
+  hosts: '{{ hosts_inventory }}'
   become: yes
 
   vars_files:
@@ -12,22 +12,22 @@
   - name: Reboot All
     reboot:
       reboot_timeout: 300
-    when: {{ hosts_reboot }} | bool
+    when: '{{ hosts_reboot }}'
 
   - name: Service to Restart
     service:
-      name: {{ hosts_service }}
+      name: '{{ hosts_service }}'
       state: restarted
 
   - name: Package to Install
     apt:
-      name: {{ hosts_package }}
+      name: '{{ hosts_package }}'
       state: present
 
   - name: User to Create
     user:
-      name: "{{ hosts_user }}"
-      groups: "{{ hosts_user }}"
-      shell: "/bin/bash"
+      name: '{{ hosts_user }}'
+      groups: '{{ hosts_user }}'
+      shell: '/bin/bash'
       state: present
 {% endverbatim %}

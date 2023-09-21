@@ -6,7 +6,7 @@ use_cases:
   - name: Hosts
     groups:
     - name: Host Targeting Mode
-      technologies: [pipeline]
+      technologies: [ansible]
       vars:
       - name: "Host Targeting Mode"
         description: "Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)."
@@ -22,16 +22,27 @@ use_cases:
       technologies: [pipeline]
       condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
       vars:
-      - name: "AWS account"
-        description: "The AWS account used to get EC2 tags information. It contains access key and secret key."
-        key: aws_cred
-        type: string
+      - name: "AWS access key"
+        description: "Amazon AWS access key for Terraform."
+        key: aws_access_key
         widget: cy_cred
         widget_config:
-          display_keys: false
+          display_keys: true
           cred_types:
             - aws
-        default: ""
+        type: string
+        default: "((aws.access_key))"
+        required: true
+      - name: "AWS secret key"
+        description: "Amazon AWS secret key for Terraform."
+        key: aws_secret_key
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - aws
+        type: string
+        default: "((aws.secret_key))"
         required: true
       - name: "Amazon AWS region"
         description: "Amazon AWS region where targeted EC2 are deployed."
@@ -45,16 +56,33 @@ use_cases:
       technologies: [pipeline]
       condition: "$host_targeting_mode == 'Azure Dynamic Inventory'"
       vars:
-      - name: "Azure credentials"
-        description: "The azure credential used to deploy the infrastructure. It contains subscription_id, tenant_id, client_id, and client_secret."
-        key: azure_cred
-        type: string
+      - name: "Azure subscription ID"
+        description: "Azure subscription ID for Terraform."
+        key: azure_subscription_id
         widget: cy_cred
-        widget_config:
-          display_keys: false
-          cred_types:
-            - azure
-        default: ""
+        type: string
+        default: "((azure_terraform.subscription_id))"
+        required: true
+      - name: "Azure tenant ID"
+        description: "Azure tenant ID for Terraform."
+        key: azure_tenant_id
+        widget: cy_cred
+        type: string
+        default: "((azure_terraform.tenant_id))"
+        required: true
+      - name: "Azure client ID"
+        description: "Azure client ID for Terraform."
+        key: azure_client_id
+        widget: cy_cred
+        type: string
+        default: "((azure_terraform.client_id))"
+        required: true
+      - name: "Azure client secret"
+        description: "Azure client secret for Terraform."
+        key: azure_client_secret
+        widget: cy_cred
+        type: string
+        default: "((azure_terraform.client_secret))"
         required: true
     - name: GCP Dynamic Inventory Configuration
       technologies: [pipeline]
@@ -72,7 +100,7 @@ use_cases:
         default: "((gcp.json_key))"
         required: true
     - name: Cycloid Asset Inventory Configuration
-      technologies: [pipeline]
+      technologies: [ansible]
       condition: "$host_targeting_mode == 'Cycloid Asset Inventory'"
       vars:
       - name: "Virtual Machine"
@@ -84,7 +112,7 @@ use_cases:
         # widget_config:
         #   - resource: aws_instance
     - name: Inventory Targeting
-      technologies: [pipeline]
+      technologies: [ansible]
       vars:
       - name: "Hosts Inventory"
         description: "An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"

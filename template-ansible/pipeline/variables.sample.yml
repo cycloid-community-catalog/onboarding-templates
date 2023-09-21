@@ -4,63 +4,38 @@
 
 # Cloud credentials to build the Ansible dynamic inventory.
 
-#. aws_cred (required): ((aws))
-#+ Amazon credentials containing access key and secret key for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
-aws_cred: ((aws))
-
 #. aws_access_key (required): ((aws.access_key))
 #+ Amazon AWS access key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
-aws_access_key: ((((aws_cred)).access_key))
+aws_access_key: ((aws.access_key))
 
 #. aws_secret_key (required): ((aws.secret_key))
 #+ Amazon AWS secret key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
-aws_secret_key: ((((aws_cred)).secret_key))
+aws_secret_key: ((aws.secret_key))
 
 #. aws_default_region (required): eu-west-1
 #+ Amazon AWS region to build the Ansible dynamic inventory.
 aws_region: eu-west-1
 
-#. azure_cred (required): ((azure))
-#+ The azure credential to build the Ansible dynamic inventory. It contains subscription_id, tenant_id, client_id, and client_secret. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
-azure_cred: ((azure))
-
 #. azure_subscription_id (required): ((azure.subscription_id))
 #+ Azure subscription ID to build the Ansible dynamic inventory.
-azure_subscription_id: ((((azure_cred)).subscription_id))
+azure_subscription_id: ((azure.subscription_id))
 
 #. azure_tenant_id (required): ((azure.tenant_id))
 #+ Azure tenant ID to build the Ansible dynamic inventory.
-azure_tenant_id: ((((azure_cred)).tenant_id))
+azure_tenant_id: ((azure.tenant_id))
 
 #. azure_client_id (required): ((azure.client_id))
 #+ Azure client ID to build the Ansible dynamic inventory.
-azure_client_id: ((((azure_cred)).client_id))
+azure_client_id: ((azure.client_id))
 
 #. azure_client_secret (required): ((azure.client_secret))
 #+ Azure client secret to build the Ansible dynamic inventory.
-azure_client_secret: ((((azure_cred)).client_secret))
+azure_client_secret: ((azure.client_secret))
 
 #. gcp_credentials_json (required): ((gcp.json_key))
 #+ Google Cloud Platform JSON credentials to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 gcp_credentials_json: ((gcp.json_key))
 
-
-#
-# Cycloid Asset Inventory
-#
-
-#. cai_host (required): ''
-#+ The targeted host IP addres or FQDN from the Cycloid Asset Inventory (cai).
-cai_host: ''
-
-
-#
-# Inventory Targeting
-#
-
-#. hosts_inventory (required): "{'project':'($ project $)','env':'($ environment $)'}"
-#+ An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod
-hosts_inventory: "{'project':'($ project $)','env':'($ environment $)'}"
 
 #
 # Hosts Connectivity

@@ -1,2 +1,6 @@
 ---
-# customize variables present in default_operations.yaml file
+host_targeting_mode:""
+hosts_reboot: false
+hosts_service: ""
+hosts_package: ""
+hosts_user: ""
