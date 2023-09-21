@@ -12,22 +12,24 @@
   - name: Reboot All
     reboot:
       reboot_timeout: 300
-    when: '{{ hosts_reboot }}'
+    when: hosts_reboot|bool == True
 
   - name: Service to Restart
     service:
       name: '{{ hosts_service }}'
       state: restarted
+    when: (hosts_service is defined) and (hosts_service|length > 0)
 
   - name: Package to Install
     apt:
       name: '{{ hosts_package }}'
       state: present
+    when: (hosts_package is defined) and (hosts_package|length > 0)
 
   - name: User to Create
     user:
       name: '{{ hosts_user }}'
-      groups: '{{ hosts_user }}'
       shell: '/bin/bash'
       state: present
+    when: (hosts_user is defined) and (hosts_user|length > 0)
 {% endverbatim %}
