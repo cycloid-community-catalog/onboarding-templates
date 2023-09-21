@@ -17,7 +17,8 @@ use_cases:
         - 'AWS Dynamic Inventory'
         - 'Azure Dynamic Inventory'
         - 'GCP Dynamic Inventory'
-        - 'Cycloid Asset Inventory'
+        # - 'Cycloid Asset Inventory'
+        - 'No Dynamic Inventory (Hosts Inventory must be IPs or FQDNs only)'
     - name: AWS Dynamic Inventory Configuration
       technologies: [pipeline]
       condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
