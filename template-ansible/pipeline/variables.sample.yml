@@ -74,10 +74,6 @@ stack_git_username: ((($ scs_cred_path $).username))
 #+ Password for HTTP(S) auth when pulling/pushing.
 stack_git_token: ((($ scs_cred_path $).password))
 {% endif %}
-#. stack_terraform_path (required): ($ stack_path $)/terraform/{{ stack_usecase }}
-#+ Path of Terraform files in the stack git repository
-stack_terraform_path: ($ stack_path $)/terraform/{{ stack_usecase }}
-
 #. stack_ansible_path (required): ($ stack_path $)/ansible
 #+ Path of Ansible files in the stack git repository
 stack_ansible_path: ($ stack_path $)/ansible
@@ -107,10 +103,6 @@ config_git_username: ((($ cr_cred_path $).username))
 #+ Password for HTTP(S) auth when pulling/pushing.
 config_git_token: ((($ cr_cred_path $).password))
 {% endif %}
-#. config_terraform_path (required): ($ project $)/terraform/{{ stack_usecase }}/($ environment $)
-#+ Path of Terraform files in the config git repository
-config_terraform_path: ($ project $)/terraform/{{ stack_usecase }}/($ environment $)
-
 #. config_ansible_path (required): ($ project $)/ansible/environments
 #+ Path of Ansible files in the config git repository
 config_ansible_path: ($ project $)/ansible/environments
