@@ -262,7 +262,7 @@ use_cases:
         key: aws_region
         widget: auto_complete
         type: string
-        values: ["eu-north-1","ap-south-1","eu-west-3","eu-west-2","eu-west-1","ap-northeast-2","ap-northeast-1","sa-east-1","ca-central-1","ap-southeast-1","ap-southeast-2","eu-central-1","us-east-1","us-east-2","us-west-1","us-west-2"]
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
         default: eu-west-1
         required: true
 {%- elif stack_usecase == "azure" %}
@@ -290,20 +290,7 @@ use_cases:
         key: azure_location
         widget: auto_complete
         type: string
-        values:
-            - Australia Central
-            - China East
-            - China North
-            - East Asia
-            - East US
-            - France Central
-            - France South
-            - North Europe
-            - Southeast Asia
-            - South Africa North
-            - South Africa West
-            - West Europe
-            - West US
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/azure-locations.json
         default: "West Europe"
         required: true
       - name: "Existing resource group name"
@@ -342,34 +329,7 @@ use_cases:
         key: gcp_region
         widget: auto_complete
         type: string
-        values:
-          - asia-east1
-          - asia-east2
-          - asia-northeast1
-          - asia-northeast2
-          - asia-northeast3
-          - asia-south1
-          - asia-south2
-          - asia-southeast1
-          - asia-southeast2
-          - australia-southeast1
-          - australia-southeast2
-          - europe-central2
-          - europe-north1
-          - europe-west1
-          - europe-west2
-          - europe-west3
-          - europe-west4
-          - europe-west6
-          - northamerica-northeast1
-          - southamerica-east1
-          - us-central1
-          - us-east1
-          - us-east4
-          - us-west1
-          - us-west2
-          - us-west3
-          - us-west4
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/gcp-regions.json
         required: true
       - name: "GCP zone"
         description: "Google Cloud Platform zone to use for Terraform."
