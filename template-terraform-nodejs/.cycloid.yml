@@ -15,7 +15,7 @@ keywords:
 - nginx
 technologies:
 - technology: terraform
-  version: 1.3.9
+  version: 1.5.7
 - technology: nodejs
 - technology: nginx
 

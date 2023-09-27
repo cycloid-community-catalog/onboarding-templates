@@ -15,7 +15,7 @@ keywords:
 - '{{ stack_usecase }}'
 technologies:
 - technology: terraform
-  version: 1.3.9
+  version: 1.5.7
 - technology: ansible
   version: 2.9
 
