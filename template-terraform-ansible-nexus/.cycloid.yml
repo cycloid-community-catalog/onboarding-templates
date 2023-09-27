@@ -67,7 +67,7 @@ config:
   gcp:
     name: 'GCP'
     description: 'Deploys a Nexus Repository in a single GCP instance'
-    cloud_provider: google
+    cloud_provider: gcp
     # Pipeline and variable configuration for the GCP CD pipeline use case
     pipeline:
       pipeline:

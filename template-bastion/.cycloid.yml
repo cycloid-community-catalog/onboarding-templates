@@ -54,7 +54,7 @@ config:
   # gcp:
   #   name: 'GCP'
   #   description: 'Deploys a Virtual Network, public and private subnets and optionally a bastion'
-  #   cloud_provider: google
+  #   cloud_provider: gcp
   #   # Pipeline and variable configuration for the GCP CD pipeline use case
   #   pipeline:
   #     pipeline:

@@ -56,7 +56,7 @@ config:
   # gcp:
   #   name: 'GCP'
   #   description: ''
-  #   cloud_provider: google
+  #   cloud_provider: gcp
   #   # Pipeline and variable configuration for the GCP CD pipeline use case
   #   pipeline:
   #     pipeline:

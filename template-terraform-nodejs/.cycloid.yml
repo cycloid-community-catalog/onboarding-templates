@@ -57,7 +57,7 @@ config:
   gcp:
     name: 'GCP'
     description: 'Deploys a Node.js web application in a single GCP instance'
-    cloud_provider: google
+    cloud_provider: gcp
     # Pipeline and variable configuration for the GCP CD pipeline use case
     pipeline:
       pipeline:
