@@ -1,7 +1,7 @@
 ---
 # Configuration of the Cycloid stack
 version: '2'
-name: 'Ansible only template'
+name: 'Ansible Template'
 canonical: 'template-ansible'
 description: Supports bulk operations such as rebooting VMs, restarting services, installing packages or creating users on a set of targeted virtual machines using Ansible.
 author: '{{ stack_author }}'
