@@ -1,5 +1,5 @@
 version: "2"
-name: NodeJS App on a VM
+name: Terraform Template
 canonical: template-terraform-nodejs
 description: Deploys a Node.js web application on one instance using Terraform and Cloud-Init.
 author: '{{stack_author}}'
