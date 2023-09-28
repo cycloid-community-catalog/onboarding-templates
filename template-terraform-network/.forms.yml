@@ -95,6 +95,9 @@ use_cases:
         type: string
         values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
         default: eu-west-1
+        validations: 
+        - regexp: "^[a-z]{2}-[a-z]+-\d+$" 
+          error_message: "Please enter a valid AWS region such as us-east-1"
         required: true
 {%- elif stack_usecase == "azure" %}
     - name: Azure Access Configuration
@@ -128,6 +131,9 @@ use_cases:
         widget: simple_text
         type: string
         default: "cycloid"
+        validations: 
+        - regexp: "^[A-Za-z0-9_-]+$"
+          error_message: "Please enter a valid Azure Resource Group such as MyResourceGroup"
         required: true
 {%- elif stack_usecase == "gcp" %}
     - name: GCP Access Configuration
@@ -150,6 +156,9 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
+        validations: 
+        - regexp: "^[a-z]{1}[a-z0-9-]{5,29}$"
+          error_message: "Please enter a valid GCP Project ID. It must be 6 to 30 lowercase letters, digits, or hyphens. It must start with a letter."
         required: true
       - name: "GCP region"
         description: "Google Cloud Platform region to use for Terraform."
@@ -157,6 +166,10 @@ use_cases:
         widget: auto_complete
         type: string
         values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/gcp-regions.json
+        default: ""
+        validations: 
+        - regexp: "^[a-z]+-[a-z0-9]+$"
+          error_message: "Please enter a valid GCP Region such as europe-west1."
         required: true
       - name: "GCP zone"
         description: "Google Cloud Platform zone to use for Terraform."
@@ -221,5 +234,9 @@ use_cases:
               values: ['us-west3-a', 'us-west3-b', 'us-west3-c']
             - condition: "$gcp_region == 'us-west4'"
               values: ['us-west4-a', 'us-west4-b', 'us-west4-c']
+        default: ""
+        validations: 
+        - regexp: "^[a-z]+-[a-z0-9]+-[a-z]{1}$"
+          error_message: "Please enter a valid GCP Zone such as europe-west1-b."
         required: true
 {%- endif %}
