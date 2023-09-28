@@ -1,9 +1,9 @@
 version: "2"
-name: NodeJS on one instance
+name: NodeJS App on a VM
 canonical: template-terraform-nodejs
-description: Deploys a Node.js web application on an instance using Terraform and Cloud-Init.
+description: Deploys a Node.js web application on one instance using Terraform and Cloud-Init.
 author: '{{stack_author}}'
-image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/node.svg'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
 status: 'private'
 template: true
 keywords:
