@@ -1,9 +1,15 @@
-{% verbatim %}
 ---
 - name: install Nexus Repository
-  hosts: tag_role_nexus:&tag_project_{{ project }}:&tag_cycloid_true:&tag_env_{{ env }}
+{%- if stack_usecase == "aws" %}
+  hosts: tag_role_nexus:&tag_project_{% verbatim %}{{ project }}{% endverbatim %}:&tag_cycloid_true:&tag_env_{% verbatim %}{{ env }}{% endverbatim %}
+{%- elif stack_usecase == "azure" %}
+  hosts: tag_role_nexus:&tag_project_{% verbatim %}{{ project | regex_replace('-', '_') }}{% endverbatim %}:&tag_cycloid_true:&tag_env_{% verbatim %}{{ env | regex_replace('-', '_') }}{% endverbatim %}
+{%- elif stack_usecase == "gcp" %}
+  hosts: tag_role_nexus:&tag_project_{% verbatim %}{{ project | regex_replace('-', '_') }}{% endverbatim %}:&tag_cycloid_true:&tag_env_{% verbatim %}{{ env | regex_replace('-', '_') }}{% endverbatim %}
+{%- endif %}
   become: yes
 
+{% verbatim %}
   vars_files:
   - "environments/default_nexus.yml"
   - ["environments/{{ env }}-nexus.yml", "environments/empty.yml"]

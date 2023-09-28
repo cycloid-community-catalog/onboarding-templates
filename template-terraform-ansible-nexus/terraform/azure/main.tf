@@ -22,10 +22,6 @@ module "nexus" {
   #+ Azure location
   azure_location = "Value injected by StackForms"
 
-  #
-  # Nexus Repository
-  #
-
   #. rg_name: 'cycloid-get-started'
   #+ The name of the existing resource group where the resources will be deployed
   rg_name = "Value injected by StackForms"

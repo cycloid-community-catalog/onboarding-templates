@@ -19,10 +19,6 @@ aws_region: eu-west-1
 {%- elif stack_usecase == "azure" %}
 # Azure credentials to use to run terraform. Usually admin account to be able to create cloud services.
 
-#. azure_cred (required): ((azure))
-#+ The azure credential used to deploy the infrastructure. It contains subscription_id, tenant_id, client_id, and client_secret. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
-azure_cred: ((azure))
-
 #. azure_subscription_id (required): ((azure.subscription_id))
 #+ Azure subscription ID to use for Terraform.
 azure_subscription_id: ((((azure_cred)).subscription_id))
