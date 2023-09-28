@@ -1,8 +1,8 @@
-module "vpc" {
+module "network" {
   #####################################
   # Do not modify the following lines #
   # source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//aws/vpc"
-  source   = "./module-vpc"
+  source   = "./module-network"
   project  = var.project
   env      = var.env
   customer = var.customer

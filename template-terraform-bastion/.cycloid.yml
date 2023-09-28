@@ -1,0 +1,69 @@
+version: "2"
+name: Bastion
+canonical: template-terraform-bastion
+description: Deploys a bastion instance using Terraform. For example, it would allow to deploy applications using Ansible in a private subnet.
+author: '{{stack_author}}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/shield.png'
+status: 'private'
+template: true
+keywords:
+- terraform
+- network
+- vpc
+- subnet
+- bastion
+technologies:
+- technology: terraform
+  version: 1.5.7
+
+config:
+  aws:
+    name: 'AWS'
+    description: 'Deploys a VPC, public and private subnets and optionally a bastion'
+    cloud_provider: aws
+    # Pipeline and variable configuration for the AWS CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+    terraform:
+      main:
+        path: 'terraform/aws/main.tf'
+        destination: '($ project $)/terraform/aws/($ environment $)/main.tf'
+
+  azure:
+    name: 'Azure'
+    description: 'Deploys a Virtual Network, public and private subnets and optionally a bastion'
+    cloud_provider: azurerm
+    # Pipeline and variable configuration for the Azure CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/azure/main.tf'
+        destination: '($ project $)/terraform/azure/($ environment $)/main.tf'
+
+  gcp:
+    name: 'GCP'
+    description: 'Deploys a Virtual Network, public and private subnets and optionally a bastion'
+    cloud_provider: gcp
+    # Pipeline and variable configuration for the GCP CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/gcp/main.tf'
+        destination: '($ project $)/terraform/gcp/($ environment $)/main.tf'
