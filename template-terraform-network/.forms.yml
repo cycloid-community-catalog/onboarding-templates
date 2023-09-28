@@ -16,7 +16,7 @@ use_cases:
         type: string
         default: "10.0.0.0/16"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/16"
         required: true
       - name: "Public Subnet CIDR"
@@ -26,7 +26,7 @@ use_cases:
         type: string
         default: "10.0.0.0/24"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/24"
         required: true
       - name: "Private Subnet CIDR"
@@ -36,7 +36,7 @@ use_cases:
         type: string
         default: "10.0.1.0/24"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/24"
         required: true
 {%- elif stack_usecase == "azure" %}
@@ -47,7 +47,7 @@ use_cases:
         type: string
         default: "10.0.0.0/16"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/16"
         required: true
       - name: "Subnet CIDR"
@@ -57,7 +57,7 @@ use_cases:
         type: string
         default: "10.0.0.0/24"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/24"
         required: true
 {%- elif stack_usecase == "gcp" %}
@@ -68,7 +68,7 @@ use_cases:
         type: string
         default: "10.0.0.0/24"
         validations: 
-        - regexp: "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/[0-9]{1,2}$" 
+        - regexp: "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\/[0-9]{1,2}$" 
           error_message: "Please enter a valid CIDR such as 10.0.0.0/24"
         required: true
 {%- endif %}
