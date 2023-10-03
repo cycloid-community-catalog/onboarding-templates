@@ -13,7 +13,7 @@ use_cases:
         key: git_app_url
         widget: auto_complete
         type: string
-        values: ["https://github.com/Rahul-Pandey7/react-image-compressor.git","https://github.com/arnab-datta/counter-app.git","https://github.com/Yog9/SnapShot.git","https://github.com/ahfarmer/calculator.git","https://github.com/ahfarmer/emoji-search.git"]
+        values: ["https://github.com/Rahul-Pandey7/react-image-compressor.git","https://github.com/Yog9/SnapShot.git","https://github.com/ahfarmer/calculator.git","https://github.com/ahfarmer/emoji-search.git"]
         default: "https://github.com/Yog9/SnapShot.git"
         required: true
     - name: Virtual machine specifications
