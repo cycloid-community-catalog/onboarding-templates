@@ -1,7 +1,7 @@
 module "network" {
   #####################################
   # Do not modify the following lines #
-  source   = "./module-network"
+  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//azure/network-rg"
   project  = var.project
   env      = var.env
   customer = var.customer
