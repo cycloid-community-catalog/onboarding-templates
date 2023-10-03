@@ -96,7 +96,7 @@ use_cases:
         values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
         default: eu-west-1
         validations: 
-        - regexp: "^[a-z]{2}-[a-z]+-\d+$" 
+        - regexp: "^[a-z]{2}-[a-z]+-\\d+$" 
           error_message: "Please enter a valid AWS region such as us-east-1"
         required: true
 {%- elif stack_usecase == "azure" %}
