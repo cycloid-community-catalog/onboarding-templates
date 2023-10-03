@@ -31,12 +31,21 @@ resources:
 {%- if stack_usecase == "aws" %}
       aws_cred: ((aws_cred))
       aws_region: ((aws_region))
+      edit_subnet: ((edit_subnet))
+      inventory_subnet_id: ((inventory_subnet_id))
+      edit_subnet_id: ((edit_subnet_id))
 {%- elif stack_usecase == "azure" %}
       azure_cred: ((azure_cred))
+      edit_subnet: ((edit_subnet))
+      inventory_subnet_id: ((inventory_subnet_id))
+      edit_subnet_id: ((edit_subnet_id))
 {%- elif stack_usecase == "gcp" %}
       gcp_project: ((gcp_project))
       gcp_region: ((gcp_region))
       gcp_zone: ((gcp_zone))
+      edit_network: ((edit_network))
+      inventory_network_name: ((inventory_network_name))
+      edit_network_name: ((edit_network_name))
 {%- endif %}
       customer: ((customer))
       project: ((project))

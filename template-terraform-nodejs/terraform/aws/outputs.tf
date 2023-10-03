@@ -1,15 +1,12 @@
 #
-# VPC outputs
-#
-output "vpc_id" {
-  description = "The VPC ID for the VPC"
-  value       = module.webapp.vpc_id
-}
-
-#
 # Instance outputs
 #
-output "url" {
-  description = "The URL of the wepapp"
+output "ssh_url" {
+  description = "The SSH URL to connect to the instance"
+  value       = "${module.webapp.vm_os_user}@${module.webapp.vm_ip}"
+}
+
+output "http_url" {
+  description = "The HTTP URL of the wepapp"
   value       = "http://${module.webapp.vm_ip}"
 }

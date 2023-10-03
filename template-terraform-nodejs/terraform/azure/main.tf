@@ -1,7 +1,7 @@
 module "webapp" {
   #####################################
   # Do not modify the following lines #
-  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//azure/vnet-vm-nodejs"
+  source   = "git::https://github.com/cycloid-community-catalog/onboarding-iac.git//azure/vm-nodejs"
   project  = var.project
   env      = var.env
   customer = var.customer
@@ -41,5 +41,9 @@ module "webapp" {
   #. azure_location: "West Europe"
   #+ Azure location
   azure_location = "Value injected by StackForms"
+
+  #. subnet_id: ""
+  #+ Subnet ID where to deploy the instance
+  subnet_id = var.edit_subnet ? var.edit_subnet_id : var.inventory_subnet_id
 
 }

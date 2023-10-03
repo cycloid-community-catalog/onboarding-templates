@@ -36,6 +36,43 @@ gcp_region: "europe-west1"
 gcp_zone: "europe-west1-b"
 {%- endif %}
 
+{%- if stack_usecase == "aws" %}
+#. edit_subnet (required): false
+#+ Whether to use the Cycloid Asset Inventory to select a Subnet ID, or to enter it manually. To populate your subnet in Cycloid Inventory, you may want to use the Networking stack template
+edit_subnet: false
+
+#. inventory_subnet_id (required): ""
+#+ Subnet ID where to deploy the instance. Must belong to the region stated in this form.
+inventory_subnet_id: ""
+
+#. edit_subnet_id (required): ""
+#+ Subnet ID where to deploy the instance. Must belong to the region stated in this form.
+edit_subnet_id: ""
+{%- elif stack_usecase == "azure" %}
+#. edit_subnet (required): false
+#+ Whether to use the Cycloid Asset Inventory to select a Subnet ID, or to enter it manually. To populate your subnet in Cycloid Inventory, you may want to use the Networking stack template
+edit_subnet: false
+
+#. inventory_subnet_id (required): ""
+#+ Subnet ID where to deploy the instance. Must belong to the region stated in this form.
+inventory_subnet_id: ""
+
+#. edit_subnet_id (required): ""
+#+ Subnet ID where to deploy the instance. Must belong to the region stated in this form.
+edit_subnet_id: ""
+{%- elif stack_usecase == "gcp" %}
+#. edit_network (required): false
+#+ Whether to use the Cycloid Asset Inventory to select a Network, or to enter it manually. To populate your Network in Cycloid Inventory, you may want to use the Networking stack template
+edit_network: false
+
+#. inventory_network_name (required): ""
+#+ Network Name where to deploy the instance. Must belong to the region stated in this form.
+inventory_network_name: ""
+
+#. edit_network_name (required): ""
+#+ Network Name where to deploy the instance. Must belong to the region stated in this form.
+edit_network_name: ""
+{%- endif %}
 
 #
 # Stack Git repository

@@ -5,6 +5,17 @@ use_cases:
   sections:
   - name: NodeJS Server
     groups:
+    - name: NodeJS Application
+      technologies: [terraform]
+      vars:
+      - name: "React Webapp Git URL"
+        description: "Public Git URL of the React web application to build and deploy."
+        key: git_app_url
+        widget: auto_complete
+        type: string
+        values: ["https://github.com/Rahul-Pandey7/react-image-compressor.git","https://github.com/arnab-datta/counter-app.git","https://github.com/Yog9/SnapShot.git","https://github.com/ahfarmer/calculator.git","https://github.com/ahfarmer/emoji-search.git"]
+        default: "https://github.com/Yog9/SnapShot.git"
+        required: true
     - name: Virtual machine specifications
       technologies: [terraform]
       vars:
@@ -57,17 +68,109 @@ use_cases:
             - 250
         required: true
         
-    - name: NodeJS Application
-      technologies: [terraform]
+{%- if stack_usecase == "aws" %}
+    - name: Subnet Selection
+      technologies: [pipeline]
       vars:
-      - name: "Webapp Public Git URL"
-        description: "Public git URL of the web application to build and deploy."
-        key: git_app_url
-        widget: auto_complete
+      - name: "Enter Subnet ID Manually"
+        description: "Whether to use the Cycloid Asset Inventory to select a Subnet ID, or to enter it manually. To populate your subnet in Cycloid Inventory, you may want to use the Networking stack template."
+        key: edit_subnet
+        widget: switch
+        type: boolean
+        default: false
+    - name: Subnet ID Selection from Asset Inventory
+      technologies: [pipeline]
+      condition: '$edit_subnet == false'
+      vars:
+      - name: "Public Subnet ID"
+        description: "Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form."
+        key: inventory_subnet_id
+        widget: cy_inventory_resource
+        # widget_config:
+        # - resource: aws_subnet
         type: string
-        values: ["https://github.com/Rahul-Pandey7/react-image-compressor.git","https://github.com/arnab-datta/counter-app.git","https://github.com/Yog9/SnapShot.git","https://github.com/ahfarmer/calculator.git","https://github.com/ahfarmer/emoji-search.git"]
-        default: "https://github.com/Yog9/SnapShot.git"
+        default: ""
         required: true
+    - name: Enter Subnet ID Manually
+      technologies: [pipeline]
+      condition: '$edit_subnet == true'
+      vars:
+      - name: "Public Subnet ID"
+        description: "Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form."
+        key: edit_subnet_id
+        widget: simple_text
+        type: string
+        default: ""
+        required: true
+{%- elif stack_usecase == "azure" %}
+    - name: Subnet Selection
+      technologies: [pipeline]
+      vars:
+      - name: "Enter Subnet ID Manually"
+        description: "Whether to use the Cycloid Asset Inventory to select a Subnet ID, or to enter it manually. To populate your subnet in Cycloid Inventory, you may want to use the Networking stack template."
+        key: edit_subnet
+        widget: switch
+        type: boolean
+        default: false
+    - name: Subnet ID Selection from Asset Inventory
+      technologies: [pipeline]
+      condition: '$edit_subnet == false'
+      vars:
+      - name: "Public Subnet ID"
+        description: "Public subnet ID where to deploy the instance. Must belong to the region stated below in this form."
+        key: inventory_subnet_id
+        widget: cy_inventory_resource
+        # widget_config:
+        # - resource: aws_subnet
+        type: string
+        default: ""
+        required: true
+    - name: Enter Subnet ID Manually
+      technologies: [pipeline]
+      condition: '$edit_subnet == true'
+      vars:
+      - name: "Public Subnet ID"
+        description: "Public subnet ID where to deploy the instance. Must belong to the region stated below in this form."
+        key: edit_subnet_id
+        widget: simple_text
+        type: string
+        default: ""
+        required: true
+{%- elif stack_usecase == "gcp" %}
+    - name: Network Selection
+      technologies: [pipeline]
+      vars:
+      - name: "Enter Network Name Manually"
+        description: "Whether to use the Cycloid Asset Inventory to select a Network, or to enter it manually. To populate your Network in Cycloid Inventory, you may want to use the Networking stack template."
+        key: edit_network
+        widget: switch
+        type: boolean
+        default: false
+    - name: Network Name Selection from Asset Inventory
+      technologies: [pipeline]
+      condition: '$edit_network == false'
+      vars:
+      - name: "Network Name"
+        description: "Network Name where to deploy the instance. Must belong to the region stated below in this form."
+        key: inventory_network_name
+        widget: cy_inventory_resource
+        # widget_config:
+        # - resource: aws_subnet
+        type: string
+        default: ""
+        required: true
+    - name: Enter Network Name Manually
+      technologies: [pipeline]
+      condition: '$edit_network == true'
+      vars:
+      - name: "Network Name"
+        description: "Network Name where to deploy the instance. Must belong to the region stated below in this form."
+        key: edit_network_name
+        widget: simple_text
+        type: string
+        default: "default"
+        required: true
+{%- endif %}
 
 {%- if stack_usecase == "aws" %}
     - name: AWS Access Configuration
