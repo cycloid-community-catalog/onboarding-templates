@@ -130,7 +130,7 @@ use_cases:
       condition: '$edit_subnet == true'
       vars:
       - name: "Public Subnet ID"
-        description: "Public subnet ID where to deploy the instance. Must belong to the region stated below in this form."
+        description: "Public subnet ID where to deploy the instance (starting with /subscriptions/...). Must belong to the region stated below in this form. Azure CLI command to get the default subnet id: az network vnet subnet show --resource-group <my-rg> --vnet-name default --name default"
         key: edit_subnet_id
         widget: simple_text
         type: string
