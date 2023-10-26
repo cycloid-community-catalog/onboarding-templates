@@ -86,8 +86,9 @@ use_cases:
         description: "Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form."
         key: inventory_subnet_id
         widget: cy_inventory_resource
-        # widget_config:
-        # - resource: aws_subnet
+        widget_config:
+          attribute: id
+          type: aws_subnet
         type: string
         default: ""
         required: true
@@ -120,8 +121,9 @@ use_cases:
         description: "Public subnet ID where to deploy the instance. Must belong to the region stated below in this form."
         key: inventory_subnet_id
         widget: cy_inventory_resource
-        # widget_config:
-        # - resource: aws_subnet
+        widget_config:
+          attribute: id
+          type: aws_subnet
         type: string
         default: ""
         required: true
@@ -154,8 +156,9 @@ use_cases:
         description: "Network Name where to deploy the instance. Must belong to the region stated below in this form."
         key: inventory_network_name
         widget: cy_inventory_resource
-        # widget_config:
-        # - resource: aws_subnet
+        widget_config:
+          attribute: id
+          type: aws_subnet
         type: string
         default: ""
         required: true

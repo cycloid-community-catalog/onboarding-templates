@@ -109,8 +109,9 @@ use_cases:
         key: cai_host
         type: string
         widget: cy_inventory_resource
-        # widget_config:
-        #   - resource: aws_instance
+        widget_config:
+          attribute: id
+          type: aws_instance
         default: ""
         required: true
     - name: Inventory Targeting

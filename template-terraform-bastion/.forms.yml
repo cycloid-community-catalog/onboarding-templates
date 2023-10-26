@@ -22,10 +22,10 @@ use_cases:
       - name: "Subnet ID"
         description: "Subnet ID where to deploy the bastion. Must belong to the region stated in this form."
         key: subnet_id
-        widget: simple_text
-        # widget: cy_inventory_resource
-        # widget_config:
-        #   - resource: aws_subnet
+        widget: cy_inventory_resource
+        widget_config:
+          attribute: id
+          type: aws_subnet
         type: string
         default: ""
         required: true
