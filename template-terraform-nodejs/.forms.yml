@@ -91,7 +91,7 @@ use_cases:
           type: aws_subnet
         type: string
         default: ""
-        required: true
+        required: false
     - name: Enter Subnet ID Manually
       technologies: [pipeline]
       condition: '$edit_subnet == true'
@@ -102,7 +102,7 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
-        required: true
+        required: false
 {%- elif stack_usecase == "azure" %}
     - name: Subnet Selection
       technologies: [pipeline]
@@ -126,7 +126,7 @@ use_cases:
           type: aws_subnet
         type: string
         default: ""
-        required: true
+        required: false
     - name: Enter Subnet ID Manually
       technologies: [pipeline]
       condition: '$edit_subnet == true'
@@ -137,7 +137,7 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
-        required: true
+        required: false
 {%- elif stack_usecase == "gcp" %}
     - name: Network Selection
       technologies: [pipeline]
@@ -161,7 +161,7 @@ use_cases:
           type: aws_subnet
         type: string
         default: ""
-        required: true
+        required: false
     - name: Enter Network Name Manually
       technologies: [pipeline]
       condition: '$edit_network == true'
@@ -172,7 +172,7 @@ use_cases:
         widget: simple_text
         type: string
         default: "default"
-        required: true
+        required: false
 {%- endif %}
 
 {%- if stack_usecase == "aws" %}
