@@ -4,7 +4,7 @@ canonical: template-terraform-network
 description: Deploys a virtual network and subnets using Terraform. They could be used by others Cycloid projects to deploy cloud resources in one place.
 author: '{{stack_author}}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/network.png'
-status: 'private'
+status: 'public'
 template: true
 keywords:
 - terraform

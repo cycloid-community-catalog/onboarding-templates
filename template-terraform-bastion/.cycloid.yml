@@ -4,7 +4,7 @@ canonical: template-terraform-bastion
 description: Deploys a bastion instance using Terraform. For example, it would allow to deploy applications using Ansible in a private subnet.
 author: '{{stack_author}}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/shield.png'
-status: 'private'
+status: 'public'
 template: true
 keywords:
 - terraform

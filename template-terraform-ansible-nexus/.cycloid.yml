@@ -6,7 +6,7 @@ canonical: 'template-terraform-ansible-nexus'
 description: Deploys a Nexus Repository on an instance using Terraform and Ansible.
 author: '{{ stack_author }}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
-status: 'private'
+status: 'public'
 template: true
 keywords:
 - terraform

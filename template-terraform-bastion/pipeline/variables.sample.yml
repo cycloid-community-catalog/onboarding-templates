@@ -10,7 +10,7 @@
 aws_cred: ((aws))
 
 #. aws_default_region (required): eu-west-1
-#+ Amazon AWS region to use for Terraform.
+#+ AWS region to use for Terraform.
 aws_region: eu-west-1
 {%- elif stack_usecase == "azure" %}
 # Azure credentials to use to run terraform. Usually admin account to be able to create cloud services.

@@ -5,15 +5,15 @@
 # Cloud credentials to build the Ansible dynamic inventory.
 
 #. aws_access_key (required): ((aws.access_key))
-#+ Amazon AWS access key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
+#+ AWS access key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 aws_access_key: ((aws.access_key))
 
 #. aws_secret_key (required): ((aws.secret_key))
-#+ Amazon AWS secret key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
+#+ AWS secret key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 aws_secret_key: ((aws.secret_key))
 
 #. aws_default_region (required): eu-west-1
-#+ Amazon AWS region to build the Ansible dynamic inventory.
+#+ AWS region to build the Ansible dynamic inventory.
 aws_region: eu-west-1
 
 #. azure_subscription_id (required): ((azure.subscription_id))

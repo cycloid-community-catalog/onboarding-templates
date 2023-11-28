@@ -4,7 +4,7 @@ canonical: template-terraform-multi
 description: Deploy storage, database and compute resources using Terraform.
 author: '{{stack_author}}'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
-status: 'private'
+status: 'public'
 template: true
 keywords:
 - terraform
