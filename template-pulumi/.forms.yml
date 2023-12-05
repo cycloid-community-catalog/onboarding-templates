@@ -1,0 +1,63 @@
+---
+version: "2"
+use_cases:
+- name: {{ stack_usecase }}
+  sections:
+  - name: Storage Account
+    groups:
+    - name: Azure Access Configuration
+      technologies: [pipeline]
+      vars:
+      - name: "Azure Subscription ID"
+        description: "The azure subscription id used to deploy the infrastructure."
+        key: azure_subscription_id
+        widget: cy_cred
+        widget_config:
+          cred_types:
+            - azure
+        type: string
+        required: true
+      - name: "Azure Tenant ID"
+        description: "The azure tenant id used to deploy the infrastructure."
+        key: azure_tenant_id
+        widget: cy_cred
+        widget_config:
+          cred_types:
+            - azure
+        type: string
+        required: true
+      - name: "Azure Client ID"
+        description: "The azure client id used to deploy the infrastructure."
+        key: azure_client_id
+        widget: cy_cred
+        widget_config:
+          cred_types:
+            - azure
+        type: string
+        required: true
+      - name: "Azure Client Secret"
+        description: "The azure client secret used to deploy the infrastructure."
+        key: azure_client_secret
+        widget: cy_cred
+        widget_config:
+          cred_types:
+            - azure
+        type: string
+        required: true
+    - name: Azure Infrastructure
+      technologies: [pipeline]
+      vars:
+      - name: "Resource Group Name"
+        description: "The name of the resource group to create."
+        key: rg_name
+        widget: simple_text
+        type: string
+        default: ""
+        required: true
+      - name: "Storage Account Name"
+        description: "The name of the storage account to create."
+        key: sa_name
+        widget: simple_text
+        type: string
+        default: ""
+        required: true

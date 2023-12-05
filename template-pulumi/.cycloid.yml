@@ -1,0 +1,35 @@
+version: "2"
+name: Pulumi Template
+canonical: template-pulumi-azure
+description: Deploys an Azure Resource Group and Storage Account using Terraform.
+author: '{{stack_author}}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/pulumi.svg'
+status: 'public'
+template: true
+keywords:
+- pulumi
+- storage
+- account
+- resource
+- group
+- bastion
+- provider:azure
+technologies:
+- technology: pulumi
+  version: v3.95.0
+
+config:
+  default:
+    name: default
+    # Pipeline and variable configuration
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+    terraform:
+      main:
+        path: 'terraform/main.tf'
+        destination: '($ project $)/terraform/($ environment $)/main.tf'
