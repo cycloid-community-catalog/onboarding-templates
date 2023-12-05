@@ -1,3 +1,4 @@
+---
 version: "2"
 name: Pulumi Template
 canonical: template-pulumi-azure
@@ -13,7 +14,6 @@ keywords:
 - resource
 - group
 - bastion
-- provider:azure
 technologies:
 - technology: pulumi
   version: v3.95.0
