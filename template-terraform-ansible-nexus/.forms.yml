@@ -56,22 +56,22 @@ use_cases:
             - 30
             - 250
         required: true
-    - name: SSH Keypair for new instances
+    - name: SSH Key pair for new instances
       technologies: [pipeline]
       vars:
       - name: "SSH Public key"
         description: "The public SSH key to connect via SSH to execute the Ansible playbook"
-        key: keypair_public
+        key: key_pair_public
         widget: cy_cred
         type: string
-        default: ((keypair.ssh_pub))
+        default: ((key_pair.public_key))
         required: true
       - name: "SSH Private key"
         description: "The private SSH key to connect via SSH to execute the Ansible playbook"
-        key: keypair_private
+        key: key_pair_private
         widget: cy_cred
         type: string
-        default: ((keypair.ssh_prv))
+        default: ((key_pair.private_key))
         required: true
 {%- if stack_usecase == "aws" %}
     - name: Networking

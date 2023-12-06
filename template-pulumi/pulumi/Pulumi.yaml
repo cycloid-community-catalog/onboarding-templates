@@ -1,3 +1,0 @@
-name: storage-account
-runtime: nodejs
-description: Creating and managing an Azure Storage Account

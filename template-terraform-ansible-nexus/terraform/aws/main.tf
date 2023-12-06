@@ -14,9 +14,9 @@ module "nexus" {
     monitoring_discovery = false
   }
 
-  #. keypair_public: ""
+  #. key_pair_public: ""
   #+ The public SSH key, for SSH access to newly-created instances
-  keypair_public = var.keypair_public
+  key_pair_public = var.key_pair_public
 
   #
   # Nexus Repository

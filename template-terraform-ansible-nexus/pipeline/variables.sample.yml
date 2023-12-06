@@ -54,16 +54,16 @@ gcp_zone: "europe-west1-b"
 
 
 #
-# SSH Keypair to use for newly created instances
+# SSH Key pair to use for newly created instances
 #
 
-#. keypair_public (required): ((keypair.ssh_pub))
+#. key_pair_public (required): ((key_pair.public_key))
 #+ The public SSH key to connect via SSH to execute the Ansible playbook.
-keypair_public: ((keypair.ssh_pub))
+key_pair_public: ((key_pair.public_key))
 
-#. keypair_private (required): ((keypair.ssh_prv))
+#. key_pair_private (required): ((key_pair.private_key))
 #+ The private SSH key to connect via SSH to execute the Ansible playbook.
-keypair_private: ((keypair.ssh_prv))
+key_pair_private: ((key_pair.private_key))
 
 
 #
@@ -148,7 +148,7 @@ project: ($ project $)
 #+ Name of the Cycloid Organization, used as customer variable name.
 customer: ($ organization_canonical $)
 
-#. cycloid_api_url (required): https://http-api.cycloid.io
+#. cycloid_api_url (required): ($ api_url $)
 #+ Cycloid API URL.
 cycloid_api_url: ($ api_url $)
 

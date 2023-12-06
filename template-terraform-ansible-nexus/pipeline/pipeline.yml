@@ -42,7 +42,7 @@ resources:
       gcp_region: ((gcp_region))
       gcp_zone: ((gcp_zone))
 {%- endif %}
-      keypair_public: ((keypair_public))
+      key_pair_public: ((key_pair_public))
       customer: ((customer))
       project: ((project))
       env: ((env))
@@ -188,7 +188,7 @@ jobs:
             - terraform-plan
 
         - get: tfstate
-          trigger: true
+          trigger: false
           passed:
             - terraform-plan
 
@@ -271,7 +271,7 @@ jobs:
             path: ansible-playbook
         params:
           #+ Parameters of ansible-runner script. Can be found here: https://github.com/cycloidio/docker-cycloid-toolkit#ansible-runner
-          SSH_PRIVATE_KEY: ((keypair_private))
+          SSH_PRIVATE_KEY: ((key_pair_private))
 {%- if stack_usecase == "aws" %}
           ANSIBLE_REMOTE_USER: admin
           EC2_VPC_DESTINATION_VARIABLE: ip_address # Force to connect to public IP because we don't use a bastion in this stack

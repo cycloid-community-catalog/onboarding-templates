@@ -10,4 +10,4 @@ variable "aws_region" {
   description = "AWS region where to create servers."
   default     = "eu-west-1"
 }
-variable "keypair_public" {}
+variable "key_pair_public" {}

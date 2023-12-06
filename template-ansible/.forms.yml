@@ -138,7 +138,7 @@ use_cases:
         key: hosts_private_key
         type: string
         widget: cy_cred
-        default: ((keypair.ssh_prv))
+        default: ((key_pair.private_key))
         required: true
     - name: Operations
       technologies: [pipeline]

@@ -62,9 +62,9 @@ hosts_inventory: ""
 #+ The username to connect to via SSH to execute the Ansible playbook.
 hosts_username: admin
 
-#. hosts_private_key (required): ((keypair.ssh_prv))
+#. hosts_private_key (required): ((key_pair.private_key))
 #+ The private SSH key to connect via SSH to execute the Ansible playbook. The Cycloid workers shall be able to connect to targeted hosts via a public IP address.
-hosts_private_key: ((keypair.ssh_prv))
+hosts_private_key: ((key_pair.private_key))
 
 
 #

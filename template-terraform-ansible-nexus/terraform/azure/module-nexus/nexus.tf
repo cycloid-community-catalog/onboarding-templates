@@ -25,7 +25,7 @@ resource "azurerm_linux_virtual_machine" "nexus" {
 
   admin_ssh_key {
       username   = var.vm_os_user
-      public_key = var.keypair_public
+      public_key = var.key_pair_public
   }
 
   tags = merge(local.merged_tags, {

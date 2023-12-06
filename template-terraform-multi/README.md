@@ -1,1 +1,0 @@
-# Deploy multiple resource types using Terraform remote modules

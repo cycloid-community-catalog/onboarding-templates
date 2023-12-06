@@ -3,8 +3,8 @@ variable "customer" {}
 variable "env" {}
 variable "project" {}
 
-# Keypair
-variable "keypair_public" {
+# Key pair
+variable "key_pair_public" {
   description = "The public SSH key, for SSH access to newly-created instances"
 }
 
