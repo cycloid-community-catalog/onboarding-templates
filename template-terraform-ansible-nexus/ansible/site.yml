@@ -52,17 +52,28 @@
       value: 65536
 
   # Installing JAVA
-  - name: Update repositories cache 
+  - name: Install gpg package
     apt:
+      name: "gpg"
+      state: present
       update_cache: yes
 
-  - name: Install Java JRE 8 headless
-    apt:
-      deb: https://cycloid-demo-archives.s3.eu-west-1.amazonaws.com/{{ java_deb_headless }}
+  - name: Add the Apt signing key of AdoptOpenJDK from jfrog.io
+    apt_key:
+      url: https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
+      state: present
 
-  - name: Install Java JRE 8
+  - name: Add apt repository for AdoptOpenJDK
+    apt_repository:
+      repo: "deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ bullseye main"
+      filename: adoptopenjdk
+      state: present
+
+  - name: Install AdoptOpenJDK package
     apt:
-      deb: https://cycloid-demo-archives.s3.eu-west-1.amazonaws.com/{{ java_deb }}
+      name: "adoptopenjdk-8-hotspot-jre"
+      state: present
+      update_cache: yes
 
   - name: make sure /etc/profile.d exists
     file: 
