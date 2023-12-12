@@ -72,7 +72,7 @@ jobs:
 - name: pulumi-up
   plan:
   - get: git_stack-pulumi
-  - task: pulumi-preview
+  - task: pulumi-up
     config:
       platform: linux
       image_resource:
@@ -125,7 +125,7 @@ jobs:
 - name: pulumi-destroy
   plan:
   - get: git_stack-pulumi
-  - task: pulumi-preview
+  - task: pulumi-destroy
     config:
       platform: linux
       image_resource:
