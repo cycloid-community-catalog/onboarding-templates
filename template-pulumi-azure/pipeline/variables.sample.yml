@@ -1,0 +1,101 @@
+#
+# Cloud Provider
+#
+
+# Azure credentials to use to run pulumi. Usually admin account to be able to create cloud services.
+
+#. azure_subscription_id (required): ((azure.subscription_id))
+#+ Azure subscription ID to build the Ansible dynamic inventory.
+azure_subscription_id: ((azure.subscription_id))
+
+#. azure_tenant_id (required): ((azure.tenant_id))
+#+ Azure tenant ID to build the Ansible dynamic inventory.
+azure_tenant_id: ((azure.tenant_id))
+
+#. azure_client_id (required): ((azure.client_id))
+#+ Azure client ID to build the Ansible dynamic inventory.
+azure_client_id: ((azure.client_id))
+
+#. azure_client_secret (required): ((azure.client_secret))
+#+ Azure client secret to build the Ansible dynamic inventory.
+azure_client_secret: ((azure.client_secret))
+
+
+#
+# Pulumi settings
+#
+
+#. pulumi_project (required): "storage-account"
+#+ The Pulumi project name
+pulumi_project: "storage-account"
+
+#. pulumi_stack (required): "dev"
+#+ The Pulumi stack name
+pulumi_stack: "dev"
+
+#. pulumi_token (required): ((pulumi.token))
+#+ The Pulumi Cloud access token
+pulumi_token: ((pulumi.token))
+
+
+#
+# Storage Account and Resource Group names to be created by pulumi
+#
+
+#. sa_name (required): "MyStorageAccount"
+#+ The azure storage account name
+sa_name: "MyStorageAccount"
+
+#. rg_name (required): "MyResourceGroup"
+#+ The azure resource group name
+rg_name: "MyResourceGroup"
+
+
+#
+# Stack Git repository
+#
+
+#. stack_git_repository (required): ($ scs_url $)
+#+ Git repository URL containing the stack.
+stack_git_repository: ($ scs_url $)
+
+#. stack_git_branch (required): ($ scs_branch $)
+#+ Branch to use on the stack Git repository.
+stack_git_branch: ($ scs_branch $)
+{% if scs_cred_type == "ssh" %}
+#. stack_git_private_key (required): ((($ scs_cred_path $).ssh_key))
+#+ SSH key pair to fetch the stack Git repository.
+stack_git_private_key: ((($ scs_cred_path $).ssh_key))
+{% else %}
+#. stack_git_username (required): ((($ scs_cred_path $).username))
+#+ Username for HTTP(S) auth when pulling/pushing.
+stack_git_username: ((($ scs_cred_path $).username))
+
+#. stack_git_token (required): ((($ scs_cred_path $).password))
+#+ Password for HTTP(S) auth when pulling/pushing.
+stack_git_token: ((($ scs_cred_path $).password))
+{% endif %}
+#. stack_pulumi_path (required): ($ stack_path $)/pulumi
+#+ Path of pulumi files in the stack git repository
+stack_pulumi_path: ($ stack_path $)/pulumi
+
+
+#
+# Default variables that shouldn't be changed except if needed
+#
+
+#. env (required): ($ environment $)
+#+ Name of the project's environment.
+env: ($ environment $)
+
+#. project (required): ($ project $)
+#+ Name of the project.
+project: ($ project $)
+
+#. customer (required): ($ organization_canonical $)
+#+ Name of the Cycloid Organization, used as customer variable name.
+customer: ($ organization_canonical $)
+
+#. cycloid_api_url (required): ($ api_url $)
+#+ Cycloid API URL.
+cycloid_api_url: ($ api_url $)

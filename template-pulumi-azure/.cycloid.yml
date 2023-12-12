@@ -1,0 +1,30 @@
+---
+version: "2"
+name: Pulumi Template
+canonical: template-pulumi-azure
+description: Deploys an Azure Resource Group and Storage Account using Pulumi.
+author: '{{stack_author}}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/pulumi.svg'
+status: 'public'
+template: true
+keywords:
+- pulumi
+- storage
+- account
+- resource
+- group
+- bastion
+technologies:
+- technology: pulumi
+  version: v3.95.0
+
+config:
+  default:
+    name: default
+    # Pipeline and variable configuration
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
