@@ -62,7 +62,7 @@ jobs:
       ARM_CLIENT_SECRET: ((azure.client_secret))
       ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
       ARM_TENANT_ID: ((azure.tenant_id))
-      PULUMI_CODE_PATH: "pulumi-stack/((stack_pulumi_path))"
+      PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))
       PULUMI_STACK: ((pulumi_stack))
@@ -115,7 +115,7 @@ jobs:
       ARM_CLIENT_SECRET: ((azure.client_secret))
       ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
       ARM_TENANT_ID: ((azure.tenant_id))
-      PULUMI_CODE_PATH: "pulumi-stack/((stack_pulumi_path))"
+      PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))
       PULUMI_STACK: ((pulumi_stack))
@@ -168,7 +168,7 @@ jobs:
       ARM_CLIENT_SECRET: ((azure.client_secret))
       ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
       ARM_TENANT_ID: ((azure.tenant_id))
-      PULUMI_CODE_PATH: "pulumi-stack/((stack_pulumi_path))"
+      PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))
       PULUMI_STACK: ((pulumi_stack))
