@@ -50,6 +50,7 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
+          pulumi config set azure-native:location "${ARM_LOCATION}"
           pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
           pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
@@ -58,10 +59,11 @@ jobs:
       inputs:
         - name: git_stack-pulumi
     params:
-      ARM_CLIENT_ID: ((azure.client_id))
-      ARM_CLIENT_SECRET: ((azure.client_secret))
-      ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
-      ARM_TENANT_ID: ((azure.tenant_id))
+      ARM_CLIENT_ID: ((azure_client_id))
+      ARM_CLIENT_SECRET: ((azure_client_secret))
+      ARM_SUBSCRIPTION_ID: ((azure_subscription_id))
+      ARM_TENANT_ID: ((azure_tenant_id))
+      ARM_LOCATION: ((azure_location))
       PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))
@@ -103,6 +105,7 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
+          pulumi config set azure-native:location "${ARM_LOCATION}"
           pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
           pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
@@ -111,10 +114,11 @@ jobs:
       inputs:
         - name: git_stack-pulumi
     params:
-      ARM_CLIENT_ID: ((azure.client_id))
-      ARM_CLIENT_SECRET: ((azure.client_secret))
-      ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
-      ARM_TENANT_ID: ((azure.tenant_id))
+      ARM_CLIENT_ID: ((azure_client_id))
+      ARM_CLIENT_SECRET: ((azure_client_secret))
+      ARM_SUBSCRIPTION_ID: ((azure_subscription_id))
+      ARM_TENANT_ID: ((azure_tenant_id))
+      ARM_LOCATION: ((azure_location))
       PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))
@@ -156,6 +160,7 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
+          pulumi config set azure-native:location "${ARM_LOCATION}"
           pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
           pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
@@ -164,10 +169,11 @@ jobs:
       inputs:
         - name: git_stack-pulumi
     params:
-      ARM_CLIENT_ID: ((azure.client_id))
-      ARM_CLIENT_SECRET: ((azure.client_secret))
-      ARM_SUBSCRIPTION_ID: ((azure.subscription_id))
-      ARM_TENANT_ID: ((azure.tenant_id))
+      ARM_CLIENT_ID: ((azure_client_id))
+      ARM_CLIENT_SECRET: ((azure_client_secret))
+      ARM_SUBSCRIPTION_ID: ((azure_subscription_id))
+      ARM_TENANT_ID: ((azure_tenant_id))
+      ARM_LOCATION: ((azure_location))
       PULUMI_CODE_PATH: "git_stack-pulumi/((stack_pulumi_path))"
       PULUMI_ACCESS_TOKEN: ((pulumi_token))
       PULUMI_PROJECT: ((pulumi_project))

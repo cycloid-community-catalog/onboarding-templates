@@ -5,20 +5,24 @@
 # Azure credentials to use to run pulumi. Usually admin account to be able to create cloud services.
 
 #. azure_subscription_id (required): ((azure.subscription_id))
-#+ Azure subscription ID to build the Ansible dynamic inventory.
+#+ Azure subscription ID.
 azure_subscription_id: ((azure.subscription_id))
 
 #. azure_tenant_id (required): ((azure.tenant_id))
-#+ Azure tenant ID to build the Ansible dynamic inventory.
+#+ Azure tenant ID.
 azure_tenant_id: ((azure.tenant_id))
 
 #. azure_client_id (required): ((azure.client_id))
-#+ Azure client ID to build the Ansible dynamic inventory.
+#+ Azure client ID.
 azure_client_id: ((azure.client_id))
 
 #. azure_client_secret (required): ((azure.client_secret))
-#+ Azure client secret to build the Ansible dynamic inventory.
+#+ Azure client secret.
 azure_client_secret: ((azure.client_secret))
+
+#. azure_location (required): "WestEurope"
+#+ Azure location.
+azure_location: "WestEurope"
 
 
 #
