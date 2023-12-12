@@ -50,8 +50,8 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
-          pulumi config set '${PULUMI_PROJECT}:sa_name' '${SA_NAME}'
-          pulumi config set '${PULUMI_PROJECT}:rg_name' '${RG_NAME}'
+          pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
+          pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
           echo "Starting pulumi preview"
           pulumi preview --refresh --diff
@@ -103,8 +103,8 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
-          pulumi config set '${PULUMI_PROJECT}:sa_name' '${SA_NAME}'
-          pulumi config set '${PULUMI_PROJECT}:rg_name' '${RG_NAME}'
+          pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
+          pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
           echo "Starting pulumi up"
           pulumi up -r -y --diff 
@@ -156,8 +156,8 @@ jobs:
           pulumi stack select ${PULUMI_STACK} --non-interactive
 
           echo "Setting pulumi config"
-          pulumi config set '${PULUMI_PROJECT}:sa_name' '${SA_NAME}'
-          pulumi config set '${PULUMI_PROJECT}:rg_name' '${RG_NAME}'
+          pulumi config set "${PULUMI_PROJECT}:sa_name" "${SA_NAME}"
+          pulumi config set "${PULUMI_PROJECT}:rg_name" "${RG_NAME}"
 
           echo "Starting pulumi destroy"
           pulumi destroy -r -y
