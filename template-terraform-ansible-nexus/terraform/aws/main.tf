@@ -42,10 +42,7 @@ module "nexus" {
   # Networking
   #
 
-  #. create_network: true
-  #+ Whether to create a VPC and subnets
-  create_network = "Value injected by StackForms"
-
+cd
   #. subnet_id: ""
   #+ Public subnet ID where to deploy the EC2 instance. Must belong to the region stated below in this form
   subnet_id = ""
