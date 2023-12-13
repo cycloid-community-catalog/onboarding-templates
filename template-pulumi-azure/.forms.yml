@@ -53,6 +53,9 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
+        validations: 
+        - regexp: "^[0-9a-zA-Z_\\-\\.]{1,90}$" 
+          error_message: "1 to 90 alphanumerics, underscores, hyphens, periods chars."
         required: true
       - name: "Storage Account Name"
         description: "The name of the storage account to create."
@@ -60,6 +63,9 @@ use_cases:
         widget: simple_text
         type: string
         default: ""
+        validations: 
+        - regexp: "^[0-9a-z]{3,24}$" 
+          error_message: "3 to 24 numbers and lower-case letters chars."
         required: true
     - name: Pulumi Settings
       technologies: [pipeline]
