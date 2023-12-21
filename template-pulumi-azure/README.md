@@ -1,7 +1,9 @@
 # Deploy resources on Azure with Pulumi
 Deploys an Azure Resource Group and Storage Account using Pulumi.
 
-Here is the process to build a stack with a Pulumi project.
+Please review our [tutorial](https://youtu.be/E1CCFNyzpBI) to integrate a Pulumi project to the newly created Cycloid stack.
+
+Here is a summary of the process to build a stack with a Pulumi project.
 
 First, create your stack from this Pulumi template.
 
