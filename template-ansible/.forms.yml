@@ -111,7 +111,8 @@ use_cases:
         widget: cy_inventory_resource
         widget_config:
           attribute: id
-          type: aws_instance
+          filters:
+            type: aws_instance
         default: ""
         required: true
     - name: Inventory Targeting

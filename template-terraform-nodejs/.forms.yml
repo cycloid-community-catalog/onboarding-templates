@@ -88,7 +88,8 @@ use_cases:
         widget: cy_inventory_resource
         widget_config:
           attribute: id
-          type: aws_subnet
+          filters:
+            type: aws_subnet
         type: string
         default: ""
         required: true
@@ -123,7 +124,8 @@ use_cases:
         widget: cy_inventory_resource
         widget_config:
           attribute: id
-          type: aws_subnet
+          filters:
+            type: aws_subnet
         type: string
         default: ""
         required: true
@@ -158,7 +160,8 @@ use_cases:
         widget: cy_inventory_resource
         widget_config:
           attribute: id
-          type: aws_subnet
+          filters:
+            type: aws_subnet
         type: string
         default: ""
         required: true
