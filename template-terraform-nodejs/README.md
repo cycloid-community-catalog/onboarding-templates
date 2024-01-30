@@ -1,1 +1,4 @@
-# stack-nodejs
+# stack-terraform
+
+Ready to use stack which deploys a NodeJS webapp (as an example) using Terraform.
+Feel free to update the Terraform HCL code, the .forms.yml file to expose the relevant input parameters to your end-users, as well as this README.
