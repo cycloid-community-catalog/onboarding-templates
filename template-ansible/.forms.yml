@@ -125,7 +125,7 @@ use_cases:
           options:
 {%- if stack_usecase == "static" %}
               default: "all"
-{%- elif %}
+{%- else %}
               default: "tag_project_($ project $):&tag_env_($ env $)"
 {%- endif %}
     - name: Hosts Connectivity
