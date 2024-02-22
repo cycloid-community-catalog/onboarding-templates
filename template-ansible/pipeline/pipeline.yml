@@ -91,11 +91,13 @@ jobs:
           #+ Parameters of ansible-runner script. Can be found here: https://github.com/cycloidio/docker-cycloid-toolkit#ansible-runner
           SSH_PRIVATE_KEY: ((hosts_private_key))
           ANSIBLE_REMOTE_USER: ((hosts_username))
+{%- if stack_usecase == "aws" %}
           #+ AWS Dynamic Inventory
           EC2_VPC_DESTINATION_VARIABLE: ip_address # Force to connect to public IP because we don't use a bastion in this stack
           AWS_ACCESS_KEY_ID: ((aws_access_key))
           AWS_SECRET_ACCESS_KEY: ((aws_secret_key))
           AWS_DEFAULT_REGION: ((aws_region))
+{%- elif stack_usecase == "azure" %}
           #+ Azure Dynamic Inventory
           AZURE_USE_PRIVATE_IP: False # Force to connect to public IP because we don't use a bastion in this stack
           AZURE_SUBSCRIPTION_ID: ((azure_subscription_id))
@@ -103,12 +105,15 @@ jobs:
           AZURE_TENANT: ((azure_tenant_id))
           AZURE_CLIENT_ID: ((azure_client_id))
           AZURE_SECRET: ((azure_client_secret))
+{%- elif stack_usecase == "gcp" %}
           #+ GCP Dynamic Inventory
           GCP_USE_PRIVATE_IP: False # Force to connect to public IP because we don't use a bastion in this stack
           GCP_SERVICE_ACCOUNT_CONTENTS: ((gcp_credentials_json))
+{%- elif stack_usecase == "manual" %}
+          ANSIBLE_EXTRA_ARGS: '-i ((manual_inventory)),'
+{%- endif %}
           ANSIBLE_PLAYBOOK_PATH: ansible-playbook
           ANSIBLE_PLAYBOOK_NAME: site.yml
-          ANSIBLE_EXTRA_ARGS: '-i ((manual_inventory)),'
           ANSIBLE_EXTRA_VARS:
             env: ((env))
             project: ((project))

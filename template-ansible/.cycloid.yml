@@ -16,8 +16,60 @@ technologies:
   version: 2.9
 
 config:
-  default:
-    name: default
+  aws:
+    name: 'AWS'
+    description: 'Hosts are targeted with AWS Dynamic Inventory via resource tagging.'
+    cloud_provider: aws
+    # Pipeline and variable configuration for the AWS CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-operations.yml'
+
+  azure:
+    name: 'Azure'
+    description: 'Hosts are targeted with Azure Dynamic Inventory via resource tagging.'
+    cloud_provider: azurerm
+    # Pipeline and variable configuration for the Azure CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-operations.yml'
+
+  gcp:
+    name: 'GCP'
+    description: 'Hosts are targeted with GCP Dynamic Inventory via resource tagging.'
+    cloud_provider: gcp
+    # Pipeline and variable configuration for the GCP CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+    # Configuration of ansible for provisionning
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ project $)/ansible/environments/($ environment $)-operations.yml'
+
+  manual:
+    name: manual
+    description: 'Hosts are targeted with a static list of FQDN or IP addresses.'
     # Pipeline and variable configuration
     pipeline:
       pipeline:
