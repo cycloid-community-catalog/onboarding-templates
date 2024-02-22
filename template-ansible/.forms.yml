@@ -1,27 +1,13 @@
 ---
 version: "2"
 use_cases:
-- name: cycloid-common
+- name: {{ stack_usecase }}
   sections:
   - name: Hosts
     groups:
-    - name: Host Targeting Mode
-      technologies: [pipeline]
-      vars:
-      - name: "Host Targeting Mode"
-        description: "Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)."
-        key: host_targeting_mode
-        type: string
-        widget: dropdown
-        values:
-        - 'AWS Dynamic Inventory'
-        - 'Azure Dynamic Inventory'
-        - 'GCP Dynamic Inventory'
-        # - 'Cycloid Asset Inventory'
-        - 'Manual Inventory'
+{%- if stack_usecase == "aws" %}
     - name: AWS Dynamic Inventory Configuration
       technologies: [pipeline]
-      condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
       vars:
       - name: "AWS access key"
         description: "AWS access key for Terraform."
@@ -53,9 +39,9 @@ use_cases:
         values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
         default: eu-west-1
         required: true
+{%- elif stack_usecase == "azure" %}
     - name: Azure Dynamic Inventory Configuration
       technologies: [pipeline]
-      condition: "$host_targeting_mode == 'Azure Dynamic Inventory'"
       vars:
       - name: "Azure subscription ID"
         description: "Azure subscription ID for Terraform."
@@ -85,9 +71,9 @@ use_cases:
         type: string
         default: ""
         required: true
+{%- elif stack_usecase == "gcp" %}
     - name: GCP Dynamic Inventory Configuration
       technologies: [pipeline]
-      condition: "$host_targeting_mode == 'GCP Dynamic Inventory'"
       vars:
       - name: "GCP credentials"
         description: "Google Cloud Platform JSON credentials to use for Terraform."
@@ -100,9 +86,9 @@ use_cases:
             - gcp
         default: ""
         required: true
+{%- elif stack_usecase == "cai" %}
     - name: Cycloid Asset Inventory Configuration
       technologies: [pipeline]
-      condition: "$host_targeting_mode == 'Cycloid Asset Inventory'"
       vars:
       - name: "Virtual Machine"
         description: "Select the Virtual Machine to target"
@@ -115,17 +101,18 @@ use_cases:
             type: aws_instance
         default: ""
         required: true
-    - name: Manual Inventory Configuration
+{%- elif stack_usecase == "static" %}
+    - name: Static Inventory Configuration
       technologies: [pipeline]
-      condition: "$host_targeting_mode == 'Manual Inventory'"
       vars:
-      - name: "Manual Inventory"
+      - name: "Static Inventory"
         description: "A comma-separated list of FQDN or IP addresses to be passed to the ansible-playbook --inventory parameter (we will add the final comma for you)."
-        key: manual_inventory
+        key: static_inventory
         type: string
         widget: simple_text
         default: 127.0.0.1
         required: true
+{%- endif %}
     - name: Inventory Targeting
       technologies: [pipeline]
       vars:
@@ -136,10 +123,11 @@ use_cases:
         widget: simple_text
         default:
           options:
-            - condition: "$host_targeting_mode == 'Manual Inventory'"
+{%- if stack_usecase == "static" %}
               default: "all"
-            - condition: "$host_targeting_mode != 'Manual Inventory'"
+{%- elif %}
               default: "tag_project_($ project $):&tag_env_($ env $)"
+{%- endif %}
     - name: Hosts Connectivity
       technologies: [pipeline]
       vars:
@@ -181,8 +169,3 @@ use_cases:
         key: hosts_user
         type: string
         widget: simple_text
-
-- name: aws
-- name: azure
-- name: gcp
-- name: static

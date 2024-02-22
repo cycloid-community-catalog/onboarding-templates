@@ -36,20 +36,16 @@ azure_client_secret: ((azure.client_secret))
 #. gcp_credentials_json (required): ((gcp.json_key))
 #+ Google Cloud Platform JSON credentials to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 gcp_credentials_json: ((gcp.json_key))
-{%- elif stack_usecase == "manual" %}
-#. manual_inventory (required): "all"
+{%- elif stack_usecase == "static" %}
+#. static_inventory (required): "all"
 #+ A list of FQDN or IP addresses to be passed to the ansible-playbook --inventory parameter.
-manual_inventory: "127.0.0.1"
+static_inventory: "127.0.0.1"
 {%- endif %}
 
 
 #
 # Inventory Targeting
 #
-
-#. host_targeting_mode (required): ""
-#+ Select how to target specific hosts. You can target a set of VMs on supported cloud providers using their dynamic inventory (based on tags matching), or target one VM using Cycloid Asset Inventory, or build your own list of hosts (FQDN or IP addresses)
-host_targeting_mode: ""
 
 #. cai_host (required): ''
 #+ The targeted host IP addres or FQDN from the Cycloid Asset Inventory (cai).

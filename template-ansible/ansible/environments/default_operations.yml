@@ -1,6 +1,5 @@
 {% verbatim %}
 ---
-host_targeting_mode: ""
 hosts_inventory: ""
 hosts_reboot: false
 hosts_service: ""
