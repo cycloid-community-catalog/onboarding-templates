@@ -53,6 +53,10 @@ cai_host: ""
 #+ An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod
 hosts_inventory: ""
 
+#. manual_inventory (required): "all"
+#+ A list of FQDN or IP addresses to be passed to the ansible-playbook --inventory parameter.
+manual_inventory: "127.0.0.1"
+
 
 #
 # Hosts Connectivity

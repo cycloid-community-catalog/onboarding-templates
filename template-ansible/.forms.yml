@@ -18,7 +18,7 @@ use_cases:
         - 'Azure Dynamic Inventory'
         - 'GCP Dynamic Inventory'
         # - 'Cycloid Asset Inventory'
-        - 'No Dynamic Inventory (Hosts Inventory must be IPs or FQDNs only)'
+        - 'Manual Inventory'
     - name: AWS Dynamic Inventory Configuration
       technologies: [pipeline]
       condition: "$host_targeting_mode == 'AWS Dynamic Inventory'"
@@ -115,15 +115,31 @@ use_cases:
             type: aws_instance
         default: ""
         required: true
+    - name: Manual Inventory Configuration
+      technologies: [pipeline]
+      condition: "$host_targeting_mode == 'Manual Inventory'"
+      vars:
+      - name: "Manual Inventory"
+        description: "A comma-separated list of FQDN or IP addresses to be passed to the ansible-playbook --inventory parameter (we will add the final comma for you)."
+        key: manual_inventory
+        type: string
+        widget: simple_text
+        default: 127.0.0.1
+        required: true
     - name: Inventory Targeting
       technologies: [pipeline]
       vars:
       - name: "Hosts Inventory"
-        description: "An Ansible Hosts pattern that can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. If you enabled a dynamic inventory above, groups have been created from Hosts tags. For example, to target all hosts tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
+        description: "An Ansible Hosts pattern that can refer to an inventory group, a set of groups, or 'all' to target all hosts in your inventory. If you enabled an AWS, Azure or GCP dynamic inventory above, groups have been created from Hosts tags. For example, to target all the instances tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
         key: hosts_inventory
         type: string
         widget: simple_text
-        default: "tag_project_($ project $):&tag_env_($ env $)"
+        default:
+          options:
+            - condition: "$host_targeting_mode == 'Manual Inventory'"
+              default: "all"
+            - condition: "$host_targeting_mode != 'Manual Inventory'"
+              default: "tag_project_($ project $):&tag_env_($ env $)"
     - name: Hosts Connectivity
       technologies: [pipeline]
       vars:

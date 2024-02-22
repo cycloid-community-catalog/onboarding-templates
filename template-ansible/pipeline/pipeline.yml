@@ -108,6 +108,7 @@ jobs:
           GCP_SERVICE_ACCOUNT_CONTENTS: ((gcp_credentials_json))
           ANSIBLE_PLAYBOOK_PATH: ansible-playbook
           ANSIBLE_PLAYBOOK_NAME: site.yml
+          ANSIBLE_EXTRA_ARGS: '-i ((manual_inventory)),'
           ANSIBLE_EXTRA_VARS:
             env: ((env))
             project: ((project))
