@@ -185,4 +185,4 @@ use_cases:
 - name: aws
 - name: azure
 - name: gcp
-- name: 'Static Inventory'
+- name: static
