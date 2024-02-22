@@ -121,13 +121,12 @@ use_cases:
         key: hosts_inventory
         type: string
         widget: simple_text
-        default:
-          options:
 {%- if stack_usecase == "static" %}
-              default: "all"
+        default: "all"
 {%- else %}
-              default: "tag_project_($ project $):&tag_env_($ env $)"
+        default: "tag_project_($ project $):&tag_env_($ env $)"
 {%- endif %}
+        required: true
     - name: Hosts Connectivity
       technologies: [pipeline]
       vars:
