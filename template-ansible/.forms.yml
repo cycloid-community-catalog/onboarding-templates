@@ -117,7 +117,11 @@ use_cases:
       technologies: [pipeline]
       vars:
       - name: "Hosts Inventory"
-        description: "An Ansible Hosts pattern that can refer to an inventory group, a set of groups, or 'all' to target all hosts in your inventory. If you enabled an AWS, Azure or GCP dynamic inventory above, groups have been created from Hosts tags. For example, to target all the instances tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
+{%- if stack_usecase == "static" %}
+        description: "An Ansible Hosts pattern that should normally be 'all' to target all hosts in your inventory above."
+{%- else %}
+        description: "An Ansible Hosts pattern to target hosts in your dynamic inventory using resource tags. For example, to target all the instances tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
+{%- endif %}
         key: hosts_inventory
         type: string
         widget: simple_text
