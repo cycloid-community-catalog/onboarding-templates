@@ -68,7 +68,7 @@ config:
         destination: '($ project $)/ansible/environments/($ environment $)-operations.yml'
 
   manual:
-    name: manual
+    name: 'Static Inventory'
     description: 'Hosts are targeted with a static list of FQDN or IP addresses.'
     # Pipeline and variable configuration
     pipeline:
