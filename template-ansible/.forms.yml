@@ -1,7 +1,7 @@
 ---
 version: "2"
 use_cases:
-- name: 'cycloid-common'
+- name: cycloid-common
   sections:
   - name: Hosts
     groups:
@@ -181,3 +181,8 @@ use_cases:
         key: hosts_user
         type: string
         widget: simple_text
+
+- name: aws
+- name: azure
+- name: gcp
+- name: 'Static Inventory'
