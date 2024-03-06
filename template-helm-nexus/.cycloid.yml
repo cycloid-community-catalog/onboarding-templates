@@ -31,4 +31,4 @@ config:
     terraform:
       main:
         path: 'terraform/main.tf'
-        destination: '($ project $)/kubernetes/($ environment $)/main.tf'
+        destination: '($ project $)/terraform/($ environment $)/main.tf'
