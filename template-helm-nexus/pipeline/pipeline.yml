@@ -16,6 +16,9 @@ shared:
         /usr/bin/merge-stack-and-config
         mkdir merged-stack/.kube
         echo "$KUBECONFIG" > merged-stack/.kube/config
+        # curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
+        # chmod +x ./aws-iam-authenticator
+        # sudo mv ./aws-iam-authenticator /usr/local/bin
         # echo "$KUBECONFIG-SA" > merged-stack/.kube/gsa-key.json
         # export GOOGLE_APPLICATION_CREDENTIALS=merged-stack/.kube/gsa-key.json
   outputs:
