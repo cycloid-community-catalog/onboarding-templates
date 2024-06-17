@@ -33,8 +33,8 @@ config:
     # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
     terraform:
       main:
-        path: 'terraform/($ .use_case $)/main.tf'
-        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+        path: 'terraform/aws/main.tf'
+        destination: '($ .project $)/terraform/aws/($ .environment $)/main.tf'
 
   azure:
     name: 'Azure'
@@ -50,8 +50,8 @@ config:
     # Configuration of terraform
     terraform:
       main:
-        path: 'terraform/($ .use_case $)/main.tf'
-        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+        path: 'terraform/azure/main.tf'
+        destination: '($ .project $)/terraform/azure/($ .environment $)/main.tf'
 
   gcp:
     name: 'GCP'
@@ -67,8 +67,8 @@ config:
     # Configuration of terraform
     terraform:
       main:
-        path: 'terraform/($ .use_case $)/main.tf'
-        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+        path: 'terraform/gcp/main.tf'
+        destination: '($ .project $)/terraform/gcp/($ .environment $)/main.tf'
 
   vmware:
     name: 'VMware'
@@ -84,5 +84,5 @@ config:
     # Configuration of terraform
     terraform:
       main:
-        path: 'terraform/($ .use_case $)/main.tf'
-        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+        path: 'terraform/vmware/main.tf'
+        destination: '($ .project $)/terraform/vmware/($ .environment $)/main.tf'
