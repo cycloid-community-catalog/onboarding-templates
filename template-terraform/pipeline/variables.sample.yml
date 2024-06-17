@@ -1,0 +1,46 @@
+#
+# Cloud Provider
+#
+
+{%- if stack_usecase == "aws" %}
+# AWS access to use to run terraform. Usually admin account to be able to create AWS Cloud services.
+
+#. aws_cred (required): ((aws))
+#+ Amazon credentials containing access key and secret key for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
+aws_cred: ((aws))
+
+#. aws_default_region (required): eu-west-3
+#+ AWS region to use for Terraform.
+aws_region: eu-west-3
+{%- elif stack_usecase == "azure" %}
+# Azure credentials to use to run terraform. Usually admin account to be able to create cloud services.
+
+#. azure_cred (required): ((azure))
+#+ The azure credential used to deploy the infrastructure. It contains subscription_id, tenant_id, client_id, and client_secret. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
+azure_cred: ((azure))
+{%- elif stack_usecase == "gcp" %}
+#. gcp_credentials_json (required): ((gcp.json_key))
+#+ Google Cloud Platform JSON credentials to use for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
+gcp_credentials_json: ((gcp.json_key))
+
+#. gcp_project (required): ""
+#+ Google Cloud Platform project ID for Terraform.
+gcp_project: ""
+
+#. gcp_region (required): "europe-west1"
+#+ Google Cloud Platform region to use for Terraform.
+gcp_region: "europe-west1"
+
+#. gcp_zone (required): "europe-west1-b"
+#+ Google Cloud Platform zone to use for Terraform.
+gcp_zone: "europe-west1-b"
+{%- endif %}
+
+
+#
+# Default variables
+#
+
+#. terraform_version (required): '1.8.3'
+#+ terraform version used to execute your code.
+terraform_version: '1.8.3'

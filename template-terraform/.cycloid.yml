@@ -1,0 +1,88 @@
+version: '3'
+name: Terraform Template
+canonical: template-terraform-nodejs
+description: Deploys a Node.js web application on one instance using Terraform and Cloud-Init.
+author: '{{stack_author}}'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
+status: 'private'
+template: true
+keywords:
+- terraform
+- cloud-init
+- user data
+- webapp
+- nodejs
+- nginx
+- provider:{{ stack_usecase }}
+technologies:
+- technology: terraform
+  version: 1.8.3
+
+config:
+  aws:
+    name: 'AWS'
+    description: 'Deploys a single AWS instance'
+    cloud_provider: aws
+    # Pipeline and variable configuration for the AWS CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
+    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+    terraform:
+      main:
+        path: 'terraform/($ .use_case $)/main.tf'
+        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+
+  azure:
+    name: 'Azure'
+    description: 'Deploys a single Azure instance'
+    cloud_provider: azurerm
+    # Pipeline and variable configuration for the Azure CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/($ .use_case $)/main.tf'
+        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+
+  gcp:
+    name: 'GCP'
+    description: 'Deploys a single GCP instance'
+    cloud_provider: gcp
+    # Pipeline and variable configuration for the GCP CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/($ .use_case $)/main.tf'
+        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
+
+  vmware:
+    name: 'VMware'
+    description: 'Deploys a single VMware instance'
+    cloud_provider: vmware
+    # Pipeline and variable configuration for the VMware CD pipeline use case
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
+    # Configuration of terraform
+    terraform:
+      main:
+        path: 'terraform/($ .use_case $)/main.tf'
+        destination: '($ .project $)/terraform/($ .use_case $)/($ .environment $)/main.tf'
