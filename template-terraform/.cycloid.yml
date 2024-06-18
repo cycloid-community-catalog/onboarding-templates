@@ -2,7 +2,6 @@ version: '3'
 name: Terraform Template
 canonical: template-terraform
 description: Deploys one instance using Terraform.
-author: '($> .stack_author $)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
 status: 'private'
 template: true
@@ -13,7 +12,6 @@ keywords:
 - webapp
 - nodejs
 - nginx
-- provider:($> .stack_usecase $)
 technologies:
 - technology: terraform
   version: 1.8.3
