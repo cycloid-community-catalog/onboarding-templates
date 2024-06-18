@@ -10,7 +10,7 @@ status: 'private'
 template: true
 keywords:
 - ansible
-- '{{ stack_usecase }}'
+- '($> .stack_usecase $)'
 technologies:
 - technology: ansible
   version: 2.9

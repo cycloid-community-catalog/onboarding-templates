@@ -13,7 +13,7 @@ keywords:
 - webapp
 - nodejs
 - nginx
-- provider:{{ stack_usecase }}
+- provider:($> .stack_usecase $)
 technologies:
 - technology: terraform
   version: 1.8.3
