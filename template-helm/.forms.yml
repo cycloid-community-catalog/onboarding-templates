@@ -1,0 +1,44 @@
+---
+version: "2"
+use_cases:
+- name: 'default'
+  sections:
+  - name: Nexus Repository
+    groups:
+    - name: Kubernetes Cluster
+      technologies: [pipeline]
+      vars:
+      - name: "Kubeconfig"
+        description: "Kubeconfig to access your K8s cluster. Please create it as a custom credential in Cycloid Credentials module beforehand."
+        key: kubeconfig
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - custom
+        type: string
+        required: true
+    - name: Pod specifications
+      technologies: [terraform]
+      vars:
+      - name: "Disk size"
+        unit: Go
+        description: "Disk size for the Nexus Repository."
+        key: vm_disk_size
+        widget: slider_range
+        type: integer
+        default: 20
+        values:
+            - 10
+            - 250
+        required: true
+    - name: Application Configuration
+      technologies: [terraform]
+      vars:
+      - name: "Port"
+        description: "Port where Nexus Repository service is exposed."
+        key: nexus_port
+        widget: simple_text
+        type: string
+        default: "8081"
+        required: true
