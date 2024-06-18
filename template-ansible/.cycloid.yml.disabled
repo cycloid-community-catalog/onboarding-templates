@@ -4,7 +4,7 @@ version: '3'
 name: 'Ansible Template'
 canonical: 'template-ansible'
 description: Supports bulk operations such as rebooting VMs, restarting services, installing packages or creating users on a set of targeted virtual machines using Ansible.
-author: '{{ stack_author }}'
+author: '($> .stack_author $)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
 status: 'private'
 template: true

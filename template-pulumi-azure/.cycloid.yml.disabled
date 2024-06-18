@@ -3,7 +3,7 @@ version: '3'
 name: Pulumi Template
 canonical: template-pulumi-azure
 description: Deploys an Azure Resource Group and Storage Account using Pulumi.
-author: '{{stack_author}}'
+author: '($> .stack_author $)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/pulumi.svg'
 status: 'private'
 template: true

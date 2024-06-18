@@ -4,7 +4,7 @@ version: '3'
 name: 'Helm template'
 canonical: 'template-helm-nexus'
 description: Deploys a Nexus Repository on a Kubernetes cluster using Helm.
-author: '{{ stack_author }}'
+author: '($> .stack_author $)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/helm.svg'
 status: 'private'
 template: true
