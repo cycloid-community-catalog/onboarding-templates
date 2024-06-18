@@ -1,7 +1,7 @@
 ---
 version: "2"
 use_cases:
-- name: ($> .stack_usecase $)
+- name: ($> .stack_usecase <$)
   sections:
   - name: NodeJS Server
     groups:
@@ -150,7 +150,7 @@ use_cases:
         key: vpc_name
         widget: simple_text
         type: string
-        required: true($>- end <$)
+        required: true($> end <$)
 ($> end <$)
 
     - name: Access Configuration

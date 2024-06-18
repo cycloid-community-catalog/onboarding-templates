@@ -1,7 +1,7 @@
 ---
 version: "2"
 use_cases:
-- name: ($> .stack_usecase $)
+- name: ($> .stack_usecase <$)
   sections:
   - name: Storage Account
     groups:

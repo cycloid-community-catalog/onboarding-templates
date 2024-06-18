@@ -4,7 +4,7 @@
 
 # Cloud credentials to build the Ansible dynamic inventory.
 
-($>- if eq .stack_usecase "aws" <$)
+($> if eq .stack_usecase "aws" <$)
 #. aws_access_key (required): ((aws.access_key))
 #+ AWS access key to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 aws_access_key: ((aws.access_key))
@@ -16,7 +16,7 @@ aws_secret_key: ((aws.secret_key))
 #. aws_default_region (required): eu-west-1
 #+ AWS region to build the Ansible dynamic inventory.
 aws_region: eu-west-1
-($>- else if eq .stack_usecase "azure" <$)
+($> else if eq .stack_usecase "azure" <$)
 #. azure_subscription_id (required): ((azure.subscription_id))
 #+ Azure subscription ID to build the Ansible dynamic inventory.
 azure_subscription_id: ((azure.subscription_id))
@@ -32,7 +32,7 @@ azure_client_id: ((azure.client_id))
 #. azure_client_secret (required): ((azure.client_secret))
 #+ Azure client secret to build the Ansible dynamic inventory.
 azure_client_secret: ((azure.client_secret))
-($>- else if eq .stack_usecase "gcp" <$)
+($> else if eq .stack_usecase "gcp" <$)
 #. gcp_credentials_json (required): ((gcp.json_key))
 #+ Google Cloud Platform JSON credentials to build the Ansible dynamic inventory. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 gcp_credentials_json: ((gcp.json_key))
@@ -40,7 +40,7 @@ gcp_credentials_json: ((gcp.json_key))
 #. static_inventory (required): "all"
 #+ A list of FQDN or IP addresses to be passed to the ansible-playbook --inventory parameter.
 static_inventory: "127.0.0.1"
-($>- end <$)
+($> end <$)
 
 
 #
