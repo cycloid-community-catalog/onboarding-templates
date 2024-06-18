@@ -14,7 +14,8 @@ technologies:
   version: 1.8.3
 
 config:
-  aws:
+  default:
+($> if eq .stack_usecase "aws" <$)
     name: 'AWS'
     description: 'Deploys a single AWS instance'
     cloud_provider: aws
@@ -30,8 +31,7 @@ config:
       main:
         path: 'terraform/aws/main.tf'
         destination: '($ .project $)/terraform/aws/($ .environment $)/main.tf'
-
-  azure:
+($> else if eq .stack_usecase "azure" <$)
     name: 'Azure'
     description: 'Deploys a single Azure instance'
     cloud_provider: azurerm
@@ -47,8 +47,7 @@ config:
       main:
         path: 'terraform/azure/main.tf'
         destination: '($ .project $)/terraform/azure/($ .environment $)/main.tf'
-
-  gcp:
+($> else if eq .stack_usecase "gcp" <$)
     name: 'GCP'
     description: 'Deploys a single GCP instance'
     cloud_provider: gcp
@@ -64,8 +63,7 @@ config:
       main:
         path: 'terraform/gcp/main.tf'
         destination: '($ .project $)/terraform/gcp/($ .environment $)/main.tf'
-
-  vmware:
+($> else if eq .stack_usecase "vmware" <$)
     name: 'VMware'
     description: 'Deploys a single VMware instance'
     cloud_provider: vmware
@@ -81,3 +79,4 @@ config:
       main:
         path: 'terraform/vmware/main.tf'
         destination: '($ .project $)/terraform/vmware/($ .environment $)/main.tf'
+($> end <$)
