@@ -5,7 +5,7 @@ use_cases:
   sections:
   - name: Hosts
     groups:
-{%- if stack_usecase == "aws" %}
+($>- if eq .stack_usecase "aws" <$)
     - name: AWS Dynamic Inventory Configuration
       technologies: [pipeline]
       vars:
@@ -39,7 +39,7 @@ use_cases:
         values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
         default: eu-west-1
         required: true
-{%- elif stack_usecase == "azure" %}
+($>- else if eq .stack_usecase "azure" <$)
     - name: Azure Dynamic Inventory Configuration
       technologies: [pipeline]
       vars:
@@ -71,7 +71,7 @@ use_cases:
         type: string
         default: ""
         required: true
-{%- elif stack_usecase == "gcp" %}
+($>- else if eq .stack_usecase "gcp" <$)
     - name: GCP Dynamic Inventory Configuration
       technologies: [pipeline]
       vars:
@@ -112,7 +112,7 @@ use_cases:
         widget: simple_text
         default: 127.0.0.1
         required: true
-{%- endif %}
+($>- end <$)
     - name: Inventory Targeting
       technologies: [pipeline]
       vars:
@@ -121,7 +121,7 @@ use_cases:
         description: "An Ansible Hosts pattern that should normally be 'all' to target all hosts in your inventory above."
 {%- else %}
         description: "An Ansible Hosts pattern to target hosts in your dynamic inventory using resource tags. For example, to target all the instances tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
-{%- endif %}
+($>- end <$)
         key: hosts_inventory
         type: string
         widget: simple_text
@@ -129,7 +129,7 @@ use_cases:
         default: "all"
 {%- else %}
         default: "tag_project_($ project $):&tag_env_($ env $)"
-{%- endif %}
+($>- end <$)
         required: true
     - name: Hosts Connectivity
       technologies: [pipeline]

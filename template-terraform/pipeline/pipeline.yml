@@ -28,25 +28,25 @@ resources:
     backend_config:
       address: '($ .api_url $)/inventory?jwt=($ .inventory_jwt $)'
     vars:
-{%- if stack_usecase == "aws" %}
+($>- if eq .stack_usecase "aws" <$)
       aws_cred: ((aws_cred))
       aws_region: ((aws_region))
-{%- elif stack_usecase == "azure" %}
+($>- else if eq .stack_usecase "azure" <$)
       azure_cred: ((azure_cred))
-{%- elif stack_usecase == "gcp" %}
+($>- else if eq .stack_usecase "gcp" <$)
       gcp_project: ((gcp_project))
       gcp_region: ((gcp_region))
       gcp_zone: ((gcp_zone))
-{%- endif %}
+($>- end <$)
       env: ($ .environment $)
       project: ($ .project $)
       customer: ($ .organization_canonical $)
-{%- if stack_usecase == "gcp" %}
+($>- if eq .stack_usecase "gcp" <$)
     env:
       GOOGLE_PROJECT: ((gcp_project))
       GOOGLE_ZONE: ((gcp_zone))
       GOOGLE_CREDENTIALS: ((gcp_credentials_json))
-{%- endif %}
+($>- end <$)
 
 # The Terraform stack (will be merged with the config)
 - name: git_stack-terraform

@@ -23,11 +23,6 @@ variable "vpc_name" {
   description = "VPC name where to deploy the instance"
 }
 
-variable "key_pair_public" {
-  description = "Public key to provision to the instance"
-  default = ""
-}
-
 # Tags
 variable "extra_tags" {
   default = {}

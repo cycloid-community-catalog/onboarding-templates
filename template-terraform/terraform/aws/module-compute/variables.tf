@@ -23,10 +23,6 @@ variable "vpc_id" {
   description = "VPC ID where to deploy the EC2 instance"
 }
 
-variable "key_pair_name" {
-  description = "Public Key pair name to provision to the EC2 instance"
-}
-
 # Tags
 variable "extra_tags" {
   default = {}
