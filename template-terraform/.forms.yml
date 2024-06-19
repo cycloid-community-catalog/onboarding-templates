@@ -93,27 +93,6 @@ use_cases:
         values: ["debian","ubuntu"]
         default: "debian"
         required: true
-      - name: "Network"
-        description: "Network where the virtual machine will be located."
-        key: vsphere_network
-        widget: simple_text
-        default: "VM Network"
-        type: string
-        required: true
-      - name: "IP Address"
-        description: "IP address to assign to the virtual machine network interface. You can also integrate Cycloid with an IP Address Management tool."
-        key: vm_ip
-        widget: simple_text
-        default: "212.129.18.92"
-        type: string
-        required: true
-      - name: "MAC Address"
-        description: "MAC address to assign to the virtual machine network interface. You can also integrate Cycloid with a MAC Address Management tool."
-        key: vm_mac
-        widget: simple_text
-        default: "00:50:56:01:f1:96"
-        type: string
-        required: true
 ($> end <$)
       - name: "Disk size"
         unit: Go
@@ -150,7 +129,29 @@ use_cases:
         key: vpc_name
         widget: simple_text
         type: string
-        required: true($> end <$)
+        required: true
+($> else if eq .stack_usecase "vmware" <$)
+      - name: "Network"
+        description: "Network where the virtual machine will be located."
+        key: vsphere_network
+        widget: simple_text
+        default: "VM Network"
+        type: string
+        required: true
+      - name: "IP Address"
+        description: "IP address to assign to the virtual machine network interface. You can also integrate Cycloid with an IP Address Management tool."
+        key: vm_ip
+        widget: simple_text
+        default: "212.129.18.92"
+        type: string
+        required: true
+      - name: "MAC Address"
+        description: "MAC address to assign to the virtual machine network interface. You can also integrate Cycloid with a MAC Address Management tool."
+        key: vm_mac
+        widget: simple_text
+        default: "00:50:56:01:f1:96"
+        type: string
+        required: true
 ($> end <$)
 
     - name: Access Configuration
