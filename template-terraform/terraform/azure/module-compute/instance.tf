@@ -21,7 +21,7 @@ resource "azurerm_linux_virtual_machine" "compute" {
       version   = "latest"
   }
 
-  disable_password_authentication = true
+  disable_password_authentication = false
   
   tags = merge(local.merged_tags, {
     Name = "${var.customer}-${var.project}-${var.env}"
