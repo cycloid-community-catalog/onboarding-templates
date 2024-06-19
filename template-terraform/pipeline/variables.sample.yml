@@ -9,9 +9,9 @@
 #+ Amazon credentials containing access key and secret key for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)
 aws_cred: ((aws))
 
-#. aws_default_region (required): eu-west-3
+#. aws_default_region (required): eu-west-1
 #+ AWS region to use for Terraform.
-aws_region: eu-west-3
+aws_region: eu-west-1
 ($> else if eq .stack_usecase "azure" <$)
 # Azure credentials to use to run terraform. Usually admin account to be able to create cloud services.
 
