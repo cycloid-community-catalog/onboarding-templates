@@ -7,6 +7,7 @@ resource "azurerm_linux_virtual_machine" "compute" {
   network_interface_ids = [azurerm_network_interface.compute.id]
   size                  = var.vm_instance_type
   admin_username        = var.vm_os_user
+  admin_password        = "Ch4ng3M3!"
 
   os_disk {
     caching              = "ReadWrite"
