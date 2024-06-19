@@ -53,7 +53,7 @@ use_cases:
         required: true
       - name: "Existing resource group name"
         description: "The name of the existing resource group where the resources will be deployed."
-        key: rg_name
+        key: resource_group_name
         widget: simple_text
         type: string
         default: ""
