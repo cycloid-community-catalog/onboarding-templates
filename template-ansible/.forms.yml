@@ -86,7 +86,7 @@ use_cases:
             - gcp
         default: ""
         required: true
-{%- elif stack_usecase == "cai" %}
+($> else if eq .stack_usecase "cai" <$)
     - name: Cycloid Asset Inventory Configuration
       technologies: [pipeline]
       vars:
@@ -101,7 +101,7 @@ use_cases:
             type: aws_instance
         default: ""
         required: true
-{%- elif stack_usecase == "static" %}
+($> else if eq .stack_usecase "static" <$)
     - name: Static Inventory Configuration
       technologies: [pipeline]
       vars:
@@ -117,17 +117,17 @@ use_cases:
       technologies: [pipeline]
       vars:
       - name: "Hosts Inventory"
-{%- if stack_usecase == "static" %}
+($> if eq .stack_usecase "static" <$)
         description: "An Ansible Hosts pattern that should normally be 'all' to target all hosts in your inventory above."
-{%- else %}
+($> else <$)
         description: "An Ansible Hosts pattern to target hosts in your dynamic inventory using resource tags. For example, to target all the instances tagged with role=fe AND env=prod, you would enter here: tag_role_fe:&tag_env_prod"
 ($> end <$)
         key: hosts_inventory
         type: string
         widget: simple_text
-{%- if stack_usecase == "static" %}
+($> if eq .stack_usecase "static" <$)
         default: "all"
-{%- else %}
+($> else <$)
         default: "tag_project_($ project $):&tag_env_($ env $)"
 ($> end <$)
         required: true
