@@ -1,35 +1,37 @@
 resources:
-# The Ansible stack
+# The Ansible stack (will be merged with the config)
 - name: git_stack-ansible
   type: git
-  icon: git
+  icon: github-circle
   source:
-    uri: ((stack_git_repository))
-    branch: ((stack_git_branch))
-{% if scs_cred_type == "ssh" %}
-    private_key: ((stack_git_private_key))
-{% else %}
-    username: ((stack_git_username))
-    password: ((stack_git_token))
-{% endif %}
+    uri: ($ .scs_url $)
+    branch: ($ .scs_branch $)
+    ($- if eq .scs_cred_type "basic_auth" $)
+    username: ((($ .scs_cred_path $).username))
+    password: ((($ .scs_cred_path $).password))
+    ($- end $)
+    ($- if eq .scs_cred_type "ssh" $)
+    private_key: ((($ .scs_cred_path $).ssh_key))
+    ($- end $)
     paths:
-      - ((stack_ansible_path))/*
+      - ($ .stack_path $)/ansible/*
 
-# The Ansible config
+# The Ansible config (will be merged with the stack)
 - name: git_config-ansible
   type: git
-  icon: git
+  icon: github-circle
   source:
-    uri: ((config_git_repository))
-    branch: ((config_git_branch))
-{% if cr_default_cred_type == "ssh" %}
-    private_key: ((config_git_private_key))
-{% else %}
-    username: ((config_git_username))
-    password: ((config_git_token))
-{% endif %}
+    uri: ($ .cr_url $)
+    branch: ($ .cr_branch $)
+    ($- if eq .cr_cred_type "basic_auth" $)
+    username: ((($ .cr_cred_path $).username))
+    password: ((($ .cr_cred_path $).password))
+    ($- end $)
+    ($- if eq .cr_cred_type "ssh" $)
+    private_key: ((($ .cr_cred_path $).ssh_key))
+    ($- end $)
     paths:
-      - ((config_ansible_path))/*
+      - ($ .project $)/ansible/($ .environment $)/*
 
 
 groups:
@@ -69,8 +71,8 @@ jobs:
           - name: merged-stack
             path: "merged-stack"
         params:
-          CONFIG_PATH: ((config_ansible_path))
-          STACK_PATH: ((stack_ansible_path))
+          CONFIG_PATH: ($ .project $)/ansible/($ .environment $)
+          STACK_PATH: ($ .stack_path $)/ansible
 
       - task: run-ansible
         config:
@@ -115,9 +117,9 @@ jobs:
           ANSIBLE_PLAYBOOK_PATH: ansible-playbook
           ANSIBLE_PLAYBOOK_NAME: site.yml
           ANSIBLE_EXTRA_VARS:
-            env: ((env))
-            project: ((project))
-            customer: ((customer))
+            env: ($ .environment $)
+            project: ($ .project $)
+            customer: ($ .organization_canonical $)
             cai_host: ((cai_host))
             hosts_inventory: ((hosts_inventory))
             hosts_reboot: ((hosts_reboot))

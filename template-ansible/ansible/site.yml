@@ -1,4 +1,3 @@
-{% verbatim %}
 ---
 - name: Operations
   hosts: '{{ hosts_inventory }}'
@@ -32,4 +31,3 @@
       shell: '/bin/bash'
       state: present
     when: (hosts_user is defined) and (hosts_user|length > 0)
-{% endverbatim %}
