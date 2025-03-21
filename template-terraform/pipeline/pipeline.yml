@@ -118,7 +118,7 @@ jobs:
         - get: git_config-terraform
           trigger: false
         - get: tfstate
-          trigger: true
+          trigger: false
 
       - task: merge-stack-and-config
         config:
