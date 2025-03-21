@@ -7,8 +7,6 @@ resource "azurerm_linux_virtual_machine" "compute" {
   size                  = var.vm_instance_type
   admin_username        = var.vm_os_user
 
-  disable_password_authentication = true
-
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -22,8 +20,20 @@ resource "azurerm_linux_virtual_machine" "compute" {
       version   = "latest"
   }
 
+  disable_password_authentication = true
+
+  admin_ssh_key {
+      username   = var.vm_os_user
+      public_key = tls_private_key.ssh_key.public_key_openssh
+  }
+
   tags = {
     Name = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
     role = "compute"
   }
+}
+
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
