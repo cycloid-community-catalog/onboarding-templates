@@ -1,13 +1,13 @@
 version: '4'
-name: 'Terraform Template'
-canonical: 'template-terraform-onboarding'
-description: 'Deploys one AWS EC2 instance using Terraform.'
+name: 'Terraform Template for Azure'
+canonical: 'template-terraform-azure'
+description: 'Deploys one Azure virtual machine using Terraform.'
 author: '($> .stack_author <$)'
-image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/azure-vm.png'
 template: true
 keywords:
 - terraform
-- provider:($> .stack_usecase <$)
+- provider:azure
 technologies:
 - technology: terraform
   version: 1.8.3

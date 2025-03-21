@@ -1,12 +1,11 @@
 ---
 # Configuration of the Cycloid stack
-version: '3'
+version: '4'
 name: 'Helm template'
 canonical: 'template-helm-onboarding'
 description: Deploys a Nexus Repository on a Kubernetes cluster using Helm.
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/helm.svg'
-status: 'private'
 template: true
 keywords:
 - helm
@@ -17,18 +16,13 @@ technologies:
 
 config:
   default:
-    name: 'Kubernetes'
-    description: 'Deploys a Nexus Repository in a Kubernetes cluster'
-    cloud_provider: kubernetes
-    # Pipeline and variable configuration for the GCP CD pipeline use case
     pipeline:
       pipeline:
-        path: 'pipeline/pipeline.yml'
+        path: pipeline/pipeline.yml
       variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
-    # Configuration of terraform
+        path: pipeline/variables.sample.yml
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
     terraform:
       main:
         path: 'terraform/main.tf'
-        destination: '($ .project $)/terraform/($ .environment $)/main.tf'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/terraform/main.tf'
