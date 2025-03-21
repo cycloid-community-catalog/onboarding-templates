@@ -1,7 +1,8 @@
 # Cycloid
-variable "customer" {}
-variable "env" {}
-variable "project" {}
+variable "cy_org" {}
+variable "cy_pro" {}
+variable "cy_env" {}
+variable "cy_com" {}
 
 #
 # Nexus Repository

@@ -3,7 +3,7 @@ terraform {
   
   required_providers {
     helm = {
-      version = ">= 2.12.0"
+      version = ">= 2.17.0"
     }
   }
 }

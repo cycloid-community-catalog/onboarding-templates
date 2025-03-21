@@ -1,4 +1,5 @@
 # Cycloid variables
-variable "env" {}
-variable "project" {}
-variable "customer" {}
+variable "cy_org" {}
+variable "cy_pro" {}
+variable "cy_env" {}
+variable "cy_com" {}

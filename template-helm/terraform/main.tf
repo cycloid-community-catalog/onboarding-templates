@@ -2,9 +2,10 @@ module "nexus" {
   #####################################
   # Do not modify the following lines #
   source   = "./module-nexus"
-  project  = var.project
-  env      = var.env
-  customer = var.customer
+  cy_org  = var.cy_org
+  cy_pro  = var.cy_pro
+  cy_env  = var.cy_env
+  cy_com  = var.cy_com
   #####################################
 
   #. vm_disk_size: 20

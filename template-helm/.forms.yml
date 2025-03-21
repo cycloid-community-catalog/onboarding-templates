@@ -10,13 +10,14 @@ use_cases:
       vars:
       - name: "Kubeconfig"
         description: "Kubeconfig to access your K8s cluster. Please create it as a custom credential in Cycloid Credentials module beforehand."
-        key: kubeconfig
+        key: kubeconfig_content
         widget: cy_cred
         widget_config:
           display_keys: true
           cred_types:
             - custom
         type: string
+        default: ((custom_($ .organization_canonical $)-($ .project $)-($ .environment $)-kubeconfig.kubeconfig))
         required: true
     - name: Pod specifications
       technologies: [terraform]

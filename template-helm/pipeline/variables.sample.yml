@@ -2,13 +2,9 @@
 # Kubernetes
 #
 
-#. kubeconfig (required): ''
-#+ Kubeconfig to access your K8s cluster.
-kubeconfig: ((kubeconfig.config))
-
-#. kubeconfig-sa (required): ''
-#+ Kubeconfig to access your K8s GCP cluster.
-# kubeconfig-sa: ((kubeconfig-gcp.sa))
+#. kubeconfig_content (required): "((custom_($ .organization_canonical $)-($ .project $)-($ .environment $)-kubeconfig.kubeconfig))"
+#+ Kubeconfig content from Cycloid vault.
+kubeconfig_content: "((custom_($ .organization_canonical $)-($ .project $)-($ .environment $)-kubeconfig.kubeconfig))"
 
 
 #
