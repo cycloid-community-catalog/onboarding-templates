@@ -2,7 +2,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.19.0"
 
-  name = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
+  name = "${var.cyorg}-${var.cypro}-${var.cyenv}-${var.cycom}"
   
   azs                 = ["${var.aws_region}a"]
   cidr                = "10.77.0.0/16"

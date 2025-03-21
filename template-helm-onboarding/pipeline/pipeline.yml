@@ -16,10 +16,10 @@ resources:
     backend_config:
       address: '($ .api_url $)/inventory?jwt=($ .inventory_jwt $)'
     vars:
-      cy_org: ($ .organization_canonical $)
-      cy_pro: ($ .project $)
-      cy_env: ($ .environment $)
-      cy_com: ($ .component $)
+      cyorg: ($ .organization_canonical $)
+      cypro: ($ .project $)
+      cyenv: ($ .environment $)
+      cycom: ($ .component $)
     env:
       KUBE_CONFIG_PATH: .kube/config
 

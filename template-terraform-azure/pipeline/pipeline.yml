@@ -17,10 +17,10 @@ resources:
       address: '($ .api_url $)/inventory?jwt=($ .inventory_jwt $)'
     vars:
       azure_cred: ((azure_cred))
-      cy_org: ($ .organization_canonical $)
-      cy_pro: ($ .project $)
-      cy_env: ($ .environment $)
-      cy_com: ($ .component $)
+      cyorg: ($ .organization_canonical $)
+      cypro: ($ .project $)
+      cyenv: ($ .environment $)
+      cycom: ($ .component $)
 
 
 # The Terraform stack (will be merged with the config)

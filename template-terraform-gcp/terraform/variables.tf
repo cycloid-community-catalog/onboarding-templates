@@ -1,8 +1,8 @@
 # Cycloid variables
-variable "cy_org" {}
-variable "cy_pro" {}
-variable "cy_env" {}
-variable "cy_com" {}
+variable "cyorg" {}
+variable "cypro" {}
+variable "cyenv" {}
+variable "cycom" {}
 
 # GCP variables
 variable "gcp_project" {}
