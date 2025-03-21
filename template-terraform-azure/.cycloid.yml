@@ -1,6 +1,6 @@
 version: '4'
-name: 'Terraform Template for Azure'
-canonical: 'template-terraform-azure'
+name: 'Terraform Blueprint for Azure'
+canonical: 'blueprint-terraform-azure'
 description: 'Deploys one Azure virtual machine using Terraform.'
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/azure-vm.png'

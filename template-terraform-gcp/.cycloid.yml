@@ -1,6 +1,6 @@
 version: '4'
-name: 'Terraform Template for GCP'
-canonical: 'template-terraform-gcp'
+name: 'Terraform Blueprint for GCP'
+canonical: 'blueprint-terraform-gcp'
 description: 'Deploys one GCP compute machine using Terraform.'
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/gcp-vm.png'

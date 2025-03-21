@@ -1,6 +1,6 @@
 version: '4'
-name: 'Terraform Template for AWS'
-canonical: 'template-terraform-aws'
+name: 'Terraform Blueprint for AWS'
+canonical: 'blueprint-terraform-aws'
 description: 'Deploys one AWS EC2 instance using Terraform.'
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/aws-ec2.svg'
