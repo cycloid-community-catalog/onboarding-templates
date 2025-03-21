@@ -1,8 +1,8 @@
 ---
 # Configuration of the Cycloid stack
 version: '4'
-name: 'Helm template'
-canonical: 'template-helm-onboarding'
+name: 'Helm Blueprint'
+canonical: 'blueprint-helm-onboarding'
 description: Deploys a Nexus Repository on a Kubernetes cluster using Helm.
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/helm.svg'
