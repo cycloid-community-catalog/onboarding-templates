@@ -3,7 +3,7 @@
 version: '4'
 name: 'Ansible Blueprint'
 canonical: 'blueprint-ansible-onboarding'
-description: Supports bulk operations such as rebooting VMs, restarting services, installing packages or creating users on a set of targeted virtual machines using Ansible.
+description: Run operations such as rebooting VMs, restarting services, installing packages, creating users using Ansible.
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
 template: true
