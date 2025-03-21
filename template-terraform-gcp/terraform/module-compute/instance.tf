@@ -4,7 +4,7 @@ resource "google_compute_firewall" "compute" {
 
   allow {
     protocol = "tcp"
-    ports    = 80
+    ports    = ["80"]
   }
 
   source_ranges = ["0.0.0.0/0"]
