@@ -1,10 +1,9 @@
-version: '3'
+version: '4'
 name: 'Terraform Template'
 canonical: 'template-terraform-onboarding'
-description: 'Deploys one instance using Terraform.'
+description: 'Deploys one AWS EC2 instance using Terraform.'
 author: '($> .stack_author <$)'
 image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/terraform.png'
-status: 'private'
 template: true
 keywords:
 - terraform
@@ -14,70 +13,14 @@ technologies:
   version: 1.8.3
 
 config:
-  aws:
-    name: 'AWS'
-    description: 'Deploys a single AWS instance'
-    cloud_provider: aws
-    # Pipeline and variable configuration for the AWS CD pipeline use case
+  default:
     pipeline:
       pipeline:
-        path: 'pipeline/pipeline.yml'
+        path: pipeline/pipeline.yml
       variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
-    # Configuration of terraform (leave .sample extension to prevent terraform executing the sample file)
+        path: pipeline/variables.sample.yml
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
     terraform:
       main:
-        path: 'terraform/aws/main.tf'
-        destination: '($ .project $)/terraform/aws/($ .environment $)/main.tf'
-
-  azure:
-    name: 'Azure'
-    description: 'Deploys a single Azure instance'
-    cloud_provider: azurerm
-    # Pipeline and variable configuration for the Azure CD pipeline use case
-    pipeline:
-      pipeline:
-        path: 'pipeline/pipeline.yml'
-      variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
-    # Configuration of terraform
-    terraform:
-      main:
-        path: 'terraform/azure/main.tf'
-        destination: '($ .project $)/terraform/azure/($ .environment $)/main.tf'
-
-  gcp:
-    name: 'GCP'
-    description: 'Deploys a single GCP instance'
-    cloud_provider: gcp
-    # Pipeline and variable configuration for the GCP CD pipeline use case
-    pipeline:
-      pipeline:
-        path: 'pipeline/pipeline.yml'
-      variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
-    # Configuration of terraform
-    terraform:
-      main:
-        path: 'terraform/gcp/main.tf'
-        destination: '($ .project $)/terraform/gcp/($ .environment $)/main.tf'
-
-  vmware:
-    name: 'VMware'
-    description: 'Deploys a single VMware instance'
-    cloud_provider: vmware
-    # Pipeline and variable configuration for the VMware CD pipeline use case
-    pipeline:
-      pipeline:
-        path: 'pipeline/pipeline.yml'
-      variables:
-        path: 'pipeline/variables.sample.yml'
-        destination: '($ .project $)/pipeline/($ .environment $)/variables.yml'
-    # Configuration of terraform
-    terraform:
-      main:
-        path: 'terraform/vmware/main.tf'
-        destination: '($ .project $)/terraform/vmware/($ .environment $)/main.tf'
+        path: 'terraform/main.tf'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/terraform/main.tf'

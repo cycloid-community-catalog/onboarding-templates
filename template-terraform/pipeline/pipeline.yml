@@ -1,22 +1,10 @@
-# YAML anchors
-shared:
-# Task : sync and merge with rsync 2 rep. Used to merge stack and config
-- &merge-stack-and-config
-  platform: linux
-  image_resource:
-    type: registry-image
-    source:
-      repository: cycloid/cycloid-toolkit
-      tag: latest
-  run:
-    path: /usr/bin/merge-stack-and-config
-
 resource_types:
 - name: terraform
   type: registry-image
   source:
     repository: cycloid/terraform-resource
     tag: ((terraform_version))
+
 
 resources:
 - name: tfstate
@@ -28,25 +16,13 @@ resources:
     backend_config:
       address: '($ .api_url $)/inventory?jwt=($ .inventory_jwt $)'
     vars:
-($> if eq .stack_usecase "aws" <$)
       aws_cred: ((aws_cred))
       aws_region: ((aws_region))
-($> else if eq .stack_usecase "azure" <$)
-      azure_cred: ((azure_cred))
-($> else if eq .stack_usecase "gcp" <$)
-      gcp_project: ((gcp_project))
-      gcp_region: ((gcp_region))
-      gcp_zone: ((gcp_zone))
-($> end <$)
-      env: ($ .environment $)
-      project: ($ .project $)
-      customer: ($ .organization_canonical $)
-($> if eq .stack_usecase "gcp" <$)
-    env:
-      GOOGLE_PROJECT: ((gcp_project))
-      GOOGLE_ZONE: ((gcp_zone))
-      GOOGLE_CREDENTIALS: ((gcp_credentials_json))
-($> end <$)
+      cy_org: ($ .organization_canonical $)
+      cy_pro: ($ .project $)
+      cy_env: ($ .environment $)
+      cy_com: ($ .component $)
+
 
 # The Terraform stack (will be merged with the config)
 - name: git_stack-terraform
@@ -63,7 +39,7 @@ resources:
     private_key: ((($ .scs_cred_path $).ssh_key))
     ($- end $)
     paths:
-      - ($ .stack_path $)/terraform/($ .use_case $)/*
+      - ($ .stack_path $)/terraform/*
 
 # The Terraform config (will be merged with the stack)
 - name: git_config-terraform
@@ -80,23 +56,21 @@ resources:
     private_key: ((($ .cr_cred_path $).ssh_key))
     ($- end $)
     paths:
-      - ($ .project $)/terraform/($ .use_case $)/($ .environment $)/*
+      - ($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/terraform/*
 
 
 groups:
 - name: overview
   jobs:
-    - terraform-plan
-    - terraform-apply
+    - deploy
 
 - name: destroy
   jobs:
-    - terraform-destroy
+    - destroy
 
 
 jobs:
-  # Merge and trigger a plan whenever there is a commit in Terraform stack or config
-  - name: terraform-plan
+  - name: deploy
     serial: true
     max_in_flight: 1
     build_logs_to_retain: 10
@@ -104,13 +78,19 @@ jobs:
       - in_parallel:
         - get: git_stack-terraform
           trigger: true
-
         - get: git_config-terraform
           trigger: true
 
       - task: merge-stack-and-config
         config:
-          <<: *merge-stack-and-config
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: cycloid/cycloid-toolkit
+              tag: latest
+          run:
+            path: /usr/bin/merge-stack-and-config
           inputs:
           - name: git_config-terraform
             path: "config"
@@ -120,40 +100,36 @@ jobs:
           - name: merged-stack
             path: "merged-stack"
         params:
-          CONFIG_PATH: ($ .project $)/terraform/($ .use_case $)/($ .environment $)
-          STACK_PATH: ($ .stack_path $)/terraform/($ .use_case $)
+          CONFIG_PATH: ($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/terraform
+          STACK_PATH: ($ .stack_path $)/terraform
 
       - put: tfstate
         params:
-          plan_only: true
           terraform_source: merged-stack/
 
 
-  # Merge and trigger an apply whenever there is a terraform plan passed successfully
-  - name: terraform-apply
-    serial: true
+  - name: destroy
     max_in_flight: 1
     build_logs_to_retain: 10
     plan:
       - in_parallel:
         - get: git_stack-terraform
           trigger: false
-          passed:
-            - terraform-plan
-
         - get: git_config-terraform
           trigger: false
-          passed:
-            - terraform-plan
-
         - get: tfstate
           trigger: true
-          passed:
-            - terraform-plan
 
       - task: merge-stack-and-config
         config:
-          <<: *merge-stack-and-config
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: cycloid/cycloid-toolkit
+              tag: latest
+          run:
+            path: /usr/bin/merge-stack-and-config
           inputs:
           - name: git_config-terraform
             path: "config"
@@ -163,48 +139,8 @@ jobs:
           - name: merged-stack
             path: "merged-stack"
         params:
-          CONFIG_PATH: ($ .project $)/terraform/($ .use_case $)/($ .environment $)
-          STACK_PATH: ($ .stack_path $)/terraform/($ .use_case $)
-
-      - put: tfstate
-        params:
-          plan_run: true
-          terraform_source: merged-stack/
-
-
-  # Destroy the infrastructure
-  - name: terraform-destroy
-    max_in_flight: 1
-    build_logs_to_retain: 10
-    plan:
-      - in_parallel:
-        - get: git_stack-terraform
-          trigger: false
-          passed:
-            - terraform-plan
-
-        - get: git_config-terraform
-          trigger: false
-          passed:
-            - terraform-plan
-
-        - get: tfstate
-          trigger: false
-
-      - task: merge-stack-and-config
-        config:
-          <<: *merge-stack-and-config
-          inputs:
-          - name: git_config-terraform
-            path: "config"
-          - name: git_stack-terraform
-            path: "stack"
-          outputs:
-          - name: merged-stack
-            path: "merged-stack"
-        params:
-          CONFIG_PATH: ($ .project $)/terraform/($ .use_case $)/($ .environment $)
-          STACK_PATH: ($ .stack_path $)/terraform/($ .use_case $)
+          CONFIG_PATH: ($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/terraform
+          STACK_PATH: ($ .stack_path $)/terraform
 
       - put: tfstate
         params:
