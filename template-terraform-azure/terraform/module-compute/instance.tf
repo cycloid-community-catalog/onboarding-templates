@@ -2,7 +2,7 @@ resource "azurerm_linux_virtual_machine" "compute" {
   name                  = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   computer_name         = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   resource_group_name   = azurerm_resource_group.compute.name
-  location              = azurerm_resource_group.compute.location
+  location              = var.azure_location
   network_interface_ids = [azurerm_network_interface.compute.id]
   size                  = var.vm_instance_type
   admin_username        = var.vm_os_user

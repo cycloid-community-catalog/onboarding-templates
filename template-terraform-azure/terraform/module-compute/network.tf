@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network" "compute" {
   name                = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   resource_group_name = azurerm_resource_group.compute.name
-  location            = azurerm_resource_group.compute.location
+  location            = var.azure_location
   address_space       = ["10.77.0.0/16"]
 }
 
@@ -15,7 +15,7 @@ resource "azurerm_subnet" "compute" {
 resource "azurerm_network_security_group" "compute" {
   name                = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   resource_group_name = azurerm_resource_group.compute.name
-  location            = azurerm_resource_group.compute.location
+  location            = var.azure_location
 
   tags = {
     Name = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
@@ -42,7 +42,7 @@ resource "azurerm_network_security_rule" "inbound" {
 resource "azurerm_public_ip" "compute" {
   name                = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   resource_group_name = azurerm_resource_group.compute.name
-  location            = azurerm_resource_group.compute.location
+  location            = var.azure_location
   allocation_method   = "Dynamic"
 
   tags = {
@@ -55,7 +55,7 @@ resource "azurerm_public_ip" "compute" {
 resource "azurerm_network_interface" "compute" {
   name                = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
   resource_group_name = azurerm_resource_group.compute.name
-  location            = azurerm_resource_group.compute.location
+  location            = var.azure_location
 
   ip_configuration {
       name                          = "${var.cy_org}-${var.cy_pro}-${var.cy_env}-${var.cy_com}"
