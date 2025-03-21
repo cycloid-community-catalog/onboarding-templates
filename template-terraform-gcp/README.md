@@ -1,4 +1,4 @@
-# stack-terraform
+# stack-terraform-gcp
 
 Ready to use stack which deploys one instance using Terraform.
 

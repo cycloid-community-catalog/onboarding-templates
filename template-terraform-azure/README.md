@@ -1,4 +1,4 @@
-# stack-terraform
+# stack-terraform-azure
 
 Ready to use stack which deploys one instance using Terraform.
 

@@ -1,0 +1,74 @@
+---
+# Configuration of the Cycloid stack
+version: '4'
+name: 'Ansible Template'
+canonical: 'template-ansible-onboarding'
+description: Supports bulk operations such as rebooting VMs, restarting services, installing packages or creating users on a set of targeted virtual machines using Ansible.
+author: '($> .stack_author <$)'
+image: 'https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/ansible.png'
+template: true
+keywords:
+- ansible
+technologies:
+- technology: ansible
+  version: 2.9
+
+config:
+  aws:
+    name: 'AWS'
+    description: 'Hosts are targeted with AWS Dynamic Inventory via resource tagging.'
+    cloud_provider: aws
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/ansible/environments/operations.yml'
+
+  azure:
+    name: 'Azure'
+    description: 'Hosts are targeted with Azure Dynamic Inventory via resource tagging.'
+    cloud_provider: azurerm
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/ansible/environments/operations.yml'
+
+  gcp:
+    name: 'GCP'
+    description: 'Hosts are targeted with GCP Dynamic Inventory via resource tagging.'
+    cloud_provider: gcp
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/ansible/environments/operations.yml'
+
+  static:
+    name: 'Static Inventory'
+    description: 'Hosts are targeted with a static list of FQDN or IP addresses.'
+    pipeline:
+      pipeline:
+        path: 'pipeline/pipeline.yml'
+      variables:
+        path: 'pipeline/variables.sample.yml'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/pipeline/variables.yml'
+    ansible:
+      default:
+        path: 'ansible/environments/operations.yml.sample'
+        destination: '($ .organization_canonical $)/($ .project $)/($ .environment $)/($ .component $)/ansible/environments/operations.yml'
