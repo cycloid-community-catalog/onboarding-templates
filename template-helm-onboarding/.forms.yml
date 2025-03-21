@@ -17,7 +17,6 @@ use_cases:
           cred_types:
             - custom
         type: string
-        default: ((custom_($ .organization_canonical $)-($ .project $)-($ .environment $)-kubeconfig.kubeconfig))
         required: true
     - name: Pod specifications
       technologies: [terraform]
