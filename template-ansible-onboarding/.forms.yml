@@ -128,7 +128,7 @@ use_cases:
 ($> if eq .stack_usecase "static" <$)
         default: "all"
 ($> else <$)
-        default: "tag_cyorg_($ .organization_canonical $):tag_cypro_($ .project $):&tag_cyenv_($ .environment $):&tag_cycom_($ .component $)"
+        default: "tag_cyorg_($ .organization_canonical $):tag_cypro_($ .project $):&tag_cyenv_($ .environment $)"
 ($> end <$)
         required: true
     - name: Hosts Connectivity
