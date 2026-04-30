@@ -1,0 +1,57 @@
+---
+# Configuration of the Cycloid stack
+version: '4'
+name: 'Deploy Container Image'
+canonical: 'blueprint-terraform-ansible-onboarding'
+author: Cycloid
+description: |
+  Deploy an application from a container image to a cloud infrastructure instance using Terraform and Ansible.
+image: |
+  https://cycloid-demo-stacks-logo.s3.eu-west-1.amazonaws.com/deployment.png
+template: true
+keywords:
+  - provider:aws
+technologies:
+  - technology: terraform
+    version: 1.8.3
+  - technology: ansible
+    version: 2.9
+
+config:
+  aws:
+    name: 'AWS'
+    description: 'Deploy the application release to an EC2 instance using Terraform and Ansible.'
+    cloud_provider: aws
+    pipeline:
+      pipeline:
+        path: pipeline/pipeline.yml
+      variables:
+        path: pipeline/variables.sample.yml
+        destination: '($ .config_root $)/pipeline/variables.yml'
+    terraform:
+      main:
+        path: 'terraform/aws/main.tf'
+        destination: '($ .config_root $)/terraform/aws/main.tf'
+    ansible:
+      docker:
+        path: 'ansible/environments/docker.yml.sample'
+        destination: '($ .config_root $)/ansible/environments/docker.yml'
+
+  #  azure:
+  #    name: 'Azure'
+  #    description: 'Deploy the application release to an Azure virtual machine using Terraform and Ansible.'
+  #    cloud_provider: azure
+  #    pipeline:
+  #      pipeline:
+  #        path: pipeline/pipeline.yml
+  #      variables:
+  #        path: pipeline/variables.sample.yml
+  #        destination: '($ .config_root $)/pipeline/variables.yml'
+  #    terraform:
+  #      main:
+  #        path: 'terraform/azure/main.tf'
+  #        destination: '($ .config_root $)/terraform/azure/main.tf'
+  #    ansible:
+  #      docker:
+  #        path: 'ansible/environments/docker.yml.sample'
+  #        destination: '($ .config_root $)/ansible/environments/docker.yml'

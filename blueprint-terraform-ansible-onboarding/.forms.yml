@@ -1,0 +1,69 @@
+---
+use_cases:
+- name: aws
+  sections:
+  - name: Configuration
+    groups:
+    - name: "AWS Configuration"
+      technologies: [pipeline]
+      vars:
+      - name: "AWS Account"
+        description: "The AWS account where to deploy the infrastructure. It contains access key and secret key."
+        key: aws_cred
+        widget: cy_cred
+        widget_config:
+          display_keys: false
+          cred_types:
+            - aws
+        type: string
+        default: "((aws))"
+        required: true
+
+      - name: "AWS Region"
+        description: "AWS region to use for Terraform."
+        key: aws_region
+        widget: auto_complete
+        type: string
+        default: "eu-west-1"
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-regions.json
+        required: true
+        
+      - name: "AWS Instance Type"
+        description: "The AWS instance type to deploy the application to."
+        key: aws_instance_type
+        widget: auto_complete
+        type: string
+        default: "t3.medium"
+        values_ref: https://cycloid-demo-stackforms-values.s3.eu-west-1.amazonaws.com/aws-ec2-instance-types.json
+        required: true
+
+    - name: Application Configuration
+      technologies: [pipeline]
+      vars:
+      - name: "DockerHub Repository"
+        description: "The DockerHub repository to store your application images."
+        key: registry_repository
+        widget: simple_text
+        type: string
+        default: "olivier2t/app-test-env"
+        required: true
+
+      - name: "DockerHub Credentials"
+        description: "The DockerHub credentials to access the repository."
+        key: registry_cred
+        widget: cy_cred
+        widget_config:
+          display_keys: false
+          cred_types:
+            - basic_auth
+        type: string
+        default: "((dockerhub))"
+        required: true
+
+      - name: "Application Image Tag"
+        description: "The application release tag to use for the container image ('1.0.1' for an application release)."
+        key: app_image_tag
+        widget: simple_text
+        required: false
+        type: string
+        default: "1.0.0"
