@@ -48,16 +48,28 @@ use_cases:
         default: "olivier2t/app-test-env"
         required: true
 
-      - name: "DockerHub Credentials"
-        description: "The DockerHub credentials to access the repository."
-        key: registry_cred
+      - name: "DockerHub Username"
+        description: "The DockerHub username to access the repository."
+        key: registry_username
         widget: cy_cred
         widget_config:
-          display_keys: false
+          display_keys: true
           cred_types:
             - basic_auth
         type: string
-        default: "((dockerhub))"
+        default: "((dockerhub.username))"
+        required: true
+
+      - name: "DockerHub Password"
+        description: "The DockerHub password to access the repository."
+        key: registry_password
+        widget: cy_cred
+        widget_config:
+          display_keys: true
+          cred_types:
+            - basic_auth
+        type: string
+        default: "((dockerhub.password))"
         required: true
 
       - name: "Application Image Tag"
