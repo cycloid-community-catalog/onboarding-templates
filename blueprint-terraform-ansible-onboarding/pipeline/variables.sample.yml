@@ -31,13 +31,9 @@ app_image_tag: "1.0.0"
 #+ The repository path to use for the container images.
 registry_repository: "olivier2t/app-test-env"
 
-#. registry_username (required): ''
-#+ The username to access the registry.
-registry_username: "((((registry_cred)).username))"
-
-#. registry_password (required): ''
-#+ The password to access the registry.
-registry_password: "((((registry_cred)).password))"
+#. registry_cred (required): ((dockerhub))
+#+ Credentials to access the registry.
+registry_cred: ((dockerhub))
 
 
 #

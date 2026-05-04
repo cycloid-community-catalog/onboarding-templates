@@ -32,8 +32,8 @@ resources:
   icon: docker
   source:
     repository: ((registry_repository))
-    username: ((registry_username))
-    password: ((registry_password))
+    username: ((registry_cred.username))
+    password: ((registry_cred.password))
     tag: "($ .org $)-($ .project $)-((app_image_tag))"
 
 # The Terraform stack (will be merged with the config)
